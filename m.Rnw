@@ -1,0 +1,17 @@
+<<echo=FALSE>>=
+library(knitr)
+opts_chunk$set(warning=F, message = FALSE,echo=F,results='asis',error=FALSE,fig.lp='fig:',fig.path='images/')
+@
+
+<<mortality,fig.cap='Mortality as a function of activity $\\tau$ for three levels of the mortality scaler $\\eta$',fig.width=5, fig.height=4,>>=
+  require(ggplot2)
+mframe <- data.frame(tau = rep(c(0,exp(seq(log(0.001),log(1),l=100))),each=3),
+                     etalab = as.character(c(0.33,1,3)),
+                     M=rep(c(0,exp(seq(log(0.001),log(1),l=100))),each=3)^c(0.33,1,3)*1)
+
+ggplot(mframe) + 
+  geom_line(aes(x=tau,y=M,linetype=etalab)) + 
+  theme_bw() +
+  xlab(bquote(tau)) +
+  scale_linetype(expression(eta))
+@
