@@ -132,9 +132,9 @@ plot_data_temp <- function(v){
                     M = tau_max^v$v*v$M*v$m^(v$q-1),
                     Optimum = sapply(sapply(tau,max,0),min,1),
                     Scope=ifelse(scope<0.0001,0,scope),
-                    Supply = f*v$m^v$n,
-                    Demand = model_frame$Metabolism*v$omega,
-                    `Std Metabolism` = model_frame$Std*v$omega,
+                    `MMR` = f*v$m^v$n,
+                    `Active M.` = model_frame$Metabolism*v$omega,
+                    `Std M.` = model_frame$Std*v$omega,
                     Viable = as.numeric(tau_max>0.0001 & model_frame[['C for growth']]>0.0001))
   )
   return(bc)

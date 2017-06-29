@@ -7,4 +7,4 @@ set -ex
 #docker push docker.dragonfly.co.nz/adaptive_activity
 
 docker run --rm  -v $PWD:/work -w /work \
-  docker.dragonfly.co.nz/adaptive_activity ./build.sh
+  docker.dragonfly.co.nz/dragonverse-17.04:2017-06-28 ./build.sh

@@ -1,6 +1,8 @@
 <<echo=FALSE>>=
 library(knitr)
 opts_chunk$set(warning=F, message = FALSE,echo=F,results='asis',error=FALSE,fig.lp='fig:',fig.path='images/')
+install.packages("purrrlyr",repo="http://cloud.r-project.org/")
+library("purrrlyr")
 @
 
 <<O2_fig,fig.cap='Maximum metabolic rate, determined by oxygen supply, as a function of temperature, for four different optimal temperatures (panels---see panel label for optimal temperature in degrees celsius), and increasing values of $\\eta$.', fig.width=8, fig.height=4, echo=FALSE, out.width='\\linewidth'>>=

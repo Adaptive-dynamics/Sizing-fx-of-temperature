@@ -1,13 +1,23 @@
-\documentclass{article}
+\documentclass[a4paper, toc=index,abstract=true]{scrartcl}
+\usepackage{geometry}
+\usepackage{enumitem}
+\usepackage{setspace}
+\usepackage{subfig}
+\usepackage{placeins}
 \usepackage{amsmath}
-\usepackage{caption} 
-\usepackage{array} 
-\usepackage{breqn}
-\usepackage[backend=biber]{biblatex}
+\usepackage{pdflscape}
+\usepackage{longtable}
+\usepackage[toc,page]{appendix}
+\usepackage{array,booktabs}
+\usepackage[american]{babel}
+\usepackage[backend=biber,style=apa,language=american, labeldate=year,
+uniquename=false, maxcitenames=2,maxbibnames=200,uniquelist=false,mincitenames=1]{biblatex}
+\usepackage{lineno, blindtext}
+\DeclareLanguageMapping{american}{american-apa}
 \addbibresource{Sizing-fx-of-temperature.bib}
 \captionsetup[table]{singlelinecheck=false}
 
-\title{Sizing the effects of temperature on ectotherms - from physiology to ecology}
+\title{Sizing the effects of temperature on fish - from physiology to ecology}
 \author{Philipp Neubauer\\Dragonfly Data Science, Wellington, NZ  \and 
         Ken H. Andersen\\Centre for Ocean Life
         Danish Technical University, Lyngby, Denmark}
@@ -16,22 +26,29 @@
 
 \maketitle
 
-\section*{Abstract}
+\begin{spacing}{1.9}
+
+\pagenumbering{gobble}
+\begin{abstract}
 
 Increasing temperatures under climate change are thought to affect individual physiology of ectotherms through increases in metabolic demands, leading to decreases in body-size with concomitant effects on species ecology. Although intuitively appealing, the magnitude, as well as when and where such changes are expected in an ecosystem context remains unclear. We develop a general trait-based model of carbon and oxygen budgets to determine the relative influence of thermal sensitivity, oxygen limitation, and environmental conditions on ectotherm body size.  Our model provides a physiological basis for changes in species size and observed ecological consequences of temperature, and ties together various strands of thought about the ecological consequences of increased temperatures. 
 
+\end{abstract}
+{\large Keywords:} stock assessment, fisheries meta-analysis, fishery development, time-to-event analysis, marine conservation, catch-only methods
+
+\newpage
 
 \section{Introduction}
 
-Temperature, through its effects on individual physiology, is a dominant driver of species ecology and bio-geography (\cite{deutsch_climate_2015,pinsky_marine_2013,brown_toward_2004}). As a consequence, current and predicted temperature increases under climate change will act as a strong agent of change in many ecosystems (\cite{deutsch_climate_2015, stuart-smith_thermal_2015}). However, the nature of these changes can be difficult to predict as temperature effects scale from individuals to species and ecosystems. Through this cascade of scales, incorrect or approxiamte model assumptions at the individual scale can have disproportionate effects on ecosystem level outcomes (\cite{brander_overconfidence_2013, lefevre_models_2017}). In marine fish, recent predictions of decreasing organism size, and resulting decreases in the size of fisheries catches (\cite{cheung_shrinking_2013}), have been criticized as overly simplistic and not in line with physiological constraints (\cite{brander_overconfidence_2013, lefevre_models_2017}). While it is not disputed that organism size can change as a result of changing temperatures, the question is when, where and why this is so. 
+Temperature, through its effects on individual physiology, is a dominant driver of species ecology and bio-geography (\cite{deutsch_climate_2015,pinsky_marine_2013,brown_toward_2004}). As a consequence, current and predicted temperature increases under climate change will act as a strong agent of change in many ecosystems (\cite{deutsch_climate_2015, stuart-smith_thermal_2015}). However, the nature of these changes can be difficult to predict as temperature effects scale from individuals to species and ecosystems. Through this cascade of scales, incorrect or approxiamte model assumptions at the individual scale can have disproportionate effects on ecosystem level outcomes (\cite{brander_overconfidence_2013, lefevre_models_2017}). In marine fish, recent predictions of decreasing organism size, and resulting decreases in the size of fisheries catches (\cite{cheung_shrinking_2013}), have been criticized as overly simplistic and not in line with physiological constraints (\cite{brander_overconfidence_2013, lefevre_models_2017}). While it is not disputed that organism size can change as a result of changing temperatures, the question remains when, where and why this is so. 
 
-Empirically, most ectotherms are found to grow larger at colder temperatures - a phenomenon called the temperature-size rule. Models of ectotherm growth can reproduce this pattern (under assumptions of optimal energy allocation between growth and reproduction) if increases in metabolic costs (metabolism) with temperature outpace increases in energy acquisition (\cite{kozlowski_can_2004}). While increasing metabolic costs are real, energy acquisition is an abstract, phenomenological description that lumps ecological aspects of foraging activity and prey availability. At this more mechanistic level of energy acquisition, consistent temperature patterns have remained elusive (\cite{englund_temperature_2011,rall_universal_2012}), with highly variable responses across habitats and taxa. 
+Empirically, most ectotherms are found to grow larger in colder temperatures - a phenomenon called the temperature-size rule (\cite{atkinson_cells_2006}). Models of ectotherm growth can reproduce this pattern (under assumptions of optimal energy allocation between growth and reproduction) if increases in metabolic costs (in terms of energy) with temperature outpace increases in energy acquisition (\cite{kozlowski_can_2004}). However, while increasing metabolic costs are real, energy acquisition is an abstract, phenomenological description that lumps ecological aspects of foraging activity and prey availability. At a more mechanistic level of energy acquisition, consistent responses of foraging and energy aquisition with temperature have remained elusive (\cite{englund_temperature_2011,rall_universal_2012}), with variable responses across habitats and taxa. This is perhaps not surprising given variable foraging ecologies, but it remains unclear how temperature dependant feeding ecology impacts growth and adult size.
 
-Physiologically, a long held view has been that temperature is a controlling factor while oxygen supply sets the physiological limits (\cite{fry_effects_1947,claireaux_linking_2007,lefevre_are_2016}). Other factors, such as salinity and pH are masking factors that influence physiology via their effects on oxygen availability and temperature sensitivity. How exactly temperature influences physiological rates and limits, however, has been a matter of debate, not least because of the variable responses observed among different species. 
+Physiologically, a long held view has been that temperature is a controlling factor while oxygen supply sets the physiological limits (\cite{fry_effects_1947,claireaux_linking_2007,lefevre_are_2016}). How exactly temperature influences physiological rates and limits, however, has been a matter of debate, not least because of the variable responses observed among different species. In most species, the standard metabolism (i.e., the metabolic cost of maintenance and routine activity such as ventilation) increases near exponentially with temperature. A prevalent view is that the maximum metabolic rate (i.e., the metabolic rate at maximum sustained exercise) has a  dome-shaped response to temperature, whereby it can be increased (passively and actively) up to a point, but plateaus or decreases thereafter (\cite{fry_effects_1947,claireaux_linking_2007,lefevre_are_2016,portner_physiology_2008}). This leads to the view of a modal curve for metabolic scope (the available oxygen/energy for activity), and suggests that towards the upper end of this curve, organisms will run out of oxygen. 
 
-In most species, the standard metabolism (i.e., the metabolic cost of maintenance and routine activity such as ventilation) increases steadily with temperature. A prevalent view is that the maximum metabolic rate (i.e., the metabolic rate at maximum sustained exercise) has a  dome-shaped response to temperature, whereby it can be increased (passively and actively) up to a point, but plateaus or decreases thereafter (\cite{fry_effects_1947,claireaux_linking_2007,lefevre_are_2016,portner_physiology_2008}). This leads to the view of a modal curve for metabolic scope, the available oxygen/energy for activity, and suggests that towards the upper end of the curve. This view was formalized in the Theory of Oxygen and Capacity Limitation of Temperature (\cite{portner_oxygen-and_2010}), which suggests that the decrease in metabolic scope towards extreme temperatures limits species limits their ability to sustain core functions such as foraging and growth. In some species, however, maximum metabolic rate may be steadily increasing (\cite{lefevre_are_2016}), suggesting that oxygen may not be the limiting factor. Consequently, the difference in observed physiological responses will at least partially determine temperature effects on body size for individual species. In addition to physiological differences, the assumed coefficients for temperature sensitivity of metabolism and size scaling exponents are different between species, and can disproportionately affect inferences about future organism size.
+This view was encapsulated in the Theory of Oxygen and Capacity Limitation of Temperature (\cite{portner_oxygen-and_2010}), which suggests that the decrease in metabolic scope towards extreme temperatures limits species ability to sustain core functions such as foraging and growth. In some species, however, maximum metabolic rate may be steadily increasing (\cite{lefevre_are_2016, verberk_does_2016}), suggesting that oxygen may not be the limiting factor. Consequently, the difference in observed physiological responses may at least partially determine temperature effects on body size for individual species. In addition to physiological differences, the assumed coefficients for temperature sensitivity of metabolism and size scaling exponents are different between species, and can disproportionately affect inferences about future organism size \cite{lefevre_models_2017, kozlowski_can_2004}.
 
-A general framework for understanding temperature effects on size should reflect physiology, and also allow exploring effects of physiological traits on temperature dependence of body size. Here, we develop a trait based framework to investigate temperature on ectotherm physiology, growth and body size. We discuss traits that have large effects on body size, and discuss expectations under climate change.
+Here, we develop a trait based framework to investigate temperature on ectotherm physiology, growth and body size. We discuss physiological traits that have large effects on body size changes, and discuss expectations under climate change.
 
 \section{Setting up the model}
 
@@ -54,11 +71,11 @@ P_{0_2} &= S_{O_2} - D_{O_2} \\
 \end{align}
 
 
-where $f$ is the feeding level ([0,1]) at weight $w$, determined by the fraction of time spent foraging (or proportion of maximum attack rate) $\tau$, consumption rate $\gamma w^p \Theta$ (search rate $\gamma w^p$ times prey availability $\Theta$) and maximum consumption $h w^q$. In the following, we will refer to $\tau$ as the activity fraction for sake of generality. Maximum consumption, determined by digestive (enzymatic) processes (\cite{jeschke2002predator, sentis2013parsing}), is assumed to scale with temperature as $c_T = e^{E_a(T-T_0)/kTT_0}$. Available carbon $P_C$ is determined by supply ($S_C$) from prey consumption ($f_C h c_T w^q$), with $\beta$ a loss due to specific dynamic action (SDA, or heat increment; the energy spent absorbing food), and $\phi$ is the fraction of food excreted and egested. Metabolic costs ($D_C$) are those of standard metabolism ($k w^n$), as well as active metabolism (scaled in units of standard metabolism as $\delta k w^n$), with the activity fraction $\tau$ determining the fraction of time that the active metabolism cost applies.  
+where $f$ is the feeding level ([0,1]) at weight $w$, determined by the fraction of time spent foraging (or proportion of maximum attack rate) $\tau$, consumption rate $\gamma w^p \Theta$ (search rate $\gamma w^p$ times prey availability $\Theta$) and maximum consumption $h w^q$. In the following, we will refer to $\tau$ as the activity fraction for sake of generality. Maximum consumption, determined by digestive (enzymatic) processes (\cite{jeschke2002predator, sentis2013parsing}), is assumed to scale with temperature as $c_T = e^{E_a(T-T_0)/kTT_0}$. Available carbon $P_C$ is determined by supply ($S_C$) from prey consumption ($f_C h c_T w^q$), with $\beta$ a loss due to specific dynamic action (SDA, or heat increment; the energy spent absorbing food), and $\phi$ is the fraction of food excreted and egested. Metabolic costs ($D_C$) are those of standard metabolism ($k w^n$), as well as active metabolism (scaled in units of standard metabolism as $\delta k w^n$, with $\delta$ the factorial aerobic scope (FAS)), with the activity fraction $\tau$ determining the fraction of time that the active metabolism cost applies.  
 
-The oxygen budget determines the metabolic scope $P_{0_2}$. Metabolic scope is the difference between oxygen supply $S_{O_2}/w^n=f_{O_2}$, the amount of oxygen supplied per unit weight, and oxygen demand. Demand ($D_{O_2}$) is the sum of oxygen used for SDA (i.e., the conversion of food into energy and growth - $\beta f_C h c_T w^q$) and catabolism ($[1+\tau \delta] c_T k w^n$), with $\omega$ determining amount of oxygen required per unit of metabolised carbon (note: oxygen is measured in the same units as the carbon. To find the actual amount of oxygen used multiply by the amount of oxygen used to respire one unit of carbon). 
+The oxygen budget $P_{0_2}$, determines physiological limits to aerobic acitivity. Demand ($D_{O_2}$) is the sum of oxygen used for SDA (i.e., the conversion of food into energy and growth - $\beta f_C h c_T w^q$) and ``active metabolism", the sum of standard (or resting) metabolism and the metabolic costs of foraging ($[1+\tau \delta] c_T k w^n$), with $\omega$ determining amount of oxygen required per unit of metabolised carbon. Metabolic scope is the difference between $S_{O_2}/w^n=f_{O_2}$, the amount of oxygen supplied per unit weight, and oxygen demand due to standard metabolism ($c_T k w^n$). 
 
-The maximum oxygen consumption---usually assumed to occur at the maximum metabolic rate (MMR), or active metbolic rate---is the oxygen consumption during maximal activity level that can be sustained over some time. This level is determined by oxygen delivery to organs and muscles. At constant temperature $T$, oxygen supply is a function of ambient oxygen and is assumed to follow a saturating function \cite[e.g.,][]{lefrancois_influence_2003}. We specify $P_{50}$ as the point where the MMR (or oxygen supply) has dropped by 50\% relative to the saturation level $l$ \footnote{Could also use the same functional form as the consumption of food for simplicity: $f_{O_2} = \Gamma \Theta_{O_2}/\Gamma \Theta_{O_2} + h_{O_2} = \Theta_{O_2}/(\Theta_{O_2} + P_{50}).$}. Oxygen supply, and hence the MMR, are usually found to be temperature dependent \cite{lefelefevre_are_2016}. We follow \cite{gnauck2013freshwater, lefrancois_influence_2003} and use a dome shaped function that peaks at the optimal temperature (optimal in the sense of maximising the MMR). Thus:
+The maximum oxygen consumption---usually assumed to occur at the maximum metabolic rate (MMR)---is the oxygen consumption during maximal activity level that can be sustained over some time. This level is determined by oxygen delivery to organs and muscles. At constant temperature $T$, oxygen supply is a function of ambient oxygen and is assumed to follow a saturating function \cite[e.g.,][]{lefrancois_influence_2003}. We specify $P_{50}$ as the point where the MMR (or oxygen supply) has dropped by 50\% relative to the saturation level $l$ \footnote{Could also use the same functional form as the consumption of food for simplicity: $f_{O_2} = \Gamma \Theta_{O_2}/\Gamma \Theta_{O_2} + h_{O_2} = \Theta_{O_2}/(\Theta_{O_2} + P_{50}).$}. Oxygen supply, and hence the MMR, are usually found to be temperature dependent \cite{lefevre_are_2016}. We follow \cite{gnauck2013freshwater, lefrancois_influence_2003} and use a dome shaped function that peaks at the optimal temperature (optimal in the sense of maximising the MMR). Thus:
 
 \begin{align}
 f_{O_2}&=\lambda(1-e^{O_2\log(0.5)/P50}),\\
@@ -69,13 +86,15 @@ with $f_{O_2}$ the oxygen supply (MMR), $T_{\text{max}}$ the lethal temperature 
 
 \input{O2_fig}
 
-We now assume that organisms will adjust their activity level to maximise available energy relative to mortality $M$: $\tau_{\text{opt}}$ = $\max_\tau(F)$ = $\max_\tau(P_C/M)$, with $F$ a measure of fitness (I \emph{think} this amounts to maximizing R0, but can't find the reference where this came from). We further assume here that mortality scales with activity level and weight as $w^{q-1}$ (\cite{andersen_how_2009, hartvig_food_2011}), such that $M_{\tau,w} = \tau^\eta \rho w^{q-1}$, where $ \rho$ is mortality at mass $w=1$ and $\tau=1$, that is, at constant maximum activity and $M$ is the effective mortality at realised levels of activity at weight $w$.
+We now assume that organisms will adjust their activity level to maximise available energy relative to mortality $M$: $\tau_{\text{opt}}$ = $\max_\tau(F)$ = $\max_\tau(P_C/M)$, with $F$ a measure of fitness \footnote{I \emph{think} this amounts to maximizing R0 if no more growth occurs: life expectancy is 1/M and reporoductive output is proportional to energy}. We further assume here that mortality scales with activity level and weight as $w^{q-1}$ (\cite{andersen_how_2009, hartvig_food_2011}), such that $M_{\tau,w} = \tau^\eta \rho w^{q-1}$, where $ \rho$ is mortality at mass $w=1$ and $\tau=1$, that is, at constant maximum activity and $M$ is the effective mortality at realised levels of activity at weight $w$.
 
+\begin{center}
 \input{m}
+\end{center}
 
 The optimal activity level ($\tau_{\text{opt}}$) is found at $\frac{dF}{d\tau}=0$. We assume that the metabolic scope dictates the upper limit of this activity, such that at $\tau_{\text{max}}$, oxygen demand $D_{0_2}$ equals total supply $S_{0_2}$. Both temperature and oxygen will influence $\tau$, such that at a given temperature and oxygen concentration, $\tau_{T,O_2} = \text{min}\left( \tau_{\text{opt}},\tau_{\text{max}} \right)$, meaning we assume that animals will adapt their effort to optimise fitness $F$ given temperature and oxygen constraints.
 
-Life history theory suggests that the maximum\/asymptotic weight $W_{\infty}$ is found at the size at which all energy is allocated to reproduction, which optimally occurs at $\frac{\partial P_C/M}{\partial w}=1$ in the case of size-dependent mortality (provided concavity with respect to mass of this quantity; CITE Taylor, PErrin,Kozlovski). Note that $W_{\infty}$ depends on temperature only through $\tau$ and changes in $P_C$ as temperature changes metabolic and enzymatic rates. We thus impose no direct constraint on $W_{\infty}$. 
+Life history theory suggests that the maximum\/asymptotic weight $W_{\infty}$ is found at the size at which all energy is allocated to reproduction, which optimally occurs at $\frac{\partial P_C/M}{\partial w}=1$ in the case of size-dependent mortality (provided concavity with respect to mass of this quantity). Note that $W_{\infty}$ depends on temperature only through $\tau$ and changes in $P_C$ as temperature changes metabolic and enzymatic rates. We thus impose no direct constraint on $W_{\infty}$. 
 
 
 
@@ -99,17 +118,28 @@ Exponent for std.~metabolism & $n=0.88$ \\
 
 \section{Model results}
 
-\begin{figure}
+
+\begin{figure}[ht!]
 \includegraphics[width=\linewidth]{activity} 
-\caption[Activity, feeding and maximum length as a function of temperature]{Consequences of increasing temperature on activity levels, feeding and maximum weight. (a) Optimal (dashed line), limiting (dotted line) and realised (solid line) activity as a function of temperature. Realised activity is the smaller of the limiting and optimal levels at each temperature, with activity limited by O2 supply as pictured by dashed lines in b). Optimal acitivity steadily increases to compensate for rising metabolic costs (dotted line in b) with temperature until limited by oxygen (overlapping supply (dashed) and demand (solid) curves in b). (c) Rising activity lelves keeps feeding levels constant (solid line in c).  Mortality levels (dashed) increase as activity increases with temperature, while available energy (carbon, dotted line) for growth and reproduction peaks and decreases. Note that energy is only limited by oxygen-limited activity levels at low temperatures in scenario 3. }
+\caption[Activity, feeding and maximum length as a function of temperature]{Consequences of increasing temperature on activity levels, feeding and maximum weight for an individual weighing 100g. (a) Optimal (dashed line), limiting (dotted line) and realised (solid line) activity as a function of temperature. Realised activity is the smaller of the limiting and optimal levels at each temperature, with activity limited by O2 supply as pictured by dashed lines in b). Optimal acitivity steadily increases to compensate for rising metabolic costs (dotted line in b) with temperature until limited by oxygen (overlapping supply (dashed) and demand (solid) curves in b). (c) Rising activity lelves keeps feeding levels constant (solid line in c).  Mortality levels (dashed) increase as activity increases with temperature, while available energy (carbon, dotted line) for growth and reproduction peaks and decreases. Note that energy is only limited by oxygen-limited activity levels at low temperatures in scenario 3. The rate of change of available energy relative to mortality drives the adult size, which delines near linearly in log-space without oxygen limitations, and lower and upper limits imposed as oxygen limits activity and energy aquisition.}
 \label{fig:act_fig}
 \end{figure}
 
+Higher temperature have cascading effects through their influence on both metabolic and ecological rates (Figure \ref{fig:act_fig}). To maintain optimal energy aquisition for growth and reproduction relative to mortality, activity levels generally increase, until they reach limitations imposed by oxygen supply (Figure \ref{fig:act_fig}a). This limit occurs when active metabolic costs equal oxygen supply (Figure \ref{fig:act_fig}b), and are therefore more pronounced for species with strongly dome-shaped maximum-metabolic rates (scenario 3 in Figure \ref{fig:act_fig}).
+
+Although increasing energy levels maintain a constant feeding level, increased maximum consumption with temperature leads to a dome-shaped response in available energy (Figure \ref{fig:act_fig}c). Since the rate of change of available energy relative to mortality determines adult size, 
 
 
+
+\begin{figure}[ht!]
+\includegraphics[width=\linewidth]{winf} 
+\caption[Influence of ecological and physiological variables on $W_\infty$]{Influence of scaling of mortality with activity (a), consumption rate (b), factorial aerobic scope (FAR; c), and exponent of metabolic rate on adult size $W\infty$.}
+\label{fig:winf_fig}
+\end{figure}
 
 \section{Discussion}
 
+\end{spacing}
 
 \printbibliography 
 \end{document}

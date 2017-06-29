@@ -89,7 +89,8 @@ ggp[['Activity']] <- ggplot(sc_act) +
   theme_cowplot()+
   #scale_size_discrete(guide='none',range = c(1.2,0.6))+
   theme(legend.justification=c(0,1), 
-        legend.position=c(0.05,0.95),
+        legend.position=c(0.55,1),
+        legend.box = "horizontal",
         legend.text  = element_text(size=8),
         legend.title = element_text(size=10),
         legend.spacing = unit(0.005,'npc'),
@@ -97,7 +98,7 @@ ggp[['Activity']] <- ggplot(sc_act) +
   labs(x = expression("Mean temperature " ( degree*C)),
        y=expression('Activity ' (tau)))
 
-sco <- tidyr::gather(scenarios,Rate,value,Supply, Demand, `Std Metabolism`)
+sco <- tidyr::gather(scenarios,Rate,value,MMR, `Active M.`, `Std M.`)
 
 ggp[['Oxygen']] <- sco %>%
   ggplot() + 
@@ -117,21 +118,21 @@ ggp[['Oxygen']] <- sco %>%
 
 sc <- function(x) x/max(x)
 sc_feed <- scenarios %>% 
-  #group_by(Scenario) %>% 
   mutate(Consumption=sc(Consumption),
          Efficiency=sc(Efficiency),
-         `Available C` = sc(`C for growth`)) %>% 
-  tidyr::gather(Rate,value,`Feeding level`,`Available C`,M) %>%
+         `Available Energy` = sc(`C for growth`),
+         `Available Energy` = ifelse(`Available Energy`<0,0,`Available Energy`)) %>% 
+  tidyr::gather(Rate,value,`Feeding level`,`Available Energy`,M) %>%
   mutate(Rate = relevel(as.factor(Rate),'Feeding level'))
 
-ggp[['Feeding']] <-sc_feed  %>% 
+ggp[['Feeding']] <- sc_feed  %>% 
   ggplot() + 
   geom_line(aes(x=Temperature, y=value, linetype=Rate, col=Scenario),alpha=0.7) +
   geom_point(data=sc_feed[seq.int(1,nrow(sc_feed),by = 5),],aes(x=Temperature, y=value, group=Rate, col=Scenario,shape=Scenario),alpha=0.5,size=2) +
   theme_cowplot()+
   lims(y=c(0,1))+
   theme(legend.justification=c(1,1), 
-        legend.position=c(0.6,0.3),
+        legend.position=c(0.8,0.8),
         legend.text  = element_text(size=8),
         legend.title = element_text(size=10),
         legend.spacing = unit(0.005,'npc'))+
@@ -164,9 +165,9 @@ ggp[['winf']] <- ggplot(growth_scenarios) +
         legend.background = element_rect(fill='white'))+
   scale_color_discrete(guide='none')+
   scale_shape_discrete(guide='none')+
-  scale_y_log10()+
+  scale_y_log10(limits=c(1,1000))+
   labs(x = expression("Mean temperature " ( degree*C)),
-       y='Asymptotic weight (g)')
+       y='Adult weight (g)')
 
 cowplot::plot_grid(plotlist = ggp,labels = 'auto')
 ggsave('activity.pdf',width = 8.5,height = 8.5)
@@ -199,7 +200,7 @@ lm=10^seq(0,6,l=1000)
 n_int = 200
 
 winf_scenarios_shape <- bind_cols(data_frame(Scenario = as.factor(rep(1:3,each=n_int*3)),
-                                         Shape = as.factor(rep(rep(c(1,1/2,2),each=n_int),3))),
+                                  Shape = as.factor(rep(rep(c(1,1/2,2),each=n_int),3))),
                               bind_rows(plot_data_growth_tO2(winf_sc1,lm,n_int = n_int),
                                         plot_data_growth_tO2(winf_sc1.1,lm,n_int = n_int),
                                         plot_data_growth_tO2(winf_sc1.2,lm,n_int = n_int),
@@ -212,15 +213,16 @@ winf_scenarios_shape <- bind_cols(data_frame(Scenario = as.factor(rep(1:3,each=n
 
 ggw <- lst()
 ggw[['winf_shape']] <- winf_scenarios_shape %>%
+  mutate(Shape = relevel(as.factor(Shape),'1')) %>% 
   ggplot() + 
   geom_line(aes(x=Temperature, 
                 y=Temp, 
                 col=Scenario,
                 linetype=Shape), 
             alpha=1,
-            position=position_dodge(width=0.5)) +
+            position=position_dodge(width=1)) +
   theme_cowplot()+
-  scale_y_log10()+
+  scale_y_log10(limits=c(1,1000))+
   theme(legend.justification=c(0,1), 
         legend.position=c(0.65,0.95),
         legend.text  = element_text(size=8),
@@ -229,7 +231,7 @@ ggw[['winf_shape']] <- winf_scenarios_shape %>%
         legend.background = element_rect(fill='white'))+
   scale_color_discrete(guide='none')+
   labs(x = expression("Mean temperature " ( degree*C)),
-       y='Asymptotic weight (g)')
+       y='Adult weight (g)')
 
 ggw[['winf_shape']] 
 
@@ -254,7 +256,7 @@ winf_sc3.2 <- winf_sc3
 winf_sc3.2$gamma <- gammasc2
 
 winf_scenarios_gamma <- bind_cols(data_frame(Scenario = as.factor(rep(1:3,each=n_int*3)),
-                                       Prey = as.factor(rep(rep(c(40,30,50),each=n_int),3))),
+                                       `Consumption rate`= as.factor(rep(rep(c(40,30,50),each=n_int),3))),
                                   bind_rows(plot_data_growth_tO2(winf_sc1,lm,n_int = n_int),
                                             plot_data_growth_tO2(winf_sc1.1,lm,n_int = n_int),
                                             plot_data_growth_tO2(winf_sc1.2,lm,n_int = n_int),
@@ -266,13 +268,14 @@ winf_scenarios_gamma <- bind_cols(data_frame(Scenario = as.factor(rep(1:3,each=n
                                             plot_data_growth_tO2(winf_sc3.2,lm,n_int = n_int)))
 
 ggw[['winf_prey']] <- winf_scenarios_gamma %>%
+  mutate(`Consumption rate` = relevel(as.factor(`Consumption rate`),'40')) %>% 
   ggplot() + 
   geom_line(aes(x=Temperature, 
                 y=Temp, 
                 col=Scenario,
-                linetype=Prey), 
+                linetype=`Consumption rate`), 
             alpha=1,
-            position=position_dodge(width=0.5)) +
+            position=position_dodge(width=1)) +
   theme_cowplot()+
   theme(legend.justification=c(0,1), 
         legend.position=c(0.65,0.95),
@@ -281,9 +284,9 @@ ggw[['winf_prey']] <- winf_scenarios_gamma %>%
         legend.spacing = unit(0.005,'npc'),
         legend.background = element_rect(fill='white'))+
   scale_color_discrete(guide='none')+
-  scale_y_log10()+
+  scale_y_log10(limits=c(1,1000))+
   labs(x = expression("Mean temperature " ( degree*C)),
-       y='Asymptotic weight (g)')
+       y='Adult weight (g)')
 
 
 ggw[['winf_prey']]
@@ -292,8 +295,8 @@ ggw[['winf_prey']]
 ############# metabolics  #######################
 #################################################
 
-deltasc1 <- 6
-deltasc2 <- 2
+deltasc1 <- 3
+deltasc2 <- 5
 
 winf_sc1.1 <- winf_sc1
 winf_sc1.1$delta <- deltasc1
@@ -309,7 +312,7 @@ winf_sc3.2 <- winf_sc3
 winf_sc3.2$delta <- deltasc2
 
 winf_scenarios_delta <- bind_cols(data_frame(Scenario = as.factor(rep(1:3,each=3*n_int)),
-                                             `Activity scaling` = as.factor(rep(rep(c(4,2,6),each=n_int),3))),
+                                             `Activity scaling` = as.factor(rep(rep(c(4,3,5),each=n_int),3))),
                                   bind_rows(plot_data_growth_tO2(winf_sc1,lm,n_int = n_int),
                                             plot_data_growth_tO2(winf_sc1.1,lm,n_int = n_int),
                                             plot_data_growth_tO2(winf_sc1.2,lm,n_int = n_int),
@@ -321,15 +324,16 @@ winf_scenarios_delta <- bind_cols(data_frame(Scenario = as.factor(rep(1:3,each=3
                                             plot_data_growth_tO2(winf_sc3.2,lm,n_int = n_int)))
 
 ggw[['winf_delta']] <- winf_scenarios_delta %>%
+  mutate(FAS = relevel(as.factor(`Activity scaling`),'4')) %>% 
   ggplot() + 
   geom_line(aes(x=Temperature, 
                 y=Temp, 
                 col=Scenario,
-                linetype=`Activity scaling`), 
+                linetype=FAS), 
             alpha=1,
-            position=position_dodge(width=0.5)) +
+            position=position_dodge(width=1)) +
   theme_cowplot()+
-  scale_y_log10()+
+  scale_y_log10(limits=c(1,1000))+
   theme(legend.justification=c(0,1), 
         legend.position=c(0.65,0.95),
         legend.text  = element_text(size=8),
@@ -338,11 +342,11 @@ ggw[['winf_delta']] <- winf_scenarios_delta %>%
         legend.background = element_rect(fill='white'))+
   scale_color_discrete(guide='none')+
   labs(x = expression("Mean temperature " ( degree*C)),
-       y='Asymptotic weight (g)')
+       y='Adult weight (g)')
 
 
 #################################################
-############# exponents   #######################
+############# exponents n  #######################
 #################################################
 lm=10^seq(0,6,l=1000)
 nsc1 <- 0.85
@@ -374,14 +378,15 @@ winf_scenarios_n <- bind_cols(data_frame(Scenario = as.factor(rep(1:3,each=3*n_i
                                             plot_data_growth_tO2(winf_sc3.2,lm,n_int = n_int)))
 
 ggw[['winf_n']] <- winf_scenarios_n %>%
+  mutate(`Exponent (n)` = relevel(as.factor(`Exponent (n)`),'0.88')) %>% 
   ggplot() + 
   geom_line(aes(x=Temperature, 
                 y=Temp, 
                 col=Scenario,
                 linetype=`Exponent (n)`), 
             alpha=1,
-            position=position_dodge(width=0.5)) +
-  scale_y_log10()+
+            position=position_dodge(width=1)) +
+  scale_y_log10(limits=c(1,1000))+
   theme_cowplot()+
   theme(legend.justification=c(0,1), 
         legend.position=c(0.65,0.95),
@@ -391,12 +396,63 @@ ggw[['winf_n']] <- winf_scenarios_n %>%
         legend.background = element_rect(fill='white'))+
   scale_color_discrete(guide='none')+
   labs(x = expression("Mean temperature " ( degree*C)),
-       y='Asymptotic weight (g)')
+       y='Adult weight (g)')
 
+#################################################
+############# exponents q  #######################
+#################################################
+lm=10^seq(0,6,l=1000)
+qsc1 <- 0.66
+qsc2 <- 0.8
 
+winf_sc1.1 <- winf_sc1
+winf_sc1.1$q <- qsc1
+winf_sc1.2 <- winf_sc1
+winf_sc1.2$q <- qsc2 
+winf_sc2.1 <- winf_sc2
+winf_sc2.1$q <- qsc1
+winf_sc2.2 <- winf_sc2
+winf_sc2.2$q <- qsc2 
+winf_sc3.1 <- winf_sc3
+winf_sc3.1$q <- qsc1
+winf_sc3.2 <- winf_sc3
+winf_sc3.2$q <- qsc2 
 
-cowplot::plot_grid(plotlist = ggw,labels = 'auto',ncol = 2,hjust = -8)
-ggsave('winf.pdf',width = 10,height = 10)
+winf_scenarios_q <- bind_cols(data_frame(Scenario = as.factor(rep(1:3,each=3*n_int)),
+                                         `Exponent (q)` = as.factor(rep(rep(c(0.75,0.66,0.8),each=n_int),3))),
+                              bind_rows(plot_data_growth_tO2(winf_sc1,lm,n_int = n_int),
+                                        plot_data_growth_tO2(winf_sc1.1,lm,n_int = n_int),
+                                        plot_data_growth_tO2(winf_sc1.2,lm,n_int = n_int),
+                                        plot_data_growth_tO2(winf_sc2,lm,n_int = n_int),
+                                        plot_data_growth_tO2(winf_sc2.1,lm,n_int = n_int),
+                                        plot_data_growth_tO2(winf_sc2.2,lm,n_int = n_int),
+                                        plot_data_growth_tO2(winf_sc3,lm,n_int = n_int),
+                                        plot_data_growth_tO2(winf_sc3.1,lm,n_int = n_int),
+                                        plot_data_growth_tO2(winf_sc3.2,lm,n_int = n_int)))
+
+ggw[['winf_q']] <- winf_scenarios_q %>%
+  mutate(`Exponent (q)` = relevel(as.factor(`Exponent (q)`),'0.75')) %>% 
+  ggplot() + 
+  geom_line(aes(x=Temperature, 
+                y=Temp, 
+                col=Scenario,
+                linetype=`Exponent (q)`), 
+            alpha=1,
+            position=position_dodge(width=1)) +
+  scale_y_log10(limits=c(1,1000))+
+  theme_cowplot()+
+  theme(legend.justification=c(0,1), 
+        legend.position=c(0.65,0.95),
+        legend.text  = element_text(size=8),
+        legend.title = element_text(size=10),
+        legend.spacing = unit(0.005,'npc'),
+        legend.background = element_rect(fill='white'))+
+  scale_color_discrete(guide='none')+
+  labs(x = expression("Mean temperature " ( degree*C)),
+       y='Adult weight (g)')
+
+cowplot::plot_grid(plotlist = ggw[1:4],labels = 'auto',ncol = 2,hjust = -10)
+ggsave('winf.pdf',width = 8,height = 8)
 
 save.image(file='source_data.RData')
 
