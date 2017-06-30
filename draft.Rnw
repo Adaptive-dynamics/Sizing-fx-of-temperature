@@ -97,7 +97,6 @@ The optimal activity level ($\tau_{\text{opt}}$) is found at $\frac{dF}{d\tau}=0
 Life history theory suggests that the maximum\/asymptotic weight $W_{\infty}$ is found at the size at which all energy is allocated to reproduction, which optimally occurs at $\frac{\partial P_C/M}{\partial w}=1$ in the case of size-dependent mortality (provided concavity with respect to mass of this quantity). Note that $W_{\infty}$ depends on temperature only through $\tau$ and changes in $P_C$ as temperature changes metabolic and enzymatic rates. We thus impose no direct constraint on $W_{\infty}$. 
 
 
-
 \begin{table}
 \caption{Parameters}
 \begin{tabular}{ll}
