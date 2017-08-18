@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta name="generator" content="pandoc">
+  <title>Sizing the effects of temperature on fish</title>
+    <style type="text/css">code{white-space: pre;}</style>
+    <link rel="stylesheet" href="poster.css"/>
+  <!--[if lt IE 9]>
+  <script src="poster_files/reveal.js-3.3.0.1/lib/js/html5shiv.js"></script>
+  <![endif]-->
+    <script src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS_CHTML-full" type="text/javascript"></script>
+</head>
+<body>
+  <div class="reveal">
+    <div class="slides">
+
+<section>
+    <h1 class="title">Sizing the effects of temperature on fish</h1>
+    <h2 class="author"><span class="\&quot;presenter\&quot;">Philipp Neubauer<sup>1</sup></span>, Ken H. Andersen<sup>2</sup>
+<ol class="\&quot;affiliations\&quot;">
+<li>
+Dragonfly Data Science, Wellington, New Zealand
+</li>
+<li>
+Centre for Ocean Life, National Institute of Aquatic Resources, Technical University of Denmark, Denmark
+</li>
+</ol></h2>
+</section>
+
+<section><section id="section" class="titleslide slide level1 col-1"><h1></h1></section><section id="introduction" class="slide level2">
+<h1>Introduction</h1>
+<p>Size-at-maturation and maximum size are key traits, defining ecoloical niches and driving ecological interactions<span class="citation" data-cites="andersen_asymptotic_2006"><sup>1</sup></span>. Temperature has been identified in various contexts as a key driver of organism size (Bergman’s rule, Temperature size rule…)<span class="citation" data-cites="atkinson_temperature_1994"><sup>2</sup></span>. Climate change may therefore have strong effects on organism size and follow on effects at population and ecosystem levels, but no clear framework to understand effects of temperature.</p>
+<p><strong>Aim: Develop a eco-physiological model to predict effects of changing temperatures on organism size over ecological and evolutionary time-scales</strong></p>
+</section></section>
+<section><section id="section-1" class="titleslide slide level1 col-2"><h1></h1></section><section id="model" class="slide level2">
+<h1>Model</h1>
+<p>We set up a weight (<span class="math inline">\(w\)</span>) based model consisting of mass and oxygen balance equations:</p>
+<p>Feeding - type 2 response with parameters for maximum consumption rate <span class="math inline">\(\gamma\)</span> and maximum intake <span class="math inline">\(h\)</span>, modulated by feeding activity <span class="math inline">\(\tau\)</span>: <span class="math display">\[ f = \frac{{\color{uclagold}\tau} \gamma w^{p}\Theta}{{\color{uclagold}\tau}\gamma w^{p}\Theta  + {\color{bondiblue} T^c_{h} h w^{q}}} \]</span></p>
+<p>Mass balance: Intake is assimilated with loss from heat increment <span class="math inline">\(\phi\)</span> and absorbtion <span class="math inline">\(\beta\)</span>. Metabolic loss due to standard and feeding activity (<span class="math inline">\(\tau\)</span>) metabolic costs <span class="math display">\[ P =(1-\beta-\phi)f {\color{bondiblue} T^c_{h} h w^{q}}-{\color{sinopia}k(1+{\color{uclagold}\tau\delta}) T^c_{M} w^n} \]</span></p>
+<p>Oxygen balance: Oxygen sets the limit for metabolism via the cost of metabolising one gram of feed <span class="math inline">\(\omega\)</span> relative to the potential oxygen supply <span class="math inline">\(f_{O_2}w^n\)</span>: <span class="math display">\[P_{0_2} = f_{O_2}w^n - \omega(\beta f_C {\color{bondiblue} T^c_{h} h w^{q}} +{\color{sinopia}k(1+{\color{uclagold}\tau\delta}) T^c_{M} w^n})\]</span></p>
+<p>Mortality: Weight based with base mortality <span class="math inline">\(m_0\)</span> and activity related mortality <span class="math inline">\(m_\tau\)</span>.</p>
+<p><span class="math display">\[M = (m_0 + {\color{uclagold}\tau}m_{\color{uclagold}\tau})w^{1-p}\]</span> <span class="math inline">\({\bf \tau}\)</span> <strong>is optimised at any temperature via Gilliam’s rule (argmax<span class="math inline">\({\bf _\tau\{P/M\}}\)</span>)</strong></p>
+</section><section id="ecological-dynamics" class="slide level2">
+<h1>Ecological dynamics</h1>
+<p>With increasing temperature, most organisms will increase activity <span class="math inline">\(\tau\)</span> to offset increased metabolic costs.</p>
+<p>Feeding level, available energy and mortality are impacted by response to temperature</p>
+<p>Oxygen sets metabolic limits at extreme temperatures</p>
+<p><img src="poster_files/figure-revealjs/unnamed-chunk-2-1.svg" width="672" /> <img src="poster_files/figure-revealjs/unnamed-chunk-3-1.svg" width="672" /></p>
+<p>Temperature affects size via evolved reaction norm on ecological time-scales:</p>
+<p><img src="poster_files/figure-revealjs/unnamed-chunk-4-1.svg" width="672" /></p>
+</section></section>
+<section><section id="section-2" class="titleslide slide level1 col-2"><h1></h1></section><section id="traits" class="slide level2">
+<h1>Traits</h1>
+<p>Two strategists: minimising mortality <span class="math inline">\(M\)</span> or maximising energy gain <span class="math inline">\(P\)</span></p>
+<p><span class="math inline">\(P\)</span> strategy: * Maximise intake at the cost of higher standard metabolism to feeding maintain activity and larger gut. * Live with higher <span class="math inline">\(M\)</span></p>
+<p><span class="math inline">\(M\)</span> strategy: * Minimise <span class="math inline">\(M\)</span> by minimising dangerous feeding activty, minimise resting metabolism</p>
+</section><section id="evolutionary-impact" class="slide level2">
+<h1>Evolutionary impact</h1>
+<p>Size-at maturation reacts strongly to temperature changes in the model, however, changes are small on ecological time-scales ($$1mm per year)</p>
+<p><img src="poster_files/figure-revealjs/unnamed-chunk-5-1.svg" width="672" /></p>
+</section></section>
+<section><section id="section-3" class="titleslide slide level1 col-1"><h1></h1></section><section id="acknowledgements" class="slide level2">
+<h1>Acknowledgements</h1>
+<p>P. Neubauer acknowledges funding from the Royal Society of New Zealand Marsden Fast Start grant 14-DFG-001.</p>
+<p>All code for this poster is accessble from github.</p>
+</section></section>
+<section><section id="section-4" class="titleslide slide level1 col-1"><h1></h1></section><section id="references" class="slide level2 unnumbered">
+<h1>References</h1>
+<div id="refs" class="references">
+<div id="ref-andersen_asymptotic_2006">
+<p>1. Andersen, K. H. &amp; Beyer, J. E. Asymptotic size determines species abundance in the marine size spectrum. <em>The American Naturalist</em> <strong>168,</strong> 54–61 (2006).</p>
+</div>
+<div id="ref-atkinson_temperature_1994">
+<p>2. Atkinson, D. Temperature and organism size: A biological law for ectotherms? <em>Advances in ecological research</em> <strong>25,</strong> 1–1 (1994).</p>
+</div>
+</div>
+</section></section>
+    </div>
+  </div>
+
+  </body>
+</html>
