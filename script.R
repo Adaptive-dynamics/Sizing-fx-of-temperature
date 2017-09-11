@@ -15,7 +15,7 @@ sc1 <- list(beta=0.15,
             k=1.2,
             lO=1, 
             m=100, 
-            M=2 ,
+            M=0.1 ,
             n=0.88, 
             O2crit=2, 
             omega=0.03, 
@@ -27,7 +27,7 @@ sc1 <- list(beta=0.15,
             temp=seq(8,26,l=100),
             Topt=20, 
             Tref=15 ,
-            v=1)
+            v=0.5)
 
 sc2 <- list(beta=0.15,
             delta=4,
@@ -37,7 +37,7 @@ sc2 <- list(beta=0.15,
             k=1.2,
             lO=1, 
             m=100, 
-            M=2 ,
+            M=0.1 ,
             n=0.88, 
             O2crit=2, 
             omega=0.03, 
@@ -49,7 +49,7 @@ sc2 <- list(beta=0.15,
             temp=seq(8,26,l=100),
             Topt=20, 
             Tref=15 ,
-            v=1)
+            v=0.5)
 
 sc3 <- list(beta=0.15,
             delta=4,
@@ -59,7 +59,7 @@ sc3 <- list(beta=0.15,
             k=1.2,
             lO=1, 
             m=100,  
-            M=2 ,
+            M=0.1 ,
             n=0.88, 
             O2crit=2, 
             omega=0.03, 
@@ -71,7 +71,7 @@ sc3 <- list(beta=0.15,
             temp=seq(8,26,l=100),
             Topt=20, 
             Tref=15 ,
-            v=1)
+            v=0.5)
 
 scenarios <- bind_cols(data_frame(Scenario = as.factor(rep(1:3,each=100))),
                        bind_rows(plot_data_temp(sc1),
@@ -81,34 +81,34 @@ scenarios <- bind_cols(data_frame(Scenario = as.factor(rep(1:3,each=100))),
 ggp <-lst()
 
 sc_act <- tidyr::gather(scenarios,Activity,value,Optimum, Limit,Realised) %>%
-  mutate(Activity = relevel(as.factor(Activity), "Realised"))
+  mutate(Activity = relevel(as.factor(Activity), "Realised")) %>%
+  filter(Scenario==3)
 
 ggp[['Activity']] <- ggplot(sc_act) + 
-  geom_line(aes(x=Temperature, y=value, linetype=Activity, col=Scenario),alpha=0.7) +
-  geom_point(data=sc_act[seq.int(1,nrow(sc_act),by = 5),],aes(x=Temperature, y=value, group=Activity, col=Scenario,shape=Scenario),alpha=0.5,size=2) +
+  geom_line(aes(x=Temperature, y=value, linetype=Activity),alpha=0.7) +
   theme_cowplot()+
   #scale_size_discrete(guide='none',range = c(1.2,0.6))+
   theme(legend.justification=c(0,1), 
-        legend.position=c(0.55,1),
+        legend.position=c(0.05,0.85),
         legend.box = "horizontal",
-        legend.text  = element_text(size=8),
-        legend.title = element_text(size=10),
+        legend.text  = element_text(size=10),
+        legend.title = element_text(size=12),
         legend.spacing = unit(0.005,'npc'),
         legend.background = element_rect(fill='white')) + 
   labs(x = expression("Mean temperature " ( degree*C)),
        y=expression('Activity ' (tau)))
 
-sco <- tidyr::gather(scenarios,Rate,value,MMR, `Active M.`, `Std M.`)
+sco <- tidyr::gather(scenarios,Rate,value,MMR, `Active M.`, `Std M.`) %>%
+  filter(Scenario==3)
 
 ggp[['Oxygen']] <- sco %>%
   ggplot() + 
-  geom_line(aes(x=Temperature, y=value, linetype=Rate, col=Scenario),alpha=0.7) +
-  geom_point(data=sco[seq.int(1,nrow(sco),by = 5),],aes(x=Temperature, y=value, group=Rate, col=Scenario,shape=Scenario),alpha=0.5,size=2) +
+  geom_line(aes(x=Temperature, y=value, linetype=Rate),alpha=0.7) +
   theme_cowplot()+
   theme(legend.justification=c(0,1), 
         legend.position=c(0.05,0.85),
-        legend.text  = element_text(size=8),
-        legend.title = element_text(size=10),
+        legend.text  = element_text(size=10),
+        legend.title = element_text(size=12),
         legend.spacing = unit(0.005,'npc')#legend.background = element_rect(fill='white')
         )+
   scale_color_discrete(guide='none')+
@@ -123,18 +123,18 @@ sc_feed <- scenarios %>%
          `Available Energy` = sc(`C for growth`),
          `Available Energy` = ifelse(`Available Energy`<0,0,`Available Energy`)) %>% 
   tidyr::gather(Rate,value,`Feeding level`,`Available Energy`,M) %>%
-  mutate(Rate = relevel(as.factor(Rate),'Feeding level'))
+  mutate(Rate = relevel(as.factor(Rate),'Feeding level')) %>%
+  filter(Scenario==3)
 
 ggp[['Feeding']] <- sc_feed  %>% 
   ggplot() + 
-  geom_line(aes(x=Temperature, y=value, linetype=Rate, col=Scenario),alpha=0.7) +
-  geom_point(data=sc_feed[seq.int(1,nrow(sc_feed),by = 5),],aes(x=Temperature, y=value, group=Rate, col=Scenario,shape=Scenario),alpha=0.5,size=2) +
+  geom_line(aes(x=Temperature, y=value, linetype=Rate),alpha=0.7) +
   theme_cowplot()+
-  lims(y=c(0,1))+
-  theme(legend.justification=c(1,1), 
-        legend.position=c(0.8,0.8),
-        legend.text  = element_text(size=8),
-        legend.title = element_text(size=10),
+  #lims(y=c(0,1))+
+  theme(legend.justification=c(0,1), 
+        legend.position=c(0.05,0.85),
+        legend.text  = element_text(size=10),
+        legend.title = element_text(size=12),
         legend.spacing = unit(0.005,'npc'))+
   scale_color_discrete(guide='none')+
   scale_shape_discrete(guide='none')+
@@ -149,25 +149,26 @@ growth_scenarios <- bind_cols(data_frame(Scenario = as.factor(rep(1:3,each=n_int
                                  plot_data_growth_tO2(sc3, lm = lm, n_int = n_int)))
 
 
-lw <- function(w) (w/(10^-2))^(1/3)
+lw <- function(w) (w/0.0029)^(1/3.3365)
 growth_scenarios <- growth_scenarios %>%
-  mutate(length=lw(Temp))
+  mutate(length=lw(Temp)) %>%
+  filter(Scenario==3)
 
 ggp[['winf']] <- ggplot(growth_scenarios) + 
-  geom_line(aes(x=Temperature, y=Temp, col=Scenario),alpha=0.7) +
-  geom_point(data=growth_scenarios[seq.int(1,nrow(growth_scenarios),by = 5),],aes(x=Temperature, y=Temp, col=Scenario,shape=Scenario),alpha=0.5,size=2) +
+  geom_line(aes(x=Temperature, y=length),alpha=0.7) +
+  #geom_point(data=growth_scenarios[seq.int(1,nrow(growth_scenarios),by = 5),],aes(x=Temperature, y=Temp, col=Scenario,shape=Scenario),alpha=0.5,size=2) +
   theme_cowplot()+
   theme(legend.justification=c(0,1), 
-        legend.position=c(0.4,0.8),
-        legend.text  = element_text(size=8),
-        legend.title = element_text(size=10),
+        legend.position=c(0.05,0.85),
+        legend.text  = element_text(size=10),
+        legend.title = element_text(size=12),
         legend.spacing = unit(0.005,'npc'),
         legend.background = element_rect(fill='white'))+
-  scale_color_discrete(guide='none')+
-  scale_shape_discrete(guide='none')+
-  scale_y_log10(limits=c(1,1000))+
+  #scale_color_discrete(guide='none')+
+  #scale_shape_discrete(guide='none')+
+  #scale_y_log10()+
   labs(x = expression("Mean temperature " ( degree*C)),
-       y='Adult weight (g)')
+       y='Adult length (cm)')
 
 cowplot::plot_grid(plotlist = ggp,labels = 'auto')
 ggsave('activity.pdf',width = 8.5,height = 8.5)

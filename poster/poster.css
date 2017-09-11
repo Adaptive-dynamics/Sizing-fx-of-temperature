@@ -32,7 +32,7 @@ body {
 /* Font-sizes.  These could also be set proportionally to the base html size */
 html {
 	font-family: "omnes-pro","Helvetica Neue",Helvetica,Arial,sans-serif;
-	font-size: 200%;
+	font-size: 220%;
 	line-height: 1.375; /* Use proportional line spacing so everything is self-consistent */
 }
 
@@ -65,7 +65,7 @@ caption {
 /* Poster title/header */
 .reveal .slides > section:first-child {
 	text-align: center;
-	background: url(img/logo.svg) 0 50%/350px 175px no-repeat, url(img/MF.png) 2% 15%/240px 100px no-repeat, url(img/ol.png) 97% 15%/150px 150px no-repeat, url(img/dtu.png) 97% 80%/120px 150px no-repeat, rgba(32,147,191,0.3) ; 
+	background: url(img/logo.svg) 0 15%/350px 150px no-repeat, url(img/MF.png) 2% 50%/240px 100px no-repeat, url(img/ol.png) 97% 15%/150px 150px no-repeat, url(img/dtu.png) 97% 80%/120px 150px no-repeat ; 
 	opacity: 1; /* but also assigns the alpha to content */
 	width: 100%;
 	box-sizing: border-box;
@@ -123,7 +123,6 @@ caption {
 .reveal .slides {
 	display: flex;
 	flex-direction: column;
-	background-color: rgba(90,177,140,0.3);
 	background-size: cover;
 	height: inherit;
 	/* padding: 1cm; */ /* Can set overall document "margins" here */
@@ -164,7 +163,6 @@ caption {
 	margin-top: 2cm;
 	/* Chrome is not handling the background opacity correctly when printing: https://bugs.chromium.org/p/chromium/issues/detail?id=226137 */
 	/* background-color: rgba(255, 255, 255, 0.9); */
-	background-color: rgba(32,147,191,0.3);
 	border: 0.2cm rgb(28,152,196);
 	box-shadow: 5px 5px 5px black;
 	display: flex;
@@ -174,7 +172,9 @@ caption {
 }
 
 p, pre {
-	flex: 95%;
+  -webkit-margin-before: 0;
+  -webkit-margin-after: 0;
+	flex: 90%;
 	padding: 0 0.3em;
 	box-sizing: border-box;
 }
