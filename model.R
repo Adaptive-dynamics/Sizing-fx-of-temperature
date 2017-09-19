@@ -6,7 +6,7 @@ inv_logit3 <- function(m,mstar,a,b,c) {
 }
 sc <- function(x) x/max(x,na.rm=T)
 lw <- function(w) (w/0.01)^(1/3)
-
+wl <- function(l) 0.01*l^3
 
 O2_plotfun <- function(etas,Tops){
   grid <- expand.grid(eta = etas,
@@ -41,7 +41,7 @@ O2_plotfun <- function(etas,Tops){
 
 plot_data_temp <- function(v){
   
-  lm = 10^seq(-2,5,l=v$lm)
+  lm = seq(10^v$min_m,10^v$max_m,l=v$lm)
   
   O2_tcor <- O2_fact(v$temp,5)
   f=O2_supply(10*O2_tcor,Topt=v$Topt,O2crit=v$O2crit,Tmax=v$temp[length(v$temp)],T=v$temp,delta=v$lO,omega=v$shape,P50=v$P50,n=v$n)
@@ -120,50 +120,10 @@ plot_data_temp <- function(v){
   
 }
 
-plot_data_growth <- function(v){
-  
-  tau_uc = eval_tau_eq(gamma=v$gamma,
-                       delta=v$delta,
-                       phi=v$phi,
-                       h=v$h,
-                       beta=v$beta,
-                       k=v$k,
-                       p=v$p,
-                       q=v$q,
-                       n=v$n,
-                       m=10^seq(1,5,l=1000),
-                       M=v$M,
-                       v=v$v)
-  
-  tau_uc[tau_uc<0] <- 0
-  tau_uc[tau_uc>1] <- 1
-  
-  taus <- get_taus(v,tau_uc,10,v$temp_ref)
-  
-  model_out_par(tau_max = taus$tau_max,
-                tau = taus$tau,
-                tau_uc = tau_uc,
-                tau_o2 = taus$tau_o2,
-                M=v$M,
-                temp=v$temp_ref,
-                Ea=v$Ea,
-                gamma=v$gamma,
-                delta=v$delta,
-                phi=v$phi,
-                h=v$h,
-                beta=v$beta,
-                k=v$k,
-                p=v$p,
-                q=v$q,
-                n=v$n,
-                m = 10^seq(1,5,l=1000)
-  )
-}
-
 plot_data_growth_tO2 <- function(v){
   
   n_int <- length(v$temp)
-  lm = 10^seq(-2,6,l=v$lm)
+  lm = seq(10^v$min_m,10^v$max_m,l=v$lm)
   O2_range <- seq(1,10,l=n_int)
   
   #### Step 1 get mstar=mo+slope*age for all Temp
@@ -182,12 +142,12 @@ plot_data_growth_tO2 <- function(v){
                            p=v$p,
                            q=v$q,
                            n=v$n,
-                           mstar = mout_ref$winf,
                            tmax = v$tmax,
                            slope=v$slope,
                            tr=v$tr,
                            v=v,
-                           lm=lm)
+                           lm=lw(lm),
+                           dt = v$dt)
   
   winfs <- mout$winfs
   
@@ -197,7 +157,6 @@ plot_data_growth_tO2 <- function(v){
   
   mouts <- model_out_growth_check(temp=winfs$Temperature,
                                   temp_ref=v$temp_ref,
-                                  l=v$lm,
                                   Ea=v$Ea,
                                   gamma= seq(v$gamma*(1-v$c),v$gamma*(1+v$c),l=n_int),
                                   delta=v$delta,
@@ -208,12 +167,13 @@ plot_data_growth_tO2 <- function(v){
                                   p=v$p,
                                   q=v$q,
                                   n=v$n,
-                                  mstar = lm[winfs$opt[which.min(abs(winfs$Temperature-v$temp_ref))]],
+                                  mstar = lw(lm[winfs$opt[which.min(abs(winfs$Temperature-v$temp_ref))]]),
                                   tmax = v$tmax,
                                   slope=v$slope,
                                   tr=v$tr,
                                   v=v,
-                                  lm=lm)
+                                  lm=lw(lm),
+                                  dt = v$dt)
   
   list(winfs=winfs,
        growth=mout$growth,
@@ -310,64 +270,6 @@ model_out <- function(tau_max,
              Std = k*tc*m^n)
 }
 
-get_dPdm <- function(m=NULL,tau,
-                     tc,
-                     nu=-0.25,
-                     v=0.2,
-                     M=0.2,
-                     gamma=50,
-                     delta=2,
-                     phi=0.15,
-                     h=30,
-                     beta=0.2,
-                     k=2,
-                     p=0.8,
-                     q=0.9,
-                     n=0.8) ((beta + phi - 1)*gamma*h*m^p*m^q*tau*tc/(gamma*m^p*tau + h*m^q*tc) + (delta*tau + 1)*k*m^n*tc)*m^(nu - 1)*nu/((tau*v + M)*m^(2*nu)) - ((beta + phi - 1)*gamma*h*m^(p - 1)*m^q*p*tau*tc/(gamma*m^p*tau + h*m^q*tc) + (beta + phi - 1)*gamma*h*m^p*m^(q - 1)*q*tau*tc/(gamma*m^p*tau + h*m^q*tc) - (gamma*m^(p - 1)*p*tau + h*m^(q - 1)*q*tc)*(beta + phi - 1)*gamma*h*m^p*m^q*tau*tc/(gamma*m^p*tau + h*m^q*tc)^2 + (delta*tau + 1)*k*m^(n - 1)*n*tc)/((tau*v + M)*m^nu)
-
-model_out_par <- function(tau_max,
-                          temp,
-                          temp_ref=15,
-                          Ea,
-                          M=0.2,
-                          v=1,
-                          nu=-0.25,
-                          gamma=50,
-                          delta=2,
-                          phi=0.15,
-                          h=30,
-                          beta=0.2,
-                          k=2,
-                          p=0.8,
-                          q=0.9,
-                          n=0.8,
-                          m=10^seq(0,6,l=1000)){
-  
-  #browser()
-  tc = exp(Ea*((temp+(288.2-temp_ref))-288.2)/(8.6173324*10^(-5)*(temp+(288.2-temp_ref))*288.2))
-  
-  
-  f <- tau_max*gamma*m^p/(tau_max*gamma*m^p+tc*h*m^q)
-  inp <- (1-phi-beta)*f*tc*h*m^q
-  out <- (1+tau_max*delta)*k*tc*m^n 
-  E=inp/out
-  
-  #browser()
-  mm <- get_dPdm(m=m,tau=tau_max,tc=tc,v=v,M=M,nu=nu,gamma=gamma,delta=delta,
-                 phi=phi,h=h,beta=beta,k=k,p=p,q=q,n=n)
-  mtemp <- (tau_max*v+M)*m^nu
-  
-  test <- abs(mm-1)
-  cond <- order(test[test<1])[1]
-  winf <- ifelse(!is.na(cond), m[test<1][cond],NA)
-  
-  list(winf=winf, 
-       dPm = data_frame(Temperature=temp,
-                        Mass=m,
-                        dPm=mm,
-                        Pm=(inp-out)/mtemp))
-}
-
 model_out_growth <- function(temp,
                              temp_ref=15,
                              l,
@@ -382,44 +284,47 @@ model_out_growth <- function(temp,
                              p=0.8,
                              q=0.9,
                              n=0.8,
-                             mstar=1000,
                              tmax=10,
                              slope=0.05,
                              tr = 1,
-                             v=NULL){
+                             v=NULL,
+                             dt=100){
   
   
   temps = length(temp)
   
   tc = exp(Ea*((temp+(288.2-temp_ref))-288.2)/(8.6173324*10^(-5)*(temp+(288.2-temp_ref))*288.2))
   
-  ts <- seq(0,tmax,l=l)
+  ts <- seq(0,tmax,l=dt)
   
   
-  s <- array(NA, c(temps,l,l))
-  allocs <- array(NA, c(temps,l,l))
+  s <- array(0, c(temps,l,dt))
+  allocs <- array(0, c(temps,l,dt))
   
-  R0 <- array(0, c(temps,l,l))
-  surv <- array(0, c(temps,l,l))
+  R0 <- array(0, c(temps,l,dt))
+  surv <- array(0, c(temps,l,dt))
   
-  s[,,1] <- 0.01
+  s[,,1] <- min(wl(lm))
   
-  for(t in 2:l) {
+  
+  dts <- (tmax/(dt-1))
+  
+  for(t in 2:dt) {
     tm1 <- get_taus(v,1,10,temp,s[,,t-1])
     f <- tm1*gamma*s[,,t-1]^p/(tm1*gamma*s[,,t-1]^p+tc*h*s[,,t-1]^q)
     inp <- (1-phi-beta)*f*tc*h*s[,,t-1]^q
     out <- (1+ tm1*delta)*k*tc*s[,,t-1]^n 
-    Es=inp-out
-    allocs[,,t] <- t(apply(lw(s[,,t-1]),1,inv_logit3,lw(lm),ts[t],slope,tr))
+    Es  <- inp-out
+    allocs[,,t] <- pmax(allocs[,,t-1],t(apply(lw(s[,,t-1]),1,inv_logit3,lm,ts[t],slope,tr)))
     
     mt <- (tm1*v$v+v$M)*s[,,t-1]^v$nu
-    surv[,,t] <- surv[,,t-1] + (tmax/(l-1))*mt
-    R0[,,t] <- R0[,,t-1] + (tmax/(l-1))*allocs[,,t]*Es*exp(-surv[,,t])
+    surv[,,t] <- surv[,,t-1] + dts*mt
+    R0[,,t] <- R0[,,t-1] + dts*allocs[,,t]*Es*exp(-surv[,,t])
     
-    s[,,t] <- s[,,t-1]+(tmax/(l-1))*(1-allocs[,,t])*Es
+    s[,,t] <- s[,,t-1]+dts*(1-allocs[,,t])*Es
   }
   ls <- lw(s)
-  opt <- apply(R0[,,l],1,function(x) ifelse(any(!is.nan(x)),which.max(x),NA))
+  opt <- apply(R0[,,dt],1,function(x) ifelse(any(!is.nan(x)),which.max(x),NA))
   
   #browser()
   
@@ -461,18 +366,18 @@ model_out_growth <- function(temp,
     tau = winfs$Temperature[t]
     this.l <- winfs$l[t]
     if (is.na(this.l)) next
-    tPM <- R0[t,opt[t],l]
-    lPM <- R0[t-1,opt[t],l]
-    nPM <- R0[t+1,opt[t],l]
+    tPM <- R0[t,opt[t],dt]
+    lPM <- R0[t-1,opt[t],dt]
+    nPM <- R0[t+1,opt[t],dt]
     
-    sl <- (nPM-lPM)/(winfs$Temperature[t+1]-winfs$Temperature[t-1])
+    sl <- abs((nPM-lPM)/(winfs$Temperature[t+1]-winfs$Temperature[t-1]))
     
     G[t] <- 0.04*this.l*sl/tPM
   }       
   
   
   sG <- sign(G)
-  winfs$G <- G/winfs$t
+  winfs$G <- G/max(winfs$t,1)
   winfs$L <- 10*(lw(winfs$l + winfs$G)-lw(winfs$l))
   
   
@@ -500,23 +405,24 @@ model_out_growth_check <- function(temp,
                                    tmax=10,
                                    slope=0.05,
                                    tr = 1,
-                                   v=NULL){
+                                   v=NULL,
+                                   dt=100){
   
   
   temps = length(temp)
   
   tc = exp(Ea*((temp+(288.2-temp_ref))-288.2)/(8.6173324*10^(-5)*(temp+(288.2-temp_ref))*288.2))
   
-  ts <- seq(0,tmax,l=l)
+  ts <- seq(0,tmax,l=dt)
   
-  s <- array(NA, c(temps,temps,l))
-  allocs <- array(NA, c(temps,temps,l))
+  s <- array(0, c(temps,temps,dt))
+  allocs <- array(0, c(temps,temps,dt))
   
-  s[,,1] <- 0.01
+  s[,,1] <- min(wl(lm))
   
+  dts <- (tmax/(dt-1))
   
-  
-  for(t in 2:l) {
+  for(t in 2:dt) {
     tm1 <- sapply(1:temps,function(g) {
       w <- v
       w$gamma <- gamma[g]
@@ -526,9 +432,9 @@ model_out_growth_check <- function(temp,
     inp <- (1-phi-beta)*f*tc*h*s[,,t-1]^q
     out <- (1+ tm1*delta)*k*tc*s[,,t-1]^n 
     Es=inp-out
-    allocs[,,t] <- t(apply(lw(s[,,t-1]),1,inv_logit3,lw(mstar),ts[t],slope,tr))
+    allocs[,,t] <- pmax(allocs[,,t-1],t(apply(lw(s[,,t-1]),1,inv_logit3,mstar,ts[t],slope,tr)))
     
-    s[,,t] <- s[,,t-1]+(tmax/(l-1))*(1-allocs[,,t])*Es
+    s[,,t] <- s[,,t-1]+dts*(1-allocs[,,t])*Es
   }
   ls <- lw(s)
   

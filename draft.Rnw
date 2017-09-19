@@ -98,9 +98,6 @@ Life history theory suggests that the adult weight $W_{\infty}$ is found at the 
 
 \subsection{Trait based scenarios}
 
-We now explore the sensitivity of size on a number of ecological and physiological traits. We model variable oxygen limitation through a set of three scenarios that reflect responses found empirically (\cite{lefevre_are_2016}; Figure \ref{fig:O2_fig}), ranging from an increasing MMR with temperature over most of the range (scenario 1), via a slightly dome-shaped response (scenario 2) to a strongly dome-shaped MMR (scenario 3). 
-
-Other physiological traits explored here are the FAS $\delta$, which determines the cost of active metabolism relative to standard metabolism. FAS ca vary strongly between species but is constant with weight (\cite{lefevre_models_2017, killen_ecological_2016}), and range from approximately 2 to 12, with most values found around 3-6. Here we explore values of 3-5. We explore the sensitivity to metabolic exponents by assuming that the exponent ranges between 0.85 and 0.9, with a base-case of 0.88 (\cite{lefevre_models_2017}).
 
 \begin{table}
 \caption{Parameters}
@@ -124,24 +121,233 @@ Exponent for std.~metabolism & $n=0.88$ \\
 
 \section{Model results}
 
+<<Scenarios>>=
 
-\begin{figure}[ht!]
-\includegraphics[width=\linewidth]{activity} 
-\caption[Activity, feeding and maximum length as a function of temperature]{Consequences of increasing temperature on activity levels, feeding and maximum weight for an individual weighing 100g. (a) Optimal (dashed line), limiting (dotted line) and realised (solid line) activity as a function of temperature. Realised activity is the smaller of the limiting and optimal levels at each temperature, with activity limited by O2 supply as pictured by dashed lines in b). Optimal activity steadily increases to compensate for rising metabolic costs (dotted line in b) with temperature until limited by oxygen (overlapping supply (dashed) and demand (solid) curves in b). (c) Rising activity levels keeps feeding levels constant (solid line in c).  Mortality levels (dashed) increase as activity increases with temperature, while available energy (carbon, dotted line) for growth and reproduction peaks and decreases. Note that energy is only limited by oxygen-limited activity levels at low temperatures in scenario 3. The rate of change of available energy relative to mortality drives the adult size, which declines near linearly in log-space without oxygen limitations, and lower and upper limits imposed as oxygen limits activity and energy acquisition.}
-\label{fig:act_fig}
-\end{figure}
+require(ggplot2)
+require(cowplot)
+require(dplyr)
+source('model.R')
 
-Increasing temperatures have cascading effects through their influence on both metabolic and ecological rates (Figure \ref{fig:act_fig}). To maintain optimal energy acquisition for growth and reproduction relative to mortality, activity levels generally increase, until they reach limitations imposed by oxygen supply (Figure \ref{fig:act_fig}a). This limit occurs when active metabolic costs equal oxygen supply (Figure \ref{fig:act_fig}b), and are therefore more pronounced for species with strongly dome-shaped maximum-metabolic rates (scenario 3 in Figure \ref{fig:act_fig}).
+int_m <- 500
+int_t <- 500
+int_temp <- 50
 
-Although increasing energy levels maintain a constant feeding level, increased maximum consumption with temperature leads to a dome-shaped response in available energy (Figure \ref{fig:act_fig}c). Since the rate of change of available energy relative to mortality determines adult size, 
+# Sluggish small
+ss <- list(c=0.3,
+           beta=0.15,
+           delta=4,
+           Ea=0.52, 
+           gamma=40, 
+           h=20, 
+           k=1,
+           lO=1, 
+           m=10, 
+           M=0.1 ,
+           n=0.8, 
+           O2crit=2, 
+           omega=0.25, 
+           p=0.75,
+           P50=4.2, 
+           phi=0.25, 
+           q=0.75 ,
+           shape=3,
+           temp=seq(5,26,l=int_temp),
+           Topt=20, 
+           temp_ref=15,
+           slope=-0.5,
+           tmax=10,
+           tr=0.5,
+           v=6,
+           lm=int_m,
+           nu=-0.2,
+           dt=int_t,
+           min_m=-2,
+           max_m= 1.5
+)
+
+# fast small
+fs <- ss
+fs$lO <- 2
+fs$k <- 1.5
+fs$h <- 40
+#fs$v <- 2
+#fs$M <- 0.8
+fs$n <- 0.75
+fs$p <- 0.70
+fs$q <- 0.70
+
+fl <- fs
+fl$p <- 0.75
+fl$q <- 0.75
+#fl$nu <- -0.25
+fl$tr <- 0.05
+fl$tmax <- 40
+fl$max_m <- 5
+
+sl <- ss
+sl$p <- 0.8
+sl$q <- 0.8
+#sl$nu <- -0.25
+sl$tmax <- 40
+sl$max_m <- 5
+sl$tr <- 0.05
+
+scs <- list(ss,fs,sl,fl)
+
+scenarios <- bind_cols(data_frame(Scenario = as.factor(rep(c('M strategy','P strategy','M strategy','P strategy'),each=int_temp)),
+                                  Size = as.factor(rep(c('Small','Large'),each=int_temp*2))),
+                       bind_rows(lapply(scs, plot_data_temp)))
+
+scn <- rep(unique(scenarios$Scenario),2)
+scz <- rep(unique(scenarios$Size),each=2)
+
+
+@
+
+<<activity,fig.cap='With increasing temperature, most organisms will increase activity $\\tau$ to offset increased metabolic costs. Oxygen sets metabolic limits at extreme temperatures.'>>=
+
+sc_act <- tidyr::gather(scenarios,Activity,value,Optimum, Limit,Realised) %>%
+  mutate(Activity = relevel(as.factor(Activity), "Realised")) 
+
+ggplot(sc_act) + 
+  geom_line(aes(x=Temperature, y=value, linetype=Activity),alpha=0.7) +
+  theme_cowplot()+
+  facet_grid(Size~Scenario)+
+  theme(plot.margin = margin(0, 6, 0, 6),
+        strip.background = element_blank(),
+        panel.background = element_blank(),
+        plot.background = element_blank()) + 
+  labs(x = expression("Mean temperature " ( degree*C)),
+       y=expression('Activity ' (tau)))
+
+@
+
+
+<<feeding,fig.cap='Figure 2: Feeding level, available energy and mortality are impacted by increased activity and the metabolic response to temperature.'>>=
+
+
+sc_feed <- scenarios %>%
+  #filter(!grepl('large',Scenario)) %>% 
+  group_by(Scenario,Size) %>%
+  mutate(Consumption=sc(Consumption),
+         Efficiency=sc(Efficiency),
+         Feeding=`Feeding level`,
+         `Available Energy` = sc(`C for growth`),
+         `Energy` = ifelse(`Available Energy`<0,0,`Available Energy`)) %>% 
+  tidyr::gather(Rate,value,Feeding,Energy,M,Efficiency) %>%
+  mutate(Rate = relevel(as.factor(Rate),'Feeding')) 
+
+
+ggplot(sc_feed) + 
+  geom_line(aes(x=Temperature, y=value, linetype=Rate),alpha=0.7) +
+  theme_cowplot()+
+  facet_grid(Size~Scenario)+
+  theme(plot.margin = margin(0, 6, 0, 6),
+        strip.background = element_blank(),
+        panel.background = element_blank(),
+        plot.background = element_blank())+
+  scale_linetype_discrete('')+
+  labs(x = expression("Mean temperature " ( degree*C)),
+       y='Relative rate') 
+
+@
 
 
 
-\begin{figure}[ht!]
-\includegraphics[width=\linewidth]{winf} 
-\caption[Influence of ecological and physiological variables on $W_\infty$]{Influence of scaling of mortality with activity (a), consumption rate (b), factorial aerobic scope (FAR; c), and exponent of metabolic rate on adult size $W\infty$.}
-\label{fig:winf_fig}
-\end{figure}
+<< norms, fig.cap='On ecological time-scales, temperature affects size via evolved maturation-reaction norms \cite{marty_impact_2011}. Most reaction norms found in nature have a negative slope, meaning for faster growth, maturation occurs at a larger size. Increasing temparture (left panel, purple to yellow growth curves) modifies growth, and maturation age changes according to the reaction norm (right panel).'>>=
+
+gouts <- parallel::mclapply(scs,plot_data_growth_tO2,mc.cores = 1)
+
+t_growth <- bind_rows(lapply(1:length(gouts), function(x) {
+  y <- gouts[[x]][['t_growth']]
+  y$Scenario <- scn[x]
+  y$Size <- scz[x]
+  y}))
+
+#browser()
+norm <- t_growth %>% 
+  group_by(Scenario,Size,Temperature) %>%
+  summarise(ts=t[ifelse(any(abs(allocs-0.5)<0.1),which.min(abs(allocs-0.5)),NA)-1],
+            m=t_length[ifelse(any(abs(allocs-0.5)<0.1),which.min(abs(allocs-0.5)),NA)-1]) 
+
+cp <- ggplot() +
+  geom_line(aes(x=t, y=t_length,col=as.factor(Temperature)),data=t_growth) +
+  geom_point(aes(x=ts, y=m),data=norm) +
+  #geom_point(data=growth_scenarios[seq.int(1,nrow(growth_scenarios),by = 5),],aes(x=Temperature, y=Temp, col=Scenario,shape=Scenario),alpha=0.5,size=2) +
+  theme_cowplot()+
+  facet_wrap(Size~Scenario,scales='free')+
+  viridis::scale_colour_viridis(discrete = T,guide='none')+
+  theme(plot.margin = margin(2, 6, 0, 6),
+        panel.background = element_blank(),
+        plot.background = element_blank())+
+  coord_cartesian()+
+  labs(y = 'Length (cm)',
+       x='Age  (years)')
+
+alloc <- bind_rows(lapply(1:length(gouts), function(x) {
+  y <- gouts[[x]][['t_growth']]
+  y$Scenario <- scn[x]
+  y$Size <- scz[x]
+  y}))
+
+norm <- alloc %>% 
+  group_by(Scenario,Size,Temperature) %>%
+  summarise(ts=t[ifelse(any(abs(allocs-0.5)<0.05),which.min(abs(allocs-0.5)),NA)-1],
+            ls=t_length[ifelse(any(abs(allocs-0.5)<0.05),which.min(abs(allocs-0.5)),NA)-1],
+            alloc=allocs[ifelse(any(abs(allocs-0.5)<0.05),which.min(abs(allocs-0.5)),NA)-1]) %>%
+  mutate(ls = sc(ls))
+
+np <-  ggplot() +
+  geom_line(aes(x=Temperature, y=ls, linetype=Scenario,col=Size),data=norm) +
+  theme_cowplot()+
+  theme(plot.margin = margin(2, 6, 0, 6),
+        panel.background = element_blank(),
+        plot.background = element_blank())+
+  #scale_color_discrete(guide='none')+
+  #scale_shape_discrete(guide='none')+
+  coord_cartesian()+
+  labs(y = 'Relative length',
+       x='Temperature')
+
+cowplot::plot_grid(cp,np,nrow=1)
+@
+
+
+<<evo, fig.cap='On evolutionary time-scales, selection moves the reaction norm. Size-at-maturation reacts strongly to temperature changes in the model (left panel). Selection (S) induced changes in size are slow for M strategists, fast for P strategists.'>>=
+
+
+winfs <- bind_rows(lapply(1:length(gouts), function(x) {
+  y <- gouts[[x]][['winfs']]
+  y$Scenario <- scn[x]
+  y$Size <- scz[x]
+  y}))
+
+wtfs <- winfs %>% group_by(Scenario,Size) %>%
+  mutate(length=sc(lw(l))) 
+
+cpG <- ggplot(wtfs) +
+  geom_line(aes(x=Temperature, y=length, col=Size,linetype=Scenario),alpha=0.7) +
+  theme_cowplot()+
+  #scale_linetype_discrete(guide='none')+
+  theme(plot.margin = margin(3, 6, 0, 6),
+        panel.background = element_blank(),
+        plot.background = element_blank())+
+  labs(x = expression("Mean temperature " ( degree*C)),
+       y='Relative adult length')
+
+
+npG <- ggplot(wtfs) +
+  geom_line(aes(x=Temperature, y=G/l, col=Size,linetype=Scenario),alpha=0.7) +
+  theme(plot.margin = margin(3, 6, 0, 6),
+        panel.background = element_blank(),
+        plot.background = element_blank())+
+  #coord_cartesian(ylim=quantile(wtfs$L/wtfs$l,c(0.05,0.95),na.rm=T)) + 
+  labs(x = expression("Mean temperature " ( degree*C)),
+       y=expression(S~response~y^-1)) 
+
+cowplot::plot_grid(cpG,npG,rel_widths = c(0.5,0.5))
+
+@
 
 \section{Discussion}
 
