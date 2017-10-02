@@ -127,7 +127,7 @@ Egestion and excretion & $\phi$ & \multicolumn{4}{c}{0.25} \\
 
 % Exponent for std.~metabolism & $n=0.88$ \\
 \multicolumn{6}{c}{\textbf{Feeding ecology}} \T\\
-Consumption rate$^1$ & $ \gamma\Theta $ & \multicolumn{4}{c}{$\frac{h w^{p-q}}{(1/f-1)\tau} (g\cdot y$^{-1}$)} \T \\
+Consumption rate$^1$ & $ \gamma\Theta $ & \multicolumn{4}{c}{$\frac{h w^{p-q}}{(1/f-1)\tau} (g\cdot y^{-1}$)} \T \\
 % Exponent for max.~consumption & $q=0.75$ \\
 % Coef.~for maximum consumption rate & $h \approx 20 $g$_{WW}^{1-n}$/yr \\
 % Exponent for clearance rate & $p=0.75$ \\
