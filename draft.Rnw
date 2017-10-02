@@ -17,7 +17,7 @@ uniquename=false, maxcitenames=2,maxbibnames=200,uniquelist=false,mincitenames=1
 \addbibresource{Sizing-fx-of-temperature.bib}
 \captionsetup[table]{singlelinecheck=false}
 
-\title{Sizing the effects of temperature on fish - from physiology to ecology}
+\title{Drivers of fish size in a changing climate}
 \author{Philipp Neubauer\\Dragonfly Data Science, Wellington, NZ  \and 
         Ken H. Andersen\\Centre for Ocean Life
         Danish Technical University, Lyngby, Denmark}
@@ -31,7 +31,7 @@ uniquename=false, maxcitenames=2,maxbibnames=200,uniquelist=false,mincitenames=1
 \pagenumbering{gobble}
 \begin{abstract}
 
-Increasing temperatures under climate change are thought to affect individual physiology of ectotherms through increases in metabolic demands, leading to decreases in body-size with concomitant effects on species ecology. Although intuitively appealing, the magnitude, as well as when and where such changes are expected in an ecosystem context remains unclear. We develop a general trait-based model of carbon and oxygen budgets to determine the relative influence of thermal sensitivity, oxygen limitation, and environmental conditions on ectotherm body size.  Our model provides a general physiological basis for changes in species size and observed ecological consequences of temperature, and ties together various strands of thought about the ecological consequences of increased temperatures. 
+Increasing temperatures under climate change are thought to affect individual physiology of ectotherms through increases in metabolic demands, leading to decreases in body-size with concomitant effects on species ecology. Although intuitively appealing, the magnitude, as well as when and where such changes are expected in an ecosystem context remains unclear. We develop a general trait-based model of carbon and oxygen budgets to determine the relative influence of thermal sensitivity, oxygen limitation, and environmental conditions on ectotherm body size. We use this model to contrast the response of size-at-maturation and asymptotic size in small and large fish with traits favoring high production versus reduced mortality. The immediate plastic and epigenetic response of size is govered by evolved maturation reaction norms that are largely independent of traits. The evolutionary response, however, is more pronounced in active species, suggesting a potentially stronger reponse to climate drivers. We suggest that this model provides a mechanistic underpinning that ties together various strands of thought and observation about ecological consequences of increased temperatures. 
 
 \end{abstract}
 {\large Keywords:} stock assessment, fisheries meta-analysis, fishery development, time-to-event analysis, marine conservation, catch-only methods
@@ -86,34 +86,55 @@ with $f_{O_2}$ the oxygen supply (MMR), $T_{\text{max}}$ the lethal temperature 
 
 \input{O2_fig}
 
-We now assume that organisms will adjust their activity level to maximise available energy relative to mortality $M$: $\tau_{\text{opt}}$ = $\max_\tau(F)$ = $\max_\tau(P_C/M)$, with $F$ a measure of fitness \footnote{I \emph{think} this amounts to maximizing R0 if no more growth occurs: life expectancy is 1/M and reproductive output is proportional to energy}. We further assume here that mortality scales with activity level and weight as $w^{q-1}$ (\cite{andersen_how_2009, hartvig_food_2011}), such that $M_{\tau,w} = \tau^\eta \rho w^{q-1}$, where $ \rho$ is mortality at mass $w=1$ and $\tau=1$, that is, at constant maximum activity and $M$ is the effective mortality at realised levels of activity at weight $w$.
-
-\begin{center}
-\input{m}
-\end{center}
+We now assume that organisms will adjust their activity level to maximise available energy relative to mortality $M$: $\tau_{\text{opt}}$ = $\max_\tau(F)$ = $\max_\tau(P_C/M)$, with $F$ a measure of fitness. We further assume here that mortality scales with activity level and weight as $w^{q-1}$ (\cite{andersen_how_2009, hartvig_food_2011}), such that $M_{\tau,w} = (\rho+\eta\tau) w^{q-1}$, where $ \rho$ is mortality at mass $w=1$ and $\tau=0$, that is, with no activity beyond that covered by standrad metabolism.  $M$ is then the effective mortality at realised levels of activity $\tau$ at weight $w$.
 
 The optimal activity level ($\tau_{\text{opt}}$) is found at $\frac{dF}{d\tau}=0$. We assume that the metabolic scope dictates the upper limit of this activity, such that at $\tau_{\text{max}}$, oxygen demand $D_{0_2}$ equals total supply $S_{0_2}$. Both temperature and oxygen will influence $\tau$, such that at a given temperature and oxygen concentration, $\tau_{T,O_2} = \text{min}\left( \tau_{\text{opt}},\tau_{\text{max}} \right)$, meaning we assume that animals will adapt their effort to optimise fitness $F$ given temperature and oxygen constraints.
 
-Life history theory suggests that the adult weight $W_{\infty}$ is found at the size at which all energy is allocated to reproduction, which optimally occurs at $\frac{\partial P_C/M}{\partial w}=1$ in the case of size-dependent mortality (provided concavity with respect to mass of this quantity). Note that $W_{\infty}$ depends on temperature only through $\tau$ and changes in $P_C$ as temperature changes metabolic and enzymatic rates. We thus impose no direct constraint on $W_{\infty}$. 
+
+\subsection{Allocation to reproduction and ecological size response}
+
+On ecological time-scales, temperature affects size via its effets on the energy budget and the investment of available (surplus) energy into reproduction and growth. The change in allocation to reproduction with size and age in variable environmental conditions is described by the maturation reaction norm. The maturation reaction norm describes the probability of maturing at a certain age under different growth conditions \cite[e.g., ][]{dieckmann_probabilistic_2007}, though we will use a slightly different definition here since our model is not probabilitic at the population level: we define the reaction norm as the mid-point of a logistic allocation function that determines investment in reproduction as a function of age and size. The allocation is parametrised as $\phi(z,c) = 1/(1+exp(-(c*z)))$, where $z = (w-w^*)\times cos(atan(b))-a\times sin(atan(b))$ rotates the coordiante system about the slope $b$ of the reaction norm, $a$ is the age, $w$ is the mass, $w^*$ is the intercept of the reaction norm, and $c$ determines how rapidly energy allcoation shifts from somatic growth to reproduction.
+
+The slope of the reaction norm is evolutionarily determined by the strngth of the co-variation between growth and mortality for a given population in a given environment \cite{marty_impact_2011}, with strongly positive co-variation leading to the relatively flat reaction norms observed for most populations of fish. We do not explicitly model these interactions here (aside from the dependence of mortality on $\tau$) as we are interested in parsing out the effect of temperature, and we assume that reaction norms evolved over relatively stable temperature regimes in the past. In other words, we assume that temperature was not a key driver of covariations between growth and mortality. In that scenario, good growth conditions (e.g., from increased prey density) probably alter the baseline mortality $\rho$ and the risk of foraging $\eta$ (e.g., by attracting predators), indepnedently of temparture influences. Consequently, we assume that the evolved slope of the reaction norm is a trait for a particular species or population. Since most reaction norms are relatively flat, we instead explore how deviations from a flat reaction norm influence maturation size and asymptotic size under varying temperatures.
+
+
+\subsection{Evolutionary size response}
+
+The maturation reaction norm is subjected to selective pressure when through a gradual change in temperature, mean environmental conditions change and previously evolved reaction norms become sub-optimal. To investigate how size will change over longer, evolutionary time-scales, we calculate the expected life-time reproduction, $R0$ as temperature changes from a reference temperature $T_ref$. We assumed that the covariation between mortality and growth remains similar as temperatures change (i.e., temperature remains independent of covariation between growth and mortality), and we optimised $R0$ with respect to $m*$ at each temperature. From this, we calculated the the expected rate of change (i.e., the selection response) of $m*$ with resepct to temperature as $S = \sigma_w^* h^2 R0'/R0$, where $R0' = dR0/dT$. 
+
 
 \subsection{Trait based scenarios}
 
+We explored impacts along two trait axes. The first axis aims to contrast species along a gradient of life-history that, at the one end, maximises production (energy aquisition) at the cost of increased metabolism and mortality, and at the opposing end minimises mortality and metabolic costs at the expense of production. This axis leads to an approximately constant ratio of production to mortality, and corresponds to a line of equal size in the life-history space proposed by \cite{charnov_evolutionary_2013}. In other words, this axis contrasts species of similar size with sluggish versus active life-histories.
+
+To implement this axis, we use the result that species with a more active, production oriented life-history (e.g., pelagic species) have a higher standard metabolism and lower weight scaling of metabolic costs \cite{killen_intraspecific_2010}. We assume that that higher standard metabolism is due to increased digestive capacity (i.e., is used for gut maintenance CITE). In practice, we assume that approxiamtely 50\% of the standard metabolic cost is due to gut maintenance, such that a doubeling of the maximum ingestion leads to a 50\% increase in standard metabolic cost. We further assume that such active species have a less effective refuge from predators and therefore have a higher constant mortality, but lower mortality related to activity. Exact parameter values are given in Table \ref{tab:parameters}.
+
+The second trait axis aims to be orthogonal to the first and contrast changes in size for species of large and small absolute size, but with similar investment in production or mortality avoidance (i.e., with the same value on the first trait axis). We assume that mortlity is largely fixed by the life history strategy on the first axis (via $\rho$ and $\eta$), and that size is largely determined by differences in weight scaling between metabolism and consumption, thereby leading to differential changes in production with size, which in turn determines absolute size \cite{charnov_evolutionary_2013, kozlowski_optimal_1996, thygesen_how_2005}.
+
+
+\newcommand\T{\rule{0pt}{2.6ex}} 
 
 \begin{table}
 \caption{Parameters}
-\begin{tabular}{ll}
-Description & Value \\
+\label{tab:parameters}
+\begin{tabular}{llrrrr}
+Description & Symbol & \multicolumn{4}{c}{Value} \T\\
 \hline
-Specific dynamic action & $\beta = 0.15$ \\
-Egestion and excretion & $\phi = 0.25$ \\
-Consumption rate$^1$ & $\Theta \gamma \approx h w^{p-q}$ (g$_C$/time) \\
-Coef.~for maximum consumption rate & $h \approx 20 $g$_{WW}^{1-n}$/yr \\
-Activity coefficient & $\delta \approx 3$ \\
-Exponent for max.~consumption & $q=0.75$ \\
-Exponent for clearance rate & $p=0.8$ \\
-Exponent for std.~metabolism & $n=0.88$ \\
+\multicolumn{6}{c}{\textbf{Biomass Metabolism}} \T\\
+Activity coefficient & $\delta$ & \multicolumn{4}{c}{4} \\
+Specific dynamic action & $\beta$ & \multicolumn{4}{c}{0.15} \\
+Egestion and excretion & $\phi$ & \multicolumn{4}{c}{0.25} \\
+
+% Exponent for std.~metabolism & $n=0.88$ \\
+\multicolumn{6}{c}{\textbf{Feeding ecology}} \T\\
+Consumption rate$^1$ & $ \gamma\Theta $ & \multicolumn{4}{c}{$\frac{h w^{p-q}}{(1/f-1)\tau} (g\cdot y$^{-1}$)} \T \\
+% Exponent for max.~consumption & $q=0.75$ \\
+% Coef.~for maximum consumption rate & $h \approx 20 $g$_{WW}^{1-n}$/yr \\
+% Exponent for clearance rate & $p=0.75$ \\
+\multicolumn{6}{c}{\textbf{Oxygen budget}} \T \\
+
 \hline
-\multicolumn{2}{p{\textwidth}}{$^1$ This is under the assumption that the amount of encountered food $\Theta$ is roughly independent of body size.  This gives and order-of-magnitude estimate of the product $\Theta \gamma $.}
+\multicolumn{6}{p{\textwidth}}{$^1$ This is under the assumption that the amount of encountered food $\Theta$ is roughly independent of body size.  This gives and order-of-magnitude estimate of the product $\Theta \gamma $.}
 \end{tabular}
 \end{table}
 
@@ -121,11 +142,16 @@ Exponent for std.~metabolism & $n=0.88$ \\
 
 \section{Model results}
 
+<< setup,echo=FALSE,include=F>>=
+knitr::opts_chunk$set(echo = F, message = F,cache = T,autodep = T)
+
+require(dplyr)
+require(rlang)
+require(cowplot)
+@
+
 <<Scenarios>>=
 
-require(ggplot2)
-require(cowplot)
-require(dplyr)
 source('model.R')
 
 int_m <- 500
@@ -254,7 +280,7 @@ ggplot(sc_feed) +
 
 
 
-<< norms, fig.cap='On ecological time-scales, temperature affects size via evolved maturation-reaction norms \cite{marty_impact_2011}. Most reaction norms found in nature have a negative slope, meaning for faster growth, maturation occurs at a larger size. Increasing temparture (left panel, purple to yellow growth curves) modifies growth, and maturation age changes according to the reaction norm (right panel).'>>=
+<< norms, fig.cap='On ecological time-scales, temperature affects size via evolved maturation-reaction norms (\\cite{marty_impact_2011}). Most reaction norms found in nature have a negative slope, meaning for faster growth, maturation occurs at a larger size. Increasing temparture (left panel, purple to yellow growth curves) modifies growth, and maturation age changes according to the reaction norm (right panel).'>>=
 
 gouts <- parallel::mclapply(scs,plot_data_growth_tO2,mc.cores = 1)
 
@@ -350,6 +376,17 @@ cowplot::plot_grid(cpG,npG,rel_widths = c(0.5,0.5))
 @
 
 \section{Discussion}
+
+Life history theory suggests that the adult weight $W_{\infty}$ is found at the size at which all energy is allocated to reproduction, which optimally occurs at $\frac{\partial P_C/M}{\partial w}=1$ in the case of size-dependent mortality (provided concavity with respect to mass of this quantity). Note that $W_{\infty}$ depends on temperature only through $\tau$ and changes in $P_C$ as temperature changes metabolic and enzymatic rates. We thus impose no direct constraint on $W_{\infty}$. 
+
+
+\begin{itemize}
+
+\item Adaptation
+\item What does evolution act on?
+
+\end{itemize}
+
 
 \end{spacing}
 

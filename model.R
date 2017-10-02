@@ -372,7 +372,7 @@ model_out_growth <- function(temp,
     
     sl <- abs((nPM-lPM)/(winfs$Temperature[t+1]-winfs$Temperature[t-1]))
     
-    G[t] <- 0.04*this.l*sl/tPM
+    G[t] <- 0.004*this.l*sl/tPM
   }       
   
   
