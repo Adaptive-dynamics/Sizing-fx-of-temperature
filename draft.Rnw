@@ -154,7 +154,7 @@ require(cowplot)
 
 source('model.R')
 
-int_m <- 500
+int_m <- 1000
 int_t <- 500
 int_temp <- 50
 
@@ -280,9 +280,9 @@ ggplot(sc_feed) +
 
 
 
-<< norms, fig.cap='On ecological time-scales, temperature affects size via evolved maturation-reaction norms (\\cite{marty_impact_2011}). Most reaction norms found in nature have a negative slope, meaning for faster growth, maturation occurs at a larger size. Increasing temparture (left panel, purple to yellow growth curves) modifies growth, and maturation age changes according to the reaction norm (right panel).'>>=
+<< norms, fig.cap='On ecological time-scales, temperature affects size via evolved maturation-reaction norms (\\cite{marty_impact_2011}). Most reaction norms found in nature have a negative slope, meaning for faster growth, maturation occurs at a larger size. Increasing temparture (purple to yellow growth curves) modifies growth, and maturation age changes according to the reaction norm (bottom panel).'>>=
 
-gouts <- parallel::mclapply(scs,plot_data_growth_tO2,mc.cores = 1)
+gouts <- parallel::mclapply(scs,plot_data_growth_tO2,mc.cores = 4)
 
 t_growth <- bind_rows(lapply(1:length(gouts), function(x) {
   y <- gouts[[x]][['t_growth']]
@@ -335,7 +335,7 @@ np <-  ggplot() +
   labs(y = 'Relative length',
        x='Temperature')
 
-cowplot::plot_grid(cp,np,nrow=1)
+cowplot::plot_grid(cp,np,nrow=2)
 @
 
 
