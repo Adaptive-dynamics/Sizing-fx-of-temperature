@@ -155,7 +155,7 @@ require(cowplot)
 source('model.R')
 
 int_m <- 1000
-int_t <- 500
+int_t <- 1000
 int_temp <- 50
 
 # Sluggish small
@@ -335,11 +335,11 @@ np <-  ggplot() +
   labs(y = 'Relative length',
        x='Temperature')
 
-cowplot::plot_grid(cp,np,nrow=2)
+cowplot::plot_grid(cp,np,nrow=2,rel_heights = c(0.65,0.35))
 @
 
 
-<<evo, fig.cap='On evolutionary time-scales, selection moves the reaction norm. Size-at-maturation reacts strongly to temperature changes in the model (left panel). Selection (S) induced changes in size are slow for M strategists, fast for P strategists.'>>=
+<<evo, fig.cap='On evolutionary time-scales, selection moves the reaction norm. Size-at-maturation reacts strongly to temperature changes in the model (left panel). Selection (S) induced changes in size are slow for M strategists, fast for P strategists.',fig.height=8>>=
 
 
 winfs <- bind_rows(lapply(1:length(gouts), function(x) {

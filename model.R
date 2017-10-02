@@ -361,7 +361,7 @@ model_out_growth <- function(temp,
               opt=unique(opt))
   
   G <- rep(NA,length(unique(winfs$Temperature)))
-  
+  #browser()
   for(t in 2:(length(winfs$Temperature)-1)) {
     tau = winfs$Temperature[t]
     this.l <- winfs$l[t]
@@ -372,12 +372,12 @@ model_out_growth <- function(temp,
     
     sl <- abs((nPM-lPM)/(winfs$Temperature[t+1]-winfs$Temperature[t-1]))
     
-    G[t] <- 0.004*this.l*sl/tPM
+    G[t] <- 0.04*this.l*sl/tPM
   }       
   
   
   sG <- sign(G)
-  winfs$G <- G/max(winfs$t,1)
+  winfs$G <- G/max(winfs$t,1,na.rm = T)
   winfs$L <- 10*(lw(winfs$l + winfs$G)-lw(winfs$l))
   
   
