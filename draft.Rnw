@@ -154,8 +154,8 @@ require(cowplot)
 
 source('model.R')
 
-int_m <- 1000
-int_t <- 1000
+int_m <- 1000/2
+int_t <- 1000/2
 int_temp <- 50
 
 # Sluggish small
@@ -168,8 +168,7 @@ ss <- list(c=0.3,
            k=1,
            lO=1, 
            m=10, 
-           M=0.1 ,
-           n=0.8, 
+           n=0.85, 
            O2crit=2, 
            omega=0.25, 
            p=0.75,
@@ -180,15 +179,16 @@ ss <- list(c=0.3,
            temp=seq(5,26,l=int_temp),
            Topt=20, 
            temp_ref=15,
-           slope=-0.5,
-           tmax=10,
-           tr=0.5,
+           slope=-0.3,
+           tmax=15,
+           tr=1,
+           M=0.1,
            v=6,
            lm=int_m,
-           nu=-0.2,
+           nu=0.75-1,
            dt=int_t,
            min_m=-2,
-           max_m= 1.5
+           max_m= 2
 )
 
 # fast small
@@ -196,27 +196,20 @@ fs <- ss
 fs$lO <- 2
 fs$k <- 1.5
 fs$h <- 40
-#fs$v <- 2
-#fs$M <- 0.8
-fs$n <- 0.75
-fs$p <- 0.70
-fs$q <- 0.70
+fs$v <- 1
+fs$M <- 1
 
 fl <- fs
-fl$p <- 0.75
-fl$q <- 0.75
-#fl$nu <- -0.25
-fl$tr <- 0.05
+fl$n <- 0.8
+fl$tr <- 0.2
 fl$tmax <- 40
-fl$max_m <- 5
+fl$max_m <- 4
 
 sl <- ss
-sl$p <- 0.8
-sl$q <- 0.8
-#sl$nu <- -0.25
+fl$n <- 0.8
 sl$tmax <- 40
-sl$max_m <- 5
-sl$tr <- 0.05
+sl$max_m <- 4
+sl$tr <- 0.2
 
 scs <- list(ss,fs,sl,fl)
 
@@ -282,7 +275,7 @@ ggplot(sc_feed) +
 
 << norms, fig.cap='On ecological time-scales, temperature affects size via evolved maturation-reaction norms (\\cite{marty_impact_2011}). Most reaction norms found in nature have a negative slope, meaning for faster growth, maturation occurs at a larger size. Increasing temparture (purple to yellow growth curves) modifies growth, and maturation age changes according to the reaction norm (bottom panel).'>>=
 
-gouts <- parallel::mclapply(scs,plot_data_growth_tO2,mc.cores = 4)
+gouts <- parallel::mclapply(scs,plot_data_growth_tO2,mc.cores = 2)
 
 t_growth <- bind_rows(lapply(1:length(gouts), function(x) {
   y <- gouts[[x]][['t_growth']]
@@ -339,7 +332,7 @@ cowplot::plot_grid(cp,np,nrow=2,rel_heights = c(0.65,0.35))
 @
 
 
-<<evo, fig.cap='On evolutionary time-scales, selection moves the reaction norm. Size-at-maturation reacts strongly to temperature changes in the model (left panel). Selection (S) induced changes in size are slow for M strategists, fast for P strategists.',fig.height=8>>=
+<<evo, fig.cap='On evolutionary time-scales, selection moves the reaction norm. Size-at-maturation reacts strongly to temperature changes in the model (left panel). Selection (S) induced changes in size are slow for M strategists, fast for P strategists.',fig.height=4>>=
 
 
 winfs <- bind_rows(lapply(1:length(gouts), function(x) {
