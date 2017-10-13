@@ -2,22 +2,27 @@
 \usepackage{geometry}
 \usepackage{enumitem}
 \usepackage{setspace}
+\usepackage{booktabs}
 \usepackage{subfig}
 \usepackage{placeins}
 \usepackage{amsmath}
 \usepackage{pdflscape}
+\usepackage{multirow}
 \usepackage{longtable}
 \usepackage[toc,page]{appendix}
 \usepackage{array,booktabs}
 \usepackage[american]{babel}
-\usepackage[backend=biber,style=apa,language=american, labeldate=year,
-uniquename=false, maxcitenames=2,maxbibnames=200,uniquelist=false,mincitenames=1]{biblatex}
+\usepackage[backend=biber,
+mincitenames = 1,
+maxcitenames = 1,
+uniquename = false,
+uniquelist = false,
+citestyle = authoryear-comp]{biblatex}%
 \usepackage{lineno, blindtext}
-\DeclareLanguageMapping{american}{american-apa}
 \addbibresource{Sizing-fx-of-temperature.bib}
 \captionsetup[table]{singlelinecheck=false}
 
-\title{Drivers of fish size in a changing climate}
+\title{Fish size response to climate warming}
 \author{Philipp Neubauer\\Dragonfly Data Science, Wellington, NZ  \and 
         Ken H. Andersen\\Centre for Ocean Life
         Danish Technical University, Lyngby, Denmark}
@@ -31,7 +36,7 @@ uniquename=false, maxcitenames=2,maxbibnames=200,uniquelist=false,mincitenames=1
 \pagenumbering{gobble}
 \begin{abstract}
 
-Increasing temperatures under climate change are thought to affect individual physiology of ectotherms through increases in metabolic demands, leading to decreases in body-size with concomitant effects on species ecology. Although intuitively appealing, the magnitude, as well as when and where such changes are expected in an ecosystem context remains unclear. We develop a general trait-based model of carbon and oxygen budgets to determine the relative influence of thermal sensitivity, oxygen limitation, and environmental conditions on ectotherm body size. We use this model to contrast the response of size-at-maturation and asymptotic size in small and large fish with traits favoring high production versus reduced mortality. The immediate plastic and epigenetic response of size is govered by evolved maturation reaction norms that are largely independent of traits. The evolutionary response, however, is more pronounced in active species, suggesting a potentially stronger reponse to climate drivers. We suggest that this model provides a mechanistic underpinning that ties together various strands of thought and observation about ecological consequences of increased temperatures. 
+Increasing temperatures under climate change are thought to affect individual physiology of ectotherms through increases in metabolic demands, leading to decreases in body-size with concomitant effects on species ecology. Although intuitively appealing, the magnitude, as well as when and where such changes are expected remains controversial. We developped a general trait-based model of carbon and oxygen budgets to determine the relative influence of thermal sensitivity, oxygen limitation, and environmental conditions on ectotherm body size. We use this model to contrast the response of size-at-maturation and asymptotic size in small and large fish with traits favoring fast growth versus reduced mortality. The immediate (plastic) response of size is govered by evolved maturation reaction norms that are largely independent of traits. The evolutionary response, however, is more pronounced in active species, suggesting a potentially stronger reponse to climate drivers. We suggest that this model provides a mechanistic underpinning that ties together various strands of thought and observation about ecological consequences of increasing temperatures. 
 
 \end{abstract}
 {\large Keywords:} stock assessment, fisheries meta-analysis, fishery development, time-to-event analysis, marine conservation, catch-only methods
@@ -40,11 +45,11 @@ Increasing temperatures under climate change are thought to affect individual ph
 
 \section{Introduction}
 
-Temperature, through its effects on individual physiology, is a dominant driver of species ecology and bio-geography (\cite{deutsch_climate_2015,pinsky_marine_2013,brown_toward_2004}). As a consequence, current and predicted temperature increases under climate change will act as a strong agent of change in many ecosystems (\cite{deutsch_climate_2015, stuart-smith_thermal_2015}). However, the nature of these changes can be difficult to predict as temperature effects scale from individuals to species and ecosystems. Through this cascade of scales, incorrect or approximate model assumptions at the individual scale can have disproportionate effects on ecosystem level outcomes (\cite{brander_overconfidence_2013, lefevre_models_2017}). In marine fish, recent predictions of decreasing organism size, and resulting decreases in the size of fisheries catches (\cite{cheung_shrinking_2013}), have been criticized as overly simplistic and not in line with physiological constraints (\cite{brander_overconfidence_2013, lefevre_models_2017}). While it is not disputed that organism size can change as a result of changing temperatures, the question remains when, where and why this is so. 
+Temperature, through its effects on individual physiology, is a dominant driver of species ecology and bio-geography (\cite{deutsch_climate_2015,pinsky_marine_2013,brown_toward_2004}). As a consequence, current and predicted temperature increases under climate change will act as a strong agent of change in many ecosystems (\cite{deutsch_climate_2015, stuart-smith_thermal_2015}). However, the nature of these changes can be difficult to predict as temperature effects scale from individuals to species and ecosystems. Through this cascade of scales, incorrect or approximate model assumptions at the individual scale can have disproportionate effects on ecosystem level outcomes. In marine fish, recent predictions of decreasing organism size, and resulting decreases in the size of fisheries catches (\cite{cheung_shrinking_2013}), have been criticized as overly simplistic and not in line with physiological constraints (\cite{brander_overconfidence_2013, lefevre_models_2017}). While it is not disputed that organism size can change as a result of changing temperatures, the question remains when, where and why this is so. 
 
 Empirically, most ectotherms are found to grow larger in colder temperatures - a phenomenon called the temperature-size rule (\cite{atkinson_cells_2006}). Models of ectotherm growth can reproduce this pattern (under assumptions of optimal energy allocation between growth and reproduction) if increases in metabolic costs (in terms of energy) with temperature outpace increases in energy acquisition (\cite{kozlowski_can_2004}). However, while increasing metabolic costs are real, energy acquisition is an abstract, phenomenological description that lumps ecological aspects of foraging activity and prey availability. At a more mechanistic level of energy acquisition, consistent responses of foraging and energy acquisition with temperature have remained elusive (\cite{englund_temperature_2011,rall_universal_2012}), with variable responses across habitats and taxa. This is perhaps not surprising given variable foraging ecologies, but it remains unclear how temperature dependent feeding ecology impacts growth and adult size.
 
-Physiologically, a long held view has been that temperature is a controlling factor while oxygen supply sets the physiological limits (\cite{fry_effects_1947,claireaux_linking_2007,lefevre_are_2016}). How exactly temperature influences physiological rates and limits, however, has been a matter of debate, not least because of the variable responses observed among different species. In most species, the standard metabolism (SM; the metabolic cost of maintenance and routine activity such as ventilation) increases near exponentially with temperature. A prevalent view is that the maximum metabolic rate (MMR; the metabolic rate at maximum sustained exercise) has a  dome-shaped response to temperature, whereby it can be increased (passively and actively) up to a point, but plateaus or decreases thereafter (\cite{fry_effects_1947,claireaux_linking_2007,lefevre_are_2016,portner_physiology_2008}). This leads to the view of a modal curve for metabolic scope (MMR-SM; the available oxygen/energy for additional activity), and suggests that towards the upper end of this curve, organisms will run out of oxygen. 
+Physiologically, a long held view has been that temperature is a controlling factor while oxygen supply sets the physiological limits (\cite{fry_effects_1947,claireaux_linking_2007,lefevre_are_2016}). How exactly temperature influences physiological rates and limits, however, has been a matter of debate, not least because of the variable responses observed among different species. In most species, the standard metabolism (SM; the metabolic cost of maintenance and routine activity such as ventilation) increases near exponentially with temperature. A prevalent view is that the maximum metabolic rate (MMR; the metabolic rate at maximum sustained exercise) has a  dome-shaped response to temperature, whereby it can be increased (passively and actively) up to a point, but plateaus or decreases thereafter (\cite{fry_effects_1947,claireaux_linking_2007,lefevre_are_2016,portner_physiology_2008}). This leads to the view of a modal curve for metabolic scope (MMR minus SM; the available oxygen/energy for additional activity), and suggests that towards the upper end of this curve, organisms will , simply put, run out of oxygen. 
 
 This view was encapsulated in the Theory of Oxygen and Capacity Limitation of Temperature (\cite{portner_oxygen-and_2010}), which suggests that the decrease in metabolic scope towards extreme temperatures limits species ability to sustain core functions such as foraging and growth (i.e., functions beyond SM), and hence body size. In some species, however, maximum metabolic rate may be steadily increasing (\cite{lefevre_are_2016, verberk_does_2016}), suggesting that oxygen may not be the limiting factor at high temperatures. Consequently, the difference in observed physiological responses may at least partially determine temperature effects on body size for individual species. In addition to physiological differences, the assumed coefficients for temperature sensitivity of metabolism and size scaling exponents are different between species, and can disproportionately affect future organism size \cite{lefevre_models_2017, kozlowski_can_2004}.
 
@@ -65,13 +70,13 @@ The model is written in terms of carbon (or energy) and oxygen balance equations
 \begin{align}
 f_C &= \frac{\tau }{\tau  + \frac{h c_T w^{q-p}}{\gamma\Theta} } \label{eq:f} \\
 P_C &= S_C - D_C \\
-  &=(1-\beta-\phi)f_C h c_T w^q  -(1+\tau \delta)c_T k w^n \\
+  &=(1-\beta-\phi)f_C h c_T w^q  - c_T k w^n - \tau \delta c_T k w  \\
 P_{0_2} &= S_{O_2} - D_{O_2} \\
-        &= f_{O_2}w^n - \omega \left( \beta f_C h c_T w^q +(1+\tau \delta) c_T k w^n \right)
+        &= f_{O_2}w^n - \omega \left( \beta f_C h c_T w^q + c_T k w^n + \tau \delta c_T k w \right)
 \end{align}
 
 
-where $f$ is the feeding level ([0,1]) at weight $w$, determined by the fraction of time spent foraging (or proportion of maximum attack rate) $\tau$, consumption rate $\gamma w^p \Theta$ (search rate $\gamma w^p$ times prey availability $\Theta$) and maximum consumption $h w^q$. In the following, we will refer to $\tau$ as the activity fraction for sake of generality. Maximum consumption, determined by digestive (enzymatic) processes (\cite{jeschke2002predator, sentis2013parsing}), is assumed to scale with temperature as $c_T = e^{E_a(T-T_0)/kTT_0}$. Available carbon $P_C$ is determined by supply ($S_C$) from prey consumption ($f_C h c_T w^q$), with $\beta$ a loss due to specific dynamic action (SDA, or heat increment; the energy spent absorbing food), and $\phi$ is the fraction of food excreted and egested. Metabolic costs ($D_C$) are those of standard metabolism ($k w^n$), as well as active metabolism (scaled in units of standard metabolism as $\delta k w^n$, with $\delta$ the factorial aerobic scope (FAS)), with the activity fraction $\tau$ determining the fraction of time that the active metabolism cost applies.  
+where $f$ is the feeding level ([0,1]) at weight $w$, determined by the fraction of time spent foraging (or proportion of maximum attack rate) $\tau$, consumption rate $\gamma w^p \Theta$ (search rate $\gamma w^p$ times prey availability $\Theta$) and maximum consumption $h w^q$. In the following, we will refer to $\tau$ as the activity fraction for sake of generality. Maximum consumption, determined by digestive (enzymatic) processes (\cite{jeschke_predator_2002, sentis_parsing_2013}), is assumed to scale with temperature as $c_T = e^{E_a(T-T_0)/kTT_0}$. Available carbon $P_C$ is determined by supply ($S_C$) from prey consumption ($f_C h c_T w^q$), with $\beta$ a loss due to specific dynamic action (SDA, or heat increment; the energy spent absorbing food), and $\phi$ is the fraction of food excreted and egested. Metabolic costs ($D_C$) are those of standard metabolism ($k w^n$), as well as active metabolism (scaled in units of standard metabolism as $\delta k w$, with $\delta$ the factorial aerobic scope (FAS)), with the activity fraction $\tau$ determining the fraction of time that the active metabolism cost applies. Note that active metabolism scales directly with $w$, owing to muscular demands scaling approxiuamtely isometrically (CITE Glazier, Brett).
 
 The oxygen budget $P_{0_2}$, determines physiological limits to aerobic activity. Demand ($D_{O_2}$) is the sum of oxygen used for SDA (i.e., the conversion of food into energy and growth - $\beta f_C h c_T w^q$) and ``active metabolism", the sum of standard (or resting) metabolism and the metabolic costs of foraging ($[1+\tau \delta] c_T k w^n$), with $\omega$ determining amount of oxygen required per unit of metabolised carbon. Metabolic scope is the difference between $S_{O_2}/w^n=f_{O_2}$, the amount of oxygen supplied per unit weight, and oxygen demand due to standard metabolism ($\omega c_T k w^n$). 
 
@@ -93,24 +98,23 @@ The optimal activity level ($\tau_{\text{opt}}$) is found at $\frac{dF}{d\tau}=0
 
 \subsection{Allocation to reproduction and ecological size response}
 
-On ecological time-scales, temperature affects size via its effets on the energy budget and the investment of available (surplus) energy into reproduction and growth. The change in allocation to reproduction with size and age in variable environmental conditions is described by the maturation reaction norm. The maturation reaction norm describes the probability of maturing at a certain age under different growth conditions \cite[e.g., ][]{dieckmann_probabilistic_2007}, though we will use a slightly different definition here since our model is not probabilitic at the population level: we define the reaction norm as the mid-point of a logistic allocation function that determines investment in reproduction as a function of age and size. The allocation is parametrised as $\phi(z,c) = 1/(1+exp(-(c*z)))$, where $z = (w-w^*)\times cos(atan(b))-a\times sin(atan(b))$ rotates the coordiante system about the slope $b$ of the reaction norm, $a$ is the age, $w$ is the mass, $w^*$ is the intercept of the reaction norm, and $c$ determines how rapidly energy allcoation shifts from somatic growth to reproduction.
+On ecological time-scales, temperature affects size via its effets on the energy budget and the investment of available (surplus) energy into reproduction and growth. The change in allocation to reproduction with size and age in variable environmental conditions is described by the maturation reaction norm, which describes the probability of maturing at a certain age under different growth conditions (\cite[e.g., ][]{dieckmann_probabilistic_2007}). We use a slightly different definition here since our model is not probabilitic at the population level: we define the reaction norm as the mid-point of a logistic allocation function that determines investment in reproduction as a function of age and size. The allocation is parametrised as $\phi(z,c) = 1/(1+\exp(-(c*z)))$, where $z = (w-w^*)\times \text{cos}(\text{atan}(b))-a\times \text{sin}(\text{atan}(b))$ rotates the coordiante system about the slope $b$ of the reaction norm, $a$ is the age, $w$ is the mass, $w^*$ is the intercept of the reaction norm, and $c$ determines how rapidly energy allcoation shifts from somatic growth to reproduction.
 
-The slope of the reaction norm is evolutionarily determined by the strngth of the co-variation between growth and mortality for a given population in a given environment \cite{marty_impact_2011}, with strongly positive co-variation leading to the relatively flat reaction norms observed for most populations of fish. We do not explicitly model these interactions here (aside from the dependence of mortality on $\tau$) as we are interested in parsing out the effect of temperature, and we assume that reaction norms evolved over relatively stable temperature regimes in the past. In other words, we assume that temperature was not a key driver of covariations between growth and mortality. In that scenario, good growth conditions (e.g., from increased prey density) probably alter the baseline mortality $\rho$ and the risk of foraging $\eta$ (e.g., by attracting predators), indepnedently of temparture influences. Consequently, we assume that the evolved slope of the reaction norm is a trait for a particular species or population. Since most reaction norms are relatively flat, we instead explore how deviations from a flat reaction norm influence maturation size and asymptotic size under varying temperatures.
+The slope of maturation reaction norms is evolutionarily determined by the strength of the co-variation between growth and mortality for a given population in a given environment (\cite{marty_impact_2011}), with strongly positive co-variation leading to the relatively flat reaction norms observed for most populations of fish. We do not explicitly model these interactions here (aside from the dependence of mortality on $\tau$) as we are interested in parsing out the effect of temperature, and we assume that reaction norms evolved over relatively stable temperature regimes in the past. In other words, we assume that temperature was not a key driver of covariations between growth and mortality. In that scenario, good growth conditions (e.g., from increased prey density) probably alter the baseline mortality $\rho$ and the risk of foraging $\eta$ (e.g., by attracting predators), independently of temperature influences. Consequently, we assume that the evolved slope of the reaction norm is a trait for a particular species or population. Since most reaction norms are relatively flat, we simply assume a flat reaction norm.
 
 
 \subsection{Evolutionary size response}
 
-The maturation reaction norm is subjected to selective pressure when through a gradual change in temperature, mean environmental conditions change and previously evolved reaction norms become sub-optimal. To investigate how size will change over longer, evolutionary time-scales, we calculate the expected life-time reproduction, $R0$ as temperature changes from a reference temperature $T_ref$. We assumed that the covariation between mortality and growth remains similar as temperatures change (i.e., temperature remains independent of covariation between growth and mortality), and we optimised $R0$ with respect to $m*$ at each temperature. From this, we calculated the the expected rate of change (i.e., the selection response) of $m*$ with resepct to temperature as $S = \sigma_w^* h^2 R0'/R0$, where $R0' = dR0/dT$. 
+The maturation reaction norm is subjected to selective pressure when through a gradual change in temperature, mean environmental conditions change and previously evolved reaction norms become sub-optimal. To investigate how size will change over evolutionary time-scales, we calculate the expected life-time reproduction, $R0$ as temperature changes from a reference temperature $T_ref$. We assumed that the covariation between mortality and growth remains similar as temperatures change (i.e., temperature remains independent of covariation between growth and mortality, and ), and we optimised $R0$ with respect to $w*$ at each temperature. From this, we calculated the the expected rate of change (i.e., the selection response) of $w*$ with resepct to temperature as $S = \sigma_w^* h^2 R0'/R0$, where $R0' = dR0/dT$, where we take $h$ to be about 0.2 and we assume a coefficient of variation about $w$ of 0.2. 
 
 
 \subsection{Trait based scenarios}
 
-We explored impacts along two trait axes. The first axis aims to contrast species along a gradient of life-history that, at the one end, maximises production (energy aquisition) at the cost of increased metabolism and mortality, and at the opposing end minimises mortality and metabolic costs at the expense of production. This axis leads to an approximately constant ratio of production to mortality, and corresponds to a line of equal size in the life-history space proposed by \cite{charnov_evolutionary_2013}. In other words, this axis contrasts species of similar size with sluggish versus active life-histories.
+We explored ecological and evolutionary impacts along two ecological trait axes. The first axis aims to contrast species along a gradient of life-history that, at the one end, maximises production (energy aquisition) at the cost of increased metabolism and mortality, and at the opposing end minimises mortality and metabolic costs at the expense of production. This axis leads to an approximately constant ratio of production to mortality, and corresponds to a line of equal size in the life-history space proposed by \cite{charnov_evolutionary_2013}. In other words, this axis contrasts species of similar size with defensive/sluggish versus active  life-histories.
 
-To implement this axis, we use the result that species with a more active, production oriented life-history (e.g., pelagic species) have a higher standard metabolism and lower weight scaling of metabolic costs \cite{killen_intraspecific_2010}. We assume that that higher standard metabolism is due to increased digestive capacity (i.e., is used for gut maintenance CITE). In practice, we assume that approxiamtely 50\% of the standard metabolic cost is due to gut maintenance, such that a doubeling of the maximum ingestion leads to a 50\% increase in standard metabolic cost. We further assume that such active species have a less effective refuge from predators and therefore have a higher constant mortality, but lower mortality related to activity. Exact parameter values are given in Table \ref{tab:parameters}.
+To implement this axis, we use the result that species with a more active, production oriented life-history (e.g., pelagic species) have a higher standard metabolism and lower weight scaling of metabolic costs \cite{killen_intraspecific_2010}. We assume that that higher standard metabolism is due to increased digestive capacity (i.e., is used for gut maintenance CITE). In practice, we assume that approximately 50\% of the standard metabolic cost is due to gut maintenance, such that a doubeling of the maximum ingestion leads to a 50\% increase in standard metabolic cost. We further assume that such active species have a less effective refuge from predators and therefore have a higher constant mortality, but lower mortality related to activity. Exact parameter values are given in Table \ref{tab:parameters}.
 
-The second trait axis aims to be orthogonal to the first and contrast changes in size for species of large and small absolute size, but with similar investment in production or mortality avoidance (i.e., with the same value on the first trait axis). We assume that mortlity is largely fixed by the life history strategy on the first axis (via $\rho$ and $\eta$), and that size is largely determined by differences in weight scaling between metabolism and consumption, thereby leading to differential changes in production with size, which in turn determines absolute size \cite{charnov_evolutionary_2013, kozlowski_optimal_1996, thygesen_how_2005}.
-
+The second trait axis aims to be orthogonal to the first and contrast changes in size for species of large and small absolute size, but with similar investment in production or mortality avoidance (i.e., with the same value on the first trait axis).  Inter-specific meta-analyses often show that metabolism scales with mass to a power of roughly 3/4 (\cite[e.g., ][]{brown_toward_2004}). This contrasts with inter-specific weight scaling, which is often found to be higher than 3/4 (\cite{killen_little_2007,ohlberger_intraspecific_2012}). We thus assume a trait axis based on metabolic cost per unit weight, which naturally leads to differences in absolute size in our model.
 
 \newcommand\T{\rule{0pt}{2.6ex}} 
 
@@ -118,23 +122,53 @@ The second trait axis aims to be orthogonal to the first and contrast changes in
 \caption{Parameters}
 \label{tab:parameters}
 \begin{tabular}{llrrrr}
-Description & Symbol & \multicolumn{4}{c}{Value} \T\\
-\hline
-\multicolumn{6}{c}{\textbf{Biomass Metabolism}} \T\\
-Activity coefficient & $\delta$ & \multicolumn{4}{c}{4} \\
-Specific dynamic action & $\beta$ & \multicolumn{4}{c}{0.15} \\
-Egestion and excretion & $\phi$ & \multicolumn{4}{c}{0.25} \\
-
-% Exponent for std.~metabolism & $n=0.88$ \\
-\multicolumn{6}{c}{\textbf{Feeding ecology}} \T\\
-Consumption rate$^1$ & $ \gamma\Theta $ & \multicolumn{4}{c}{$\frac{h w^{p-q}}{(1/f-1)\tau} (g\cdot y^{-1}$)} \T \\
-% Exponent for max.~consumption & $q=0.75$ \\
-% Coef.~for maximum consumption rate & $h \approx 20 $g$_{WW}^{1-n}$/yr \\
-% Exponent for clearance rate & $p=0.75$ \\
-\multicolumn{6}{c}{\textbf{Oxygen budget}} \T \\
+ \multirow{3}{*}{Description} &  \multirow{3}{*}{Symbol (unit)} & \multicolumn{4}{r}{Value} \\
+ \cmidrule{3-6}
+ & & \multicolumn{2}{r}{M-strategy}  & \multicolumn{2}{r}{P-strategy} \\
+ \cmidrule{3-4}\cmidrule{5-6}
+ & & Small & Large & Small & Large \\
 
 \hline
-\multicolumn{6}{p{\textwidth}}{$^1$ This is under the assumption that the amount of encountered food $\Theta$ is roughly independent of body size.  This gives and order-of-magnitude estimate of the product $\Theta \gamma $.}
+\addlinespace
+\multicolumn{6}{c}{\textbf{Biomass Metabolism}} \\
+Activity coefficient & $\delta$ & 4 & 4  & 4  & 4  \\
+Specific dynamic action & $\beta$ & 0.15& 0.15& 0.15& 0.15\\
+Egestion and excretion & $\phi$ & 0.25 & 0.25 & 0.25 & 0.25 \\
+Coeff. for std.~metabolism  & $k$ ($g\cdot y^{-1}$)  & 1 & 0.7 & 1.5 & 1\\
+Exponent for std.~metabolism & $n$ & 0.8 &0.8 & 0.75 & 0.75 \\
+
+\addlinespace
+\multicolumn{6}{c}{\textbf{Feeding ecology}}\\
+Coeff. for Encountered food & $\gamma\Theta$ ($y^{-1}$)& 60 & 60 & 60 & 60\\
+Exponent for clearance rate $\gamma$ & $p=n$ & 0.8  & 0.8 & 0.75 & 0.75 \\
+Coeff. for Maximum consumption rate & $h$ ($y^{-1}$) & 30 & 30 & 60 & 60 \\
+Exponent for max.~consumption $\gamma$ & $q=n$ & 0.8 & 0.8 & 0.75 & 0.75 \\
+Coeff. for constant mortality & $M$ ($g\cdot y^{-1}$) & 0.1 & 0.1 & 1 & 1 \\
+Coeff. for activity related mortality & $\rho$ ($y^{-1}$) & 6  & 6 & 1 & 1\\
+Exponent for mortality & $\nu=h-1$ & -0.2 & -0.2 & -0.25 & -0.25 \\
+
+\addlinespace
+\multicolumn{6}{c}{\textbf{Temperature}}\\
+Reference temperature (°C) & $T_{ref}$ & 15 & 15 & 15 & 15 \\
+Activation energy & $E_a$ & 0.52 & 0.52 & 0.52 & 0.52 \\
+Temperature at maximum MMR & $T_{max}$ & 20 & 20& 20& 20\\
+Temperature range & $T^-_{lethal}$--$T^+_{lethal}$ & \multicolumn{4}{c}{5--26} \\
+
+\addlinespace
+\multicolumn{6}{c}{\textbf{Reaction norm}}\\
+
+Slope & $b$ & 0  & 0 & 0 & 0\\
+Reaction & $c$ & 0.5 & 0.1 & 0.5 & 0.1 \\
+
+\addlinespace
+\multicolumn{6}{c}{\textbf{Oxygen budget}} \\
+Critical $O_2$ & $P_{crit}$ ($mg\cdot L^{-1}$) & 2 & 2& 2& 2\\
+Disolved $O_2$ at $0.5\times f_{max}(O_2)$  & $P50$ ($mg\cdot L^{-1}$) & 4  & 4  & 4  & 4 \\
+Doming for $O_2$ supply & $\eta$ & 3 & 3 & 3 & 3\\
+Level of $O_2$ supply  & $\zeta$ ($g\cdot y^{-1}$) &  1 & 1 & 2 & 2\\
+
+
+\hline
 \end{tabular}
 \end{table}
 
@@ -143,7 +177,7 @@ Consumption rate$^1$ & $ \gamma\Theta $ & \multicolumn{4}{c}{$\frac{h w^{p-q}}{(
 \section{Model results}
 
 << setup,echo=FALSE,include=F>>=
-knitr::opts_chunk$set(echo = F, message = F,cache = T,autodep = T)
+knitr::opts_chunk$set(echo = F, message = F,cache=T,autodep = T)
 
 require(dplyr)
 require(rlang)
@@ -154,62 +188,69 @@ require(cowplot)
 
 source('model.R')
 
-int_m <- 1000/2
-int_t <- 1000/2
-int_temp <- 50
+int_m <- 1000
+int_t <- 1000
+int_temp <- 30
 
 # Sluggish small
 ss <- list(c=0.3,
            beta=0.15,
            delta=4,
            Ea=0.52, 
-           gamma=40, 
-           h=20, 
+           gamma=60, 
+           h=30, 
            k=1,
-           lO=1, 
+           lO=0.5, 
            m=10, 
-           n=0.85, 
+           n=0.8, 
            O2crit=2, 
            omega=0.25, 
-           p=0.75,
+           p=0.8,
            P50=4.2, 
            phi=0.25, 
-           q=0.75 ,
+           q=0.8,
            shape=3,
            temp=seq(5,26,l=int_temp),
            Topt=20, 
            temp_ref=15,
            slope=-0.3,
-           tmax=15,
-           tr=1,
+           tmax=10,
+           tr=0.5,
            M=0.1,
            v=6,
            lm=int_m,
-           nu=0.75-1,
+           nu=0.8-1,
            dt=int_t,
            min_m=-2,
-           max_m= 2
+           max_m= 3
 )
 
 # fast small
 fs <- ss
-fs$lO <- 2
+fs$lO <- 1
 fs$k <- 1.5
-fs$h <- 40
+fs$h <- 60
 fs$v <- 1
 fs$M <- 1
+fs$nu<- 0.75-1
+fs$n <- 0.75
+fs$p <- 0.75
+fs$q <- 0.75
+fs$tmax <- 5
 
 fl <- fs
-fl$n <- 0.8
-fl$tr <- 0.2
-fl$tmax <- 40
+fl$n <- 0.75
+fl$k <- 1
+fl$tr <- 0.1
+fl$tmax <- 20
 fl$max_m <- 4
 
 sl <- ss
-fl$n <- 0.8
-sl$tmax <- 40
+sl$n <- 0.8
+sl$k <- 0.7
+sl$tmax <- 50
 sl$max_m <- 4
-sl$tr <- 0.2
+sl$tr <- 0.1
 
 scs <- list(ss,fs,sl,fl)
 
@@ -223,7 +264,7 @@ scz <- rep(unique(scenarios$Size),each=2)
 
 @
 
-<<activity,fig.cap='With increasing temperature, most organisms will increase activity $\\tau$ to offset increased metabolic costs. Oxygen sets metabolic limits at extreme temperatures.'>>=
+<<activity,fig.cap='With increasing temperature, most organisms will increase activity $\\tau$ to offset increased metabolic costs. Oxygen sets metabolic limits at extreme temperatures. Responses are shown for arbitrary M- and P-strategy (left and right columns, respectively), for small and large species (top and bottom rows, respectively).'>>=
 
 sc_act <- tidyr::gather(scenarios,Activity,value,Optimum, Limit,Realised) %>%
   mutate(Activity = relevel(as.factor(Activity), "Realised")) 
@@ -232,8 +273,7 @@ ggplot(sc_act) +
   geom_line(aes(x=Temperature, y=value, linetype=Activity),alpha=0.7) +
   theme_cowplot()+
   facet_grid(Size~Scenario)+
-  theme(plot.margin = margin(0, 6, 0, 6),
-        strip.background = element_blank(),
+  theme(strip.text = element_blank(),
         panel.background = element_blank(),
         plot.background = element_blank()) + 
   labs(x = expression("Mean temperature " ( degree*C)),
@@ -242,7 +282,7 @@ ggplot(sc_act) +
 @
 
 
-<<feeding,fig.cap='Figure 2: Feeding level, available energy and mortality are impacted by increased activity and the metabolic response to temperature.'>>=
+<<feeding,fig.cap='Feeding level, available energy and mortality are impacted by increased activity and the metabolic response to temperature. Responses are shown for arbitrary M- and P-strategy (left and right columns, respectively), for small and large species (top and bottom rows, respectively). Energy is plotted relative to maximum over all temperatures.'>>=
 
 
 sc_feed <- scenarios %>%
@@ -253,7 +293,7 @@ sc_feed <- scenarios %>%
          Feeding=`Feeding level`,
          `Available Energy` = sc(`C for growth`),
          `Energy` = ifelse(`Available Energy`<0,0,`Available Energy`)) %>% 
-  tidyr::gather(Rate,value,Feeding,Energy,M,Efficiency) %>%
+  tidyr::gather(Rate,value,Feeding,Energy,M) %>%
   mutate(Rate = relevel(as.factor(Rate),'Feeding')) 
 
 
@@ -261,8 +301,7 @@ ggplot(sc_feed) +
   geom_line(aes(x=Temperature, y=value, linetype=Rate),alpha=0.7) +
   theme_cowplot()+
   facet_grid(Size~Scenario)+
-  theme(plot.margin = margin(0, 6, 0, 6),
-        strip.background = element_blank(),
+  theme(strip.text = element_blank(),
         panel.background = element_blank(),
         plot.background = element_blank())+
   scale_linetype_discrete('')+
@@ -271,11 +310,14 @@ ggplot(sc_feed) +
 
 @
 
+<<calc-gouts>>=
+
+gouts <- parallel::mclapply(scs,plot_data_growth_tO2,mc.cores = 4)
+
+@
 
 
-<< norms, fig.cap='On ecological time-scales, temperature affects size via evolved maturation-reaction norms (\\cite{marty_impact_2011}). Most reaction norms found in nature have a negative slope, meaning for faster growth, maturation occurs at a larger size. Increasing temparture (purple to yellow growth curves) modifies growth, and maturation age changes according to the reaction norm (bottom panel).'>>=
-
-gouts <- parallel::mclapply(scs,plot_data_growth_tO2,mc.cores = 2)
+<< norms, fig.cap='On ecological time-scales, temperature affects size via evolved maturation-reaction norms (\\cite{marty_impact_2011}). Most reaction norms found in nature have a negative slope, meaning for faster growth, maturation occurs at a larger size. Increasing temparture (purple to yellow growth curves) modifies growth, and maturation age changes according to the reaction norm (bottom left panel), whereas asymptotic size is affected by changes in absolute energy available for growth.'>>=
 
 t_growth <- bind_rows(lapply(1:length(gouts), function(x) {
   y <- gouts[[x]][['t_growth']]
@@ -290,15 +332,15 @@ norm <- t_growth %>%
             m=t_length[ifelse(any(abs(allocs-0.5)<0.1),which.min(abs(allocs-0.5)),NA)-1]) 
 
 cp <- ggplot() +
-  geom_line(aes(x=t, y=t_length,col=as.factor(Temperature)),data=t_growth) +
+  geom_line(aes(x=t, y=t_length,col=Temperature,group=as.factor(Temperature)),data=t_growth) +
   geom_point(aes(x=ts, y=m),data=norm) +
   #geom_point(data=growth_scenarios[seq.int(1,nrow(growth_scenarios),by = 5),],aes(x=Temperature, y=Temp, col=Scenario,shape=Scenario),alpha=0.5,size=2) +
   theme_cowplot()+
   facet_wrap(Size~Scenario,scales='free')+
-  viridis::scale_colour_viridis(discrete = T,guide='none')+
-  theme(plot.margin = margin(2, 6, 0, 6),
-        panel.background = element_blank(),
-        plot.background = element_blank())+
+  viridis::scale_colour_viridis(expression(Temp~(degree*C)))+
+  theme(panel.background = element_blank(),
+        plot.background = element_blank(),
+        strip.text  = element_blank())+
   coord_cartesian()+
   labs(y = 'Length (cm)',
        x='Age  (years)')
@@ -313,26 +355,31 @@ norm <- alloc %>%
   group_by(Scenario,Size,Temperature) %>%
   summarise(ts=t[ifelse(any(abs(allocs-0.5)<0.05),which.min(abs(allocs-0.5)),NA)-1],
             ls=t_length[ifelse(any(abs(allocs-0.5)<0.05),which.min(abs(allocs-0.5)),NA)-1],
+            l=max(t_length, na.rm=T),
             alloc=allocs[ifelse(any(abs(allocs-0.5)<0.05),which.min(abs(allocs-0.5)),NA)-1]) %>%
-  mutate(ls = sc(ls))
+  mutate(lm = sc(ls),
+         lt = sc(l)) %>%
+  tidyr::gather('type','length',lm,lt)
 
 np <-  ggplot() +
-  geom_line(aes(x=Temperature, y=ls, linetype=Scenario,col=Size),data=norm) +
+  
+  geom_line(aes(x=Temperature, y=length, linetype=Scenario,col=Size),data=norm) +
+  facet_wrap(~type,scales='free_y') +
   theme_cowplot()+
-  theme(plot.margin = margin(2, 6, 0, 6),
-        panel.background = element_blank(),
-        plot.background = element_blank())+
+  theme(panel.background = element_blank(),
+        plot.background = element_blank(),
+        strip.text = element_blank())+
   #scale_color_discrete(guide='none')+
   #scale_shape_discrete(guide='none')+
   coord_cartesian()+
   labs(y = 'Relative length',
-       x='Temperature')
+       x=expression(Temperature~(degree*C)))
 
 cowplot::plot_grid(cp,np,nrow=2,rel_heights = c(0.65,0.35))
 @
 
 
-<<evo, fig.cap='On evolutionary time-scales, selection moves the reaction norm. Size-at-maturation reacts strongly to temperature changes in the model (left panel). Selection (S) induced changes in size are slow for M strategists, fast for P strategists.',fig.height=4>>=
+<<evo, fig.cap='On evolutionary time-scales, selection moves the reaction norm. Size-at-maturation reacts strongly to temperature changes in the model (top left panel). Selection (S) induced changes in size are slow for M strategists, fast for P strategists. (top right panel). In absolute terms, these changes are slow for both small (bottom left panel) and large fish (bottom right panel)',fig.height=6>>=
 
 
 winfs <- bind_rows(lapply(1:length(gouts), function(x) {
@@ -347,24 +394,49 @@ wtfs <- winfs %>% group_by(Scenario,Size) %>%
 cpG <- ggplot(wtfs) +
   geom_line(aes(x=Temperature, y=length, col=Size,linetype=Scenario),alpha=0.7) +
   theme_cowplot()+
-  #scale_linetype_discrete(guide='none')+
-  theme(plot.margin = margin(3, 6, 0, 6),
-        panel.background = element_blank(),
-        plot.background = element_blank())+
-  labs(x = expression("Mean temperature " ( degree*C)),
+  scale_linetype_discrete(guide='none')+
+  scale_color_discrete(guide='none')+
+  theme(panel.background = element_blank(),
+        plot.background = element_blank(),)+
+  labs(x = '',
        y='Relative adult length')
 
 
 npG <- ggplot(wtfs) +
   geom_line(aes(x=Temperature, y=G/l, col=Size,linetype=Scenario),alpha=0.7) +
-  theme(plot.margin = margin(3, 6, 0, 6),
-        panel.background = element_blank(),
+  theme(panel.background = element_blank(),
         plot.background = element_blank())+
-  #coord_cartesian(ylim=quantile(wtfs$L/wtfs$l,c(0.05,0.95),na.rm=T)) + 
-  labs(x = expression("Mean temperature " ( degree*C)),
+  labs(x = '',
        y=expression(S~response~y^-1)) 
 
-cowplot::plot_grid(cpG,npG,rel_widths = c(0.5,0.5))
+
+g_legend<-function(a.gplot){
+  tmp <- ggplot_gtable(ggplot_build(a.gplot))
+  leg <- which(sapply(tmp$grobs, function(x) x$name) == "guide-box")
+  legend <- tmp$grobs[[leg]]
+  return(legend)}
+
+mylegend<-g_legend(npG)
+
+npTs <- ggplot(wtfs) +
+  geom_line(aes(x=Temperature, y=G, linetype=Scenario)) +
+  facet_wrap(~Size,scales='free_y') +
+  theme(panel.background = element_blank(),
+        plot.background = element_blank(),
+        strip.text = element_blank(),
+        legend.position="none")+
+  labs(x = expression("Mean temperature " ( degree*C)),
+       y=expression(S~response~mm.y^-1)) 
+
+require(gridExtra)
+grid.arrange(arrangeGrob(
+  arrangeGrob(cpG,npG+ theme(legend.position="none"),ncol=2),
+  npTs,nrow=2),
+  mylegend, ncol=2,widths=c(10,2))
+# 
+# cp <- cowplot::plot_grid(cpG,npG,rel_widths = c(0.4,0.6),ncol = 2)
+# 
+# cowplot::plot_grid(cp,npTs,nrow=2)
 
 @
 
