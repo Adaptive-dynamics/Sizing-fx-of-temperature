@@ -104,7 +104,7 @@ To implement this axis, we use the result that species with a more active, produ
 
 The second trait axis aims to be orthogonal to the first and contrast changes in size with temperature for species of large and small absolute size, but with similar investment in production or mortality avoidance (i.e., with the same value on the first trait axis).  Inter-specific meta-analyses often show that resting metabolism scales with mass to a power of roughly 3/4 (\cite[e.g., ][]{brown_toward_2004}). This contrasts with inter-specific weight scaling, which is often found to be higher than 3/4 (\cite{killen_little_2007,ohlberger_intraspecific_2012}). We thus assume a trait axis based on metabolic cost per unit weight, which naturally leads to differences in absolute size in our model.
 
-\newcommand\T{\rule{0pt}{2.6ex}} 
+\begin{landscape} 
 
 \begin{table}
 \caption{Parameters}
@@ -159,6 +159,9 @@ Level of $O_2$ supply  & $\zeta$ ($g\cdot y^{-1}$) &  1 & 1 & 2 & 2\\
 \hline
 \end{tabular}
 \end{table}
+
+
+\end{landscape} 
 
 \subsection{Allocation to reproduction and ecological size response}
 
