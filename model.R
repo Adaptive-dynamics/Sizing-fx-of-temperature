@@ -343,23 +343,22 @@ model_out_growth <- function(temp,
   allocs <- array(0, c(temps,l,dt))
   
   R0 <- array(0, c(temps,l,dt))
-  surv <- array(0, c(temps,l,dt))
-  
-  s[,,1] <- min(wl(lm))
-  
+  mu <- array(0, c(temps,l,dt))
   
   dts <- (tmax/(dt-1))
+  s[,,1] <- min(wl(lm))
+  
   
   for(t in 2:dt) {
     tm1 <- get_taus(v,1,10,temp,s[,,t-1])
     Es <- (1-phi-beta)*(tm1*gamma*s[,,t-1]^p/(tm1*gamma*s[,,t-1]^p+tc*h*s[,,t-1]^q))*tc*h*s[,,t-1]^q -k*tc*s[,,t-1]^n-tm1*delta*k*tc*s[,,t-1]
     allocs[,,t] <- pmax(allocs[,,t-1],t(apply(lw(s[,,t-1]),1,inv_logit3,lm,ts[t],slope,tr)))
     
-    mt <- (tm1*v$v+v$M)*s[,,t-1]^v$nu
-    surv[,,t] <- surv[,,t-1] + dts*mt
-    R0[,,t] <- R0[,,t-1] + dts*allocs[,,t]*Es*exp(-surv[,,t])
     
     s[,,t] <- s[,,t-1]+dts*(1-allocs[,,t])*Es
+    mu[,,t] <- mu[,,t-1] + dts*(tm1*v$v+v$M)*s[,,t]^v$nu
+    R0[,,t] <- R0[,,t-1] + dts*allocs[,,t]*Es*exp(-mu[,,t])
+    
   }
   ls <- lw(s)
   opt <- apply(R0[,,dt],1,function(x) ifelse(any(!is.nan(x)),which.max(x),NA))
@@ -372,20 +371,20 @@ model_out_growth <- function(temp,
   
   lss <- reshape2::melt(s)
   colnames(lss) <- c('Temperature','t','size')
+  lss$opt <- opt[lss$Temperature]
   lss$Temperature <- temp[lss$Temperature]
   lss$t <- ts[lss$t]
-  lss$opt <- opt[lss$Temperature]
   
   alloc <- reshape2::melt(allocs)
   colnames(alloc) <- c('Temperature','t','allocs')
-  alloc$Temperature <- temp[alloc$Temperature]
   alloc$t <- ts[alloc$t]
   alloc$opt <- opt[alloc$Temperature]
+  alloc$Temperature <- temp[alloc$Temperature]
   
   R0s <- reshape2::melt(R0s)
   colnames(R0s) <- c('Temperature','t','R0')
-  R0s$Temperature <- temp[R0s$Temperature]
   R0s$opt <- opt[R0s$Temperature]
+  R0s$Temperature <- temp[R0s$Temperature]
   R0s$t <- ts[R0s$t]
   
   #browser()
