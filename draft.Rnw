@@ -317,6 +317,23 @@ ggplot(sc_feed) +
   labs(x = expression("Mean temperature " ( degree*C)),
        y='Relative rate') 
 
+
+sco <- tidyr::gather(scenarios,Rate,value,`Max Metabolism`, `Active Metabolism`, `Std Metabolism`) 
+
+
+ggplot(sco) + 
+  geom_line(aes(x=Temperature, y=value, linetype=Rate),alpha=0.7) +
+  theme_cowplot()+
+  facet_grid(Size~Scenario)+
+  theme(strip.text = element_blank(),
+        panel.background = element_blank(),
+        plot.background = element_blank())+
+  scale_linetype_discrete('')+
+  labs(x = expression("Mean temperature " ( degree*C)),
+       y=expression(Oxygen~(mg.yr^-1))) 
+
+
+
 @
 
 <<calc-gouts>>=

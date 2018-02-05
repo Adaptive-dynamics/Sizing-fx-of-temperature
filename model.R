@@ -98,12 +98,12 @@ plot_data_temp <- function(v){
   
   
   #browser()
-  scope <- f*v$m-model_frame$Metabolism*v$omega
+  scope <- f*v$m-model_frame$std*v$omega
   scope[scope<0.0001] <- 0
   #browser()
   
   
-  
+  #browser()
   bind_cols(model_frame,
             data_frame(
               Temperature=v$temp,
@@ -112,9 +112,9 @@ plot_data_temp <- function(v){
               M = (tau_max*v$v+v$M)*v$m^v$nu,
               Optimum = sapply(sapply(tau,max,0),min,1),
               Scope=ifelse(scope<0.0001,0,scope),
-              `Max Metabolism` = f*v$m,
-              `Active Metabolism` = model_frame$Metabolism*v$omega,
-              `Std Metabolism` = model_frame$Std*v$omega,
+              `Max` = f*v$m,
+              `Active` = model_frame$Met*v$omega,
+              `Std` = model_frame$std*v$omega,
               Viable = as.numeric(tau_max>0.0001 & model_frame[['C for growth']]>0.0001))
   )
   
@@ -177,6 +177,7 @@ plot_data_growth_tO2 <- function(v){
   
   list(winfs=winfs,
        growth=mout$growth,
+       R0=mout$R0s,
        g_growth=mouts$g_growth,
        t_growth=mouts$t_growth)
   
@@ -307,8 +308,8 @@ model_out <- function(tau_max,
              `C for growth` = e, 
              Efficiency = efficiency, 
              `Predation rate`=predation_rate, 
-             Metabolism = met,
-             Std = k*tc*m^n)
+             Met = met,
+             std = k*tc*m^n)
 }
 
 model_out_growth <- function(temp,
@@ -419,7 +420,7 @@ model_out_growth <- function(temp,
   
   
   
-  list(winfs=winfs, growth=growth)
+  list(winfs=winfs, growth=growth, R0s  = R0[,which.min(abs(winfs$Temperature-v$temp_ref)),dt])
   
 }
 

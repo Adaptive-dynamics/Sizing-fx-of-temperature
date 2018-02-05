@@ -3,10 +3,10 @@ SHELL := /bin/bash
 
 HASDOCKER ?= $(shell which docker)
 
-DOC := $(if $(HASDOCKER), docker run --net host --rm --user=$$(id -u):$$(id -g) -v $$PWD:/work -w /work docker.dragonfly.co.nz/dragonverse-17.04:2017-06-28,)
+DOC := $(if $(HASDOCKER), docker run --net host --rm --user=$$(id -u):$$(id -g) -v $$PWD:/work -w /work docker.dragonfly.co.nz/dragonverse-17.04,)
 
 OUTPUT_DIR=build
-TARGET=draft.pdf
+TARGET=draft_model_only.pdf
 PRESENTATION=model_meeting.pdf
 
 KNITR = $(addsuffix .tex, $(basename $(shell find ./figures/ -iname "*.Rnw")))
