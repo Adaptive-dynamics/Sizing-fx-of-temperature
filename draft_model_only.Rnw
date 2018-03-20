@@ -284,12 +284,12 @@ lab2 <- as_labeller(c(`M strategy Rising` ='d',
                    `P strategy Rising` ='h',
                    `P strategy Domed` = 'f'))
 
-ggsc <- ggplot(sc_act) + 
+ggsc <- ggplot(sc_act %>% filter(Dispatch=='M strategy Domed')) + 
   geom_line(aes(x=Temperature, y=value, linetype=Activity,col=Activity)) +
   theme_cowplot()+
-  scale_color_manual(values = cols, guide='none')+
-  scale_linetype(guide='none')+
-  facet_wrap(~Dispatch,ncol = 1,labeller = lab1)+
+  scale_color_manual(values = cols)+
+  scale_linetype()+
+  #facet_wrap(~Dispatch,ncol = 1,labeller = lab1)+
   theme(strip.text = element_text(hjust = 0),
         strip.background = element_blank(),
         panel.background = element_blank(),
@@ -300,13 +300,13 @@ ggsc <- ggplot(sc_act) +
 sco <- tidyr::gather(scenarios,Metabolism,value,Max, Active, Std,Scope) %>%
   mutate(Dispatch = paste(Scenario,O2lim))
 
-ggso <- sco %>%
+ggso <- sco  %>% filter(Dispatch=='M strategy Domed') %>%
   ggplot() + 
    geom_line(aes(x=Temperature, y=value, linetype=Metabolism,col=Metabolism)) +
   theme_cowplot()+
-  scale_color_manual(values = cols, guide='none')+
-  scale_linetype(guide='none')+
-  facet_wrap(~Dispatch,ncol = 1,labeller = lab2)+
+  scale_color_manual(values = cols)+
+  scale_linetype()+
+  #facet_wrap(~Dispatch,ncol = 1,labeller = lab2)+
   theme(strip.text = element_text(hjust = 0),
         strip.background = element_blank(),
         panel.background = element_blank(),
@@ -357,12 +357,12 @@ laba <- as_labeller(c(`M strategy Small` ='a',
 
 sc_acts$Dispatch <- factor(sc_acts$Dispatch,levels=unique(sc_acts$Dispatch)[order(unlist(laba(unique(sc_acts$Dispatch))))])
 
-ggplot(sc_acts) + 
+ggplot(sc_acts %>% filter(Dispatch=='P strategy Large')) + 
   geom_line(aes(x=Temperature, y=value, linetype=Activity,col=Activity)) +
   theme_cowplot()+
-  scale_color_manual(values = cols, guide='none')+
-  scale_linetype(guide='none')+
-  facet_wrap(~Dispatch,ncol = 2,labeller = laba)+
+  scale_color_manual(values = cols)+
+  scale_linetype()+
+  #facet_wrap(~Dispatch,ncol = 2,labeller = laba)+
   theme(strip.text = element_text(hjust = 0),
         strip.background = element_blank(),
         panel.background = element_blank(),
@@ -398,16 +398,16 @@ sc_feed <- scenarios %>%
          Dispatch = paste(Scenario,O2lim))
 
 
-ggplot(sc_feed) + 
+ggplot(sc_feed%>% filter(Dispatch=='M strategy Domed')) + 
   geom_line(aes(x=Temperature, y=value, linetype=Rate,col=Rate,group=Rate)) +
   theme_cowplot()+
-  facet_wrap(~Dispatch,labeller = lab,ncol=2)+
+  #facet_wrap(~Dispatch,labeller = lab,ncol=2)+
   theme(strip.text = element_text(hjust = 0),
         strip.background = element_blank(),
         panel.background = element_blank(),
         plot.background = element_blank())+
-  scale_linetype_manual(values=c(1:4,1),guide='none')+
-  scale_color_manual(values = cols,guide='none')+
+  scale_linetype_manual(values=c(1:4,1))+
+  scale_color_manual(values = cols)+
   labs(x = expression("Mean temperature " ( degree*C)),
        y='Relative rate') 
 
@@ -418,7 +418,7 @@ Simulated growth curves illustrate the ontogenetic consequences of increasing te
 
 <<calc-gouts>>=
 
-gouts <- parallel::mclapply(scs,plot_data_growth_tO2,mc.cores = 2)
+gouts <- parallel::mclapply(scs[2],plot_data_growth_tO2,mc.cores = 2)
 
 @
 
@@ -445,12 +445,12 @@ norm <- t_growth %>%
 
 ggplot() +
   geom_line(aes(x=t, y=t_length,col=Temperature,group=as.factor(Temperature)),data=t_growth) +
-  geom_point(aes(x=ts, y=m),data=norm) +
+  #geom_point(aes(x=ts, y=m),data=norm) +
   # geom_point(aes(x=tsq1, y=mq1),data=norm,col=cols[3]) +
   # geom_point(aes(x=tsq3, y=mq3),data=norm,col=cols[3]) +
   #geom_point(data=growth_scenarios[seq.int(1,nrow(growth_scenarios),by = 5),],aes(x=Temperature, y=Temp, col=Scenario,shape=Scenario),alpha=0.5,size=2) +
   theme_cowplot()+
-  facet_wrap(~Dispatch,scales='free',ncol=2,labeller = lab)+
+  #facet_wrap(~Dispatch,scales='free',ncol=2,labeller = lab)+
   viridis::scale_colour_viridis(expression(Temp~(degree*C)))+
   theme(legend.text = element_text(size=8),
         legend.title = element_text(size=9),
@@ -541,10 +541,8 @@ f1 <- ggplot(R0s) +
         plot.background = element_blank())+
   scale_linetype_manual(values=c(1:4),guide='none')+
   scale_color_manual(values = cols,guide='none')+
-  labs(x = '',
-       y=expression('R0/R0'[max])) +
-    theme(axis.title.x=element_blank(),
-          axis.text.x = element_text(colour = NA))
+  labs(x = expression("Mean temperature " ( degree*C)),
+       y=expression('R0/R0'[max])) 
 
 
 R0s <- bind_rows(lapply(1:length(gouta), function(x) {
