@@ -418,13 +418,13 @@ wtfs <- winfs %>% group_by(Scenario,Size) %>%
   mutate(length=sc(lw(l))) 
 
 cpG <- ggplot(wtfs) +
-  geom_line(aes(x=Temperature, y=length, col=Size,linetype=Scenario),alpha=0.7) +
+  geom_line(aes(x=Temperature, y=length, linetype=Scenario),alpha=0.7) +
   theme_cowplot()+
   scale_linetype_discrete(guide='none')+
   scale_color_discrete(guide='none')+
   theme(panel.background = element_blank(),
         plot.background = element_blank(),)+
-  labs(x = '',
+  labs(x = expression("Mean temperature " ( degree*C)),
        y='Relative adult length')
 
 
@@ -432,7 +432,7 @@ npG <- ggplot(wtfs) +
   geom_line(aes(x=Temperature, y=G/l, col=Size,linetype=Scenario),alpha=0.7) +
   theme(panel.background = element_blank(),
         plot.background = element_blank())+
-  labs(x = '',
+  labs(x = expression("Mean temperature " ( degree*C)),
        y=expression(S~response~y^-1)) 
 
 
