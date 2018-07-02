@@ -62,36 +62,52 @@ Here, we propose a general quantitative size- and trait-based eco-physiological 
 
 \subsection{Key assumptions}
 
-Our model assumes that physiology is described by two key budgets: the energy and oxygen budgets (\cite{holt_climate_2015,holt_climate_2014}). At a high level, we assume that animals will adapt activity levels to optimise available energy for growth and reproduction relative to mortality risk. Available energy is limited either by food capture, food processing capacity, or by available oxygen. We further assume that temperature acts directly on rates that are determined by enzymatic activity: digestive activity (via maximum consumption) and metabolic costs. Consequently, temperature only acts on ecological rates (e.g., actual feeding rates) via optimisation of activity levels.
+Our model assumes that physiology is described by two key budgets: the energy and oxygen budgets (\cite{holt_climate_2015,holt_climate_2014}). We assume that animals will adapt activity levels to optimise available energy for growth and reproduction relative to mortality risk. Available energy is determined either by food capture, food processing capacity, or by available oxygen. We further assume that temperature acts directly on rates that are determined by enzymatic activity: digestive activity (via maximum consumption) and metabolic costs. Consequently, temperature only acts on ecological rates (e.g., actual feeding rates) via optimisation of activity levels.
 
 \subsection{Model description}
+Ectotherms adjust the relative amounts of time ($\tau$) spent on metabolically costly activity and resting/hiding to optimise the net energy gain relative to mortality. In the following, we refer to $\tau$ as the activity fraction for sake of generality.   Since both energy gain and metabolic losses are sensitive to temperature and oxygen limitations, both the activity level and the net energy gain will be subject to these environmental constraints. Their interplay thus determines available energy for growth and reproduction.
 
-The quantitative size- and trait-based thermal impact model lets ectotherms adjust the relative amounts of time ($\tau$) spent on metabolically costly activity and resting/hiding to optimise the net energy $P$ gain relative to natural mortality. Since both energy gain and loss are sensitive to temperature and oxygen limitations, both the activity level and the net energy gain will be subject to these environmental constraints. Their interplay thus determines available energy for growth and reproduction.
-
-The model is written in terms of weight $w$ and oxygen balance equations at temperature $T$:
-
+Net energy gain $P$ (mass per time) is the difference between supply $S$ and metabolic demands $D$, each being functions of body weight $w$ and temperature $T$:
 \begin{align}
-f(w,T) &= \frac{\tau }{\tau  + \frac{h c_T w^{q-p}}{\gamma\Theta} } \label{eq:f} \\
 P(w,T) &= S(w,T) - D(w,T) \\
-  &=(1-\beta-\phi)f(w,T) h c_T w^q  - c_T k w^n - \tau \delta c_T k w  \\
-P_{0_2}(w,T) &= S_{O_2}(w,T) - D_{O_2}(w,T) \\
-        &= f_{O_2}(T)w^n - \omega \left( \beta f(w,T) h c_T w^q + c_T k w^n + \tau \delta c_T k w \right)
+          &=(1-\beta-\phi)f(w,T) h c(T) w^q  - c(T) k w^n - \tau \delta c(T) k w  \\
+  \label{eq:P}
 \end{align}
+where the feeding level ($[0:1]$)is given by a Holling type II function response:
+\begin{align}
+  f(w,T) &= \frac{\tau \gamma\Theta w^{p} }{\tau \gamma\Theta w^{p} + h c(T) w^q} }, \label{eq:f} \\
+\end{align}
+where $h c(T) w^q$ is the maximum consumption rate. The corresponding function for oxygen is given in Appendix A.  The feeding level ([0,1]) is determined by the fraction of time spent foraging $\tau$, foraging rate $\gamma w^p \Theta$ (search rate $\gamma w^p$ times prey availability $\Theta$) and maximum consumption $h c(T) w^q$.  The supply is discounted by the loss due to specific dynamic action  $\beta$ (SDA, or heat increment; the energy spent absorbing food), and $\phi$ is the fraction of food excreted and egested. 
 
+Metabolic demands ($D(w,T)$) are standard metabolism ($\propto k w^n$), which scales with exponent $n<1$, and active metabolism $\propto \tau k_a w$, which scales proportional to mass owing to muscular demands scaling approximately isometrically with weight (\cite{glazier_activity_2009,brett1965relation}, and the activity fraction \emph{(Important note: you cannot interpret $\delta$ as the factorial aerobic scope (FAS) when the two metabolisms scale with different exponents!. I therefore propose to rename the constant to $k_a$)}. 
 
-where $f(w,T)$ is the feeding level ([0,1]) at weight $w$ and temperature $T$, determined by the fraction of time spent foraging (or proportion of maximum attack rate) $\tau$, consumption rate $\gamma w^p \Theta$ (search rate $\gamma w^p$ times prey availability $\Theta$) and maximum consumption $h w^q$. In the following, we will refer to $\tau$ as the activity fraction for sake of generality. Maximum consumption, determined by digestive (enzymatic) processes (\cite{jeschke_predator_2002, sentis_parsing_2013}), is assumed to scale with temperature as $c_T = e^{E_a(T-T_0)/kTT_0}$. Available energy $P(w,T)$ is determined by supply ($S(w,T)$) from prey consumption ($f(w,T) h c_T w^q$), with $\beta$ a loss due to specific dynamic action (SDA, or heat increment; the energy spent absorbing food), and $\phi$ is the fraction of food excreted and egested. Metabolic demands ($D(w,T)$) are those of standard metabolism ($k w^n$), as well as active metabolism, scaled in units of standard metabolism as $\delta k w$, with $\delta$ the factorial aerobic scope (FAS). The activity fraction $\tau$ determines the fraction of time that the active metabolism cost applies. Note that active metabolism scales directly with $w$, owing to muscular demands scaling approximately isometrically with weight (\cite{glazier_activity_2009,brett1965relation}). 
+Temperature scaling of all metabolic rates (standard and active metabolism and maximum consumption rate) is determined by digestive (enzymatic) processes (\cite{jeschke_predator_2002, sentis_parsing_2013}) as $c(T) = e^{E_a(T-T_0)/(kTT_0)}$. 
 
-The oxygen budget $P_{0_2}(w,T)$, determines physiological limits to aerobic activity. Demand ($D_{O_2}(w,T)$) is the sum of oxygen used for SDA (i.e., the conversion of food into energy, growth and reproduction - $\beta f h c_T w^q$) and ``active metabolism", the sum of standard (or resting) metabolism ($c_T k w^n$) and the metabolic costs of foraging ($\tau \delta c_T k w$), with $\omega$ determining amount of oxygen required per unit of metabolised feed. Metabolic scope is the difference between $S_{O_2}(w,T)=f_{O_2}(T)w^n$, the maximum amount of oxygen supplied at temperature $T$, and oxygen demand due to standard metabolism ($\omega c_T k w^n$). We assume that the maximum oxygen supply (MOS), follows a flexible dome-shaped function that can emulate both a dome-shaped MOS as well as MOS that increas continously up to a lethal temeprature (Figure \ref{fig:O2_fig}, Appendix A).
+The oxygen budget $P_{0_2}(w,T)$ (oxygen per time) follows a similar form to the mass budget:
+\begin{align}
+  P_{0_2}(w,T) &= S_{O_2}(w,T) - D_{O_2}(w,T) \\
+        &= s_(T) w^n - \omega c(T) \left( \beta f(w,T) h w^q + k w^n + k_a w \right).
+\end{align}
+Demand ($D_{O_2}(w,T)$) is the sum of oxygen used for all metabolic processes in Eq.~\ref{eq:P} (except assimilation losses), with $\omega$ being amount of oxygen required per mass.  The oxygen supply scales with body weight as $w^n$ multiplied by a flexible dome-shaped function ($s(t)$) \emph{I've changed this away from $f$, because $f$ was used above for a function that is in the range 0:1, while this one has a unit} that can emulate both a dome-shaped MOS as well as MOS that increas continously up to a lethal temeprature (Figure \ref{fig:O2_fig}, Appendix A). 
 
-We assumed that fish will adjust their activity level to maximise $F$: maximize available energy relative to mortality: $\tau_{\text{opt}}$ = $\text{argmax}_{\tau_{w,T}}F(\tau_{w,T})$ = $\text{argmax}_{\tau_{w,T}}P(\tau_{w,T})/M(\tau_{w,T})$. This optimisation is also known as Gilliam's rule (\cite{gilliam_habitat_1987}) and represents a "short-sighted" fitness optimisation that does not account for future changes in conditions, and is appropriate for simulating opmisation in changing environments (\cite{sainmont_effective_2015}). We further assumed here that mortality scales with activity level and weight as $w^{q-1}$ (\cite{andersen_how_2009, hartvig_food_2011}), such that $M(w) = (\rho+\eta\tau) w^{q-1}$, where $ \rho$ is mortality at mass $w=1$ and $\tau=0$, that is, with no activity beyond that covered by standard metabolism. $M$ is then the effective mortality at realised levels of activity $\tau$ at weight $w$.
+Fish will adjust their activity fraction $\tau$ to maximise fitness. We use Gilliam's rule as a fitness proxy \cite{gilliam_habitat_1987}:
+\begin{equation}
+  \tau^* = \argmax_{\tau} \{ \frac{P(w,T)}{M(w)} \}.
+\end{equation}
+This optimisation represents a "short-sighted" fitness optimisation that does not account for future changes in conditions, and is appropriate for optimisation in stable environments (\cite{sainmont_effective_2015}).  Mortality scales with activity fraction and weight as $w^{q-1}$ (\cite{andersen_how_2009, hartvig_food_2011}):
+\begin{equation}
+  \label{eq:M}
+  M(w) = (\rho+\eta\tau) w^{q-1},
+\end{equation}
+$\rho$ is mortality at mass $w=1$ and $\tau=0$, that is, with no activity beyond that covered by standard metabolism.  Activity is limited by available oxygen, such that $P_{O_2}$ is not allowed to be negative \emph{Is that a correct interpretation?}.
 
-We assumed that the metabolic scope dictates the upper limit of this activity, such that at $\tau_{\text{max}}$, oxygen demand $D_{0_2}$ equals total supply $S_{0_2}$. Both temperature and oxygen will influence $\tau$, such that at a given temperature and oxygen concentration, $\tau_{w,T,O_2} = \text{min}\left( \tau_{\text{opt}},\tau_{\text{max}} \right)$, meaning we assumed that animals will adapt their effort to optimise fitness $F$ given temperature and oxygen constraints.
+%We assumed that the metabolic scope dictates the upper limit of this activity, such that at $\tau_{\text{max}}$, oxygen demand $D_{0_2}$ equals total supply $S_{0_2}$. Both temperature and oxygen will influence $\tau$, such that at a given temperature and oxygen concentration, $\tau_{w,T,O_2} = \text{min}\left( \tau_{\text{opt}},\tau_{\text{max}} \right)$, meaning we assumed that animals will adapt their effort to optimise fitness $F$ given temperature and oxygen constraints.
 
 
 \subsection{Growth response}
 
 Temperature affects growth via its effects on the energy budget and the investment of available (surplus) energy into reproduction and growth. The change in allocation to reproduction with size and age in variable environmental conditions is described by the maturation reaction norm, which is generally defined as the probability of maturing at a certain age under different growth conditions (\cite[e.g., ][]{dieckmann_probabilistic_2007}). We used a slightly different definition here since our model is not probabilistic at the population level: we defined the reaction norm as the mid-point of a logistic allocation function that determines investment in reproduction as a function of age and size. The allocation was parametrised as 
-$$\phi(z) = 1/(1+\exp(-(c*z))) \text{, where }$$
+$$\phi(z) = 1/(1+\exp(-(c z))) \text{, where }$$
 $$z(t, w_t) = (w_t-w^*)\times \text{cos}(\text{atan}(b))-t\times \text{sin}(\text{atan}(b))$$ 
 rotates the coordinate system about the slope $b$ of the reaction norm, $t$ is the age, $w$ is the mass, $w^*$ is the intercept of the reaction norm, and $c$ determines how rapidly energy allocation shifts from somatic growth to reproduction.
 
@@ -152,7 +168,7 @@ Exponent for mortality & $\nu$ & \multicolumn{2}{c}{0.2} \\
 
 \addlinespace
 \multicolumn{4}{c}{\textbf{Temperature}}\\
-Reference temperature (°C) & $T_{ref}$ & \multicolumn{2}{c}{15} \\
+Reference temperature (??C) & $T_{ref}$ & \multicolumn{2}{c}{15} \\
 Activation energy & $E_a$ & \multicolumn{2}{c}{0.52} \\
 Temperature at maximum MOS & $T_{max}$ & \multicolumn{2}{c}{20/25}\\
 Temperature range & $T^-_{lethal}$--$T^+_{lethal}$ & \multicolumn{2}{c}{5--26} \\
