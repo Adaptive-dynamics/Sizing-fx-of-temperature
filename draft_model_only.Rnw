@@ -23,7 +23,7 @@ citestyle = authoryear-comp]{biblatex}%
 \addbibresource{Sizing-fx-of-temperature.bib}
 \captionsetup[table]{singlelinecheck=false}
 
-\title{Beyond conceptual eco-physiological hypotheses: insights from a general size and trait-based model of ectotherm thermal performance}
+\title{Explaining thermal performance in fish: interplay of ecology and physiology drive growth and fitness response}
 \author{Philipp Neubauer\\Dragonfly Data Science, Wellington, NZ  \and 
         Ken H. Andersen\\Centre for Ocean Life
         Danish Technical University, Lyngby, Denmark}
