@@ -3,7 +3,7 @@ SHELL := /bin/bash
 
 HASDOCKER ?= $(shell which docker)
 
-DOC := $(if $(HASDOCKER), docker run --net host --rm --user=$$(id -u):$$(id -g) -v $$PWD:/work -w /work docker.dragonfly.co.nz/dragonverse-17.04,)
+DOC := $(if $(HASDOCKER), docker run --net host --rm --user=$$(id -u):$$(id -g) -v $$PWD:/work -w /work docker.dragonfly.co.nz/dragonverse-18.04,)
 
 OUTPUT_DIR=build
 TARGET=draft_model_only.pdf
