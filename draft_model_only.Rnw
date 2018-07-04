@@ -23,7 +23,7 @@ citestyle = authoryear-comp]{biblatex}%
 \addbibresource{Sizing-fx-of-temperature.bib}
 \captionsetup[table]{singlelinecheck=false}
 
-\title{Explaining thermal performance in fish: interplay of ecology and physiology drive growth and fitness response}
+\title{Explaining thermal performance of fish: interplay of behaviour, ecology and physiology drive growth and fitness responses}
 \author{Philipp Neubauer\\Dragonfly Data Science, Wellington, NZ  \and 
         Ken H. Andersen\\Centre for Ocean Life
         Danish Technical University, Lyngby, Denmark}
@@ -37,7 +37,7 @@ citestyle = authoryear-comp]{biblatex}%
 \pagenumbering{gobble}
 \begin{abstract}
 
-Increasing temperatures under climate change are thought to affect individual physiology of ectotherms through increases in metabolic demands, leading to changes in species performance with concomitant effects on species ecology. Although intuitively appealing, the driving mechanism behind thermal performance is contested: thermal performance (e.g., growth) appears correlated with metabolic scope (i.e., oxygen availability for activity) for a number of species, but a substantial number of datasets do not support oxygen limitation of long-term performance. Whether or not oxygen limitations via the metabolic scope, or a lack thereof, have major ecological consequences remains a highly contested question. Here, we propose a general size and trait-based model of energy and oxygen budgets to determine the relative influence of thermal sensitivity of metabolic rates, oxygen limitation, and environmental conditions on fish thermal performance. We show that oxygen limitation is not necessary to explain performance curves that are correlated with metabolic scope. Oxygen can drastically limit performance and fitness, especially at temperature extremes, but changes in thermal performance are primarily driven by the interplay of changing metabolic rates and species ecology. Furthermore, our model reveals that fitness trends with temperature can oppose trends in growth, suggesting a potential explanation for the paradox that species often occur at lower temperatures than their growth-optimum. We suggest that this general model provides a mechanistic underpinning that can provide general and realistic predictions about temperature impacts on the performance of fish and other ectotherms, and act as a null model for temperature impacts on species with different metabolic and ecological traits.
+Increasing temperatures under climate change are thought to affect individual physiology of fish and other ectotherms through increases in metabolic demands, leading to changes in species performance with concomitant effects on species ecology. Although intuitively appealing, the driving mechanism behind thermal performance is contested: thermal performance (e.g., growth) appears correlated with metabolic scope (i.e., oxygen availability for activity) for a number of species, but a substantial number of datasets do not support oxygen limitation of long-term performance. Whether or not oxygen limitations via the metabolic scope, or a lack thereof, have major ecological consequences remains a highly contested question. Here, we propose a general size and trait-based model of energy and oxygen budgets to determine the relative influence of metabolic rates, oxygen limitation, and environmental conditions on ecotherm performance. We show that oxygen limitation is not necessary to explain performance curves that are correlated with metabolic scope. Oxygen can drastically limit performance and fitness, especially at temperature extremes, but changes in thermal performance are primarily driven by the interplay of changing metabolic rates and species ecology. Furthermore, our model reveals that fitness trends with temperature can oppose trends in growth, suggesting a potential explanation for the paradox that species often occur at lower temperatures than their growth-optimum. We suggest that this model provides a mechanistic underpinning that can provide general and realistic predictions about temperature impacts on the performance of fish and other ectotherms, and act as a null model for contrasting temperature impacts on species with different metabolic and ecological traits.
 
 \end{abstract}
 {\large Keywords:} thermal performance curves, OCLTT, metabolic rates, climate change
@@ -48,15 +48,15 @@ Increasing temperatures under climate change are thought to affect individual ph
 
 Temperature, through its effects on individual physiology, is a dominant driver of species ecology and bio-geography (\cite{deutsch_climate_2015,pinsky_marine_2013,brown_toward_2004}). As a consequence, current and predicted temperature increases under climate change will act as a strong agent of change in many ecosystems (\cite{deutsch_climate_2015, stuart-smith_thermal_2015, parmesan_globally_2003, walther_ecological_2002}). However, the nature of these changes can be difficult to predict as temperature effects scale from individuals to species and ecosystems. Through this cascade of scales, incorrect or approximate model assumptions at the individual scale can have disproportionate effects on ecosystem level outcomes (\cite{brander_overconfidence_2013, lefevre_models_2017}). In marine fish, for example, recent predictions of decreasing organism size, and resulting decreases in the size of fisheries catches (\cite{cheung_shrinking_2013}), have been criticized as overly simplistic and not in line with physiological constraints (\cite{brander_overconfidence_2013, lefevre_models_2017}).
 
-There are few general concepts and models that can explain thermal performance and ecological responses to temperature. To our knowledge, no general theoretical framework exists to quantitatively explain and predict changes in fundamental ecological rates, such as observed changes of attack rates with temperature (\cite{englund_temperature_2011,rall_universal_2012}), from fundamental physiological processes. Instead, and as advocated by the metabolic theory of ecology (\cite{brown_toward_2004}), ecological theory often treats ecological rates as being directly temperature dependant, without a direct link to the underlying physiological drivers (\cite[e.g., ][]{vucic-pestic_warming_2011, guiet_effects_2016}). 
+There are few general concepts and models that can explain thermal performance and ecological responses to temperature. To our knowledge, no general theoretical framework exists to quantitatively explain and predict changes in fundamental ecological rates, such as observed change in growth and asymptotic size \cite[e.g., the temerature-size rule in ectotherms;][]{angilletta_temperature_2004,atkinson_temperature_1994}), or attack rates (\cite{englund_temperature_2011,rall_universal_2012}) with temperature, from fundamental physiological processes. Instead, and as advocated by the metabolic theory of ecology (\cite{brown_toward_2004}), ecological theory often treats ecological rates as being directly temperature dependent, without a direct link to the underlying physiological drivers (\cite[e.g., ][]{angilletta_temperature_2004,vucic-pestic_warming_2011, guiet_effects_2016}). 
 
-Although ecological rates seem to follow some general patterns in the response to temprature (\cite{englund_temperature_2011,rall_universal_2012}), there is also significant heterogeneity between species and trait groups. A phenomenological description that assumes a general ecological temperature response thus leads to difficulties with extrapolation when observed ecological responses are heterogeneous across species or other model components (\cite[e.g., fish in marine ecosystem models; ][]{guiet_effects_2016}). In this case, a deeper understanding of the underlying drivers of thermal responses may be necessary in order to derive general predictions about ecological responses to changing temperatures (\cite[e.g., ][]{vucic-pestic_warming_2011}). Since the primary effect of temperature of organisms is on individual physiology, a general model to explain ecological response should be grounded in physiology.
+Although ecological rates seem to follow some general patterns in the response to temperature , there is also significant heterogeneity between species and trait groups (\cite[e.g., ][]{angilletta_temperature_2004,englund_temperature_2011,rall_universal_2012}). A phenomenological description that assumes a general ecological temperature response thus often fails to explain heterogeneity in ecological responses (\cite{angilletta_temperature_2004}), and leads to difficulties with extrapolation across species or other model components (\cite[e.g., fish in marine ecosystem models; ][]{guiet_effects_2016}). In this case, a deeper understanding of the underlying drivers of thermal responses may be necessary in order to derive general predictions about ecological responses to changing temperatures (\cite[e.g., ][]{vucic-pestic_warming_2011,lefevre_models_2017}). Since the primary effect of temperature of organisms is on individual physiology, a general model to explain ecological response should be grounded in physiology.
 
 Physiologically, a long held view has been that temperature is a controlling factor while oxygen supply sets the physiological limits (\cite{fry_effects_1947,claireaux_linking_2007,lefevre_are_2016}). How exactly temperature influences ectotherm physiological rates and limits, however, has been a matter of debate, not least because of the variable responses observed among different species. In most species, the standard metabolism (SM; the metabolic cost of maintenance and routine activity such as ventilation) increases near exponentially with temperature. A prevalent view is that the maximum metabolic rate (MMR; the metabolic rate at maximum sustained exercise) has a dome-shaped response to temperature, whereby it can be increased (passively and actively) up to a point, but plateaus or decreases thereafter (\cite{fry_effects_1947,claireaux_linking_2007,lefevre_are_2016,portner_physiology_2008}). This leads to the view of a uni-modal curve for metabolic scope (MMR minus SM; the available oxygen/energy for additional activity), and suggests that towards the upper end of this curve, organisms will, simply put, run out of oxygen. 
 
 This view was encapsulated in the Theory of Oxygen and Capacity Limitation of Temperature (\cite{portner_oxygen-and_2010}), which suggests that the decrease in metabolic scope towards extreme temperatures limits species ability to sustain core functions such as foraging and growth (i.e., functions beyond SM). In some species, however, maximum metabolic rate increases steadily (\cite{lefevre_are_2016, verberk_does_2016}), suggesting that oxygen may not be the limiting factor at high temperatures. Indeed, it has been argued that oxygen is unlikely to determine performance for most species over most of their temperature range as oxygen limits are rarely reached during normal activity (\cite{jutfelt_oxygen-and_2018, holt_climate_2015}). 
 
-Here, we propose a general quantitative size- and trait-based eco-physiological model to derive general predictions about temperature impacts on ectotherm physiology, performance and ecology. We describe simple size-dependent physiological processes within an ecological context, and, using a simple optimisation argument, show that observed ecological responses of different life-history strategies can be predicted on the basis of optimised bio-energetics under different temperatures.
+Here, we propose a general quantitative size- and trait-based eco-physiological model to derive general predictions about temperature impacts on fish  physiology, performance and ecology. We describe simple size-dependent physiological processes within an ecological context, and, using a simple optimisation argument, show that observed ecological responses of different life-history strategies can be predicted on the basis of optimised bio-energetics under different temperatures.
 
 \section{Methods}
 
@@ -70,25 +70,23 @@ Ectotherms adjust the relative amounts of time ($\tau$) spent on metabolically c
 Net energy gain $P$ (mass per time) is the difference between supply $S$ and metabolic demands $D$, each being functions of body weight $w$ and temperature $T$:
 \begin{align}
 P(w,T) &= S(w,T) - D(w,T) \\
-          &=(1-\beta-\phi)f(w,T) h c(T) w^q  - c(T) k w^n - \tau \delta c(T) k w  \\
+          &=(1-\beta-\phi)f(w,T) h c(T) w^q  - c(T) k w^n - \tau c(T) k_a w
   \label{eq:P}
 \end{align}
 where the feeding level ($[0:1]$)is given by a Holling type II function response:
 \begin{align}
-  f(w,T) &= \frac{\tau \gamma\Theta w^{p} }{\tau \gamma\Theta w^{p} + h c(T) w^q}, \label{eq:f} \\
+  f(w,T) &= \frac{\tau \gamma\Theta w^{p} }{\tau \gamma\Theta w^{p} + h c(T) w^q}, \label{eq:f} 
 \end{align}
-where $h c(T) w^q$ is the maximum consumption rate. The corresponding function for oxygen is given in Appendix A.  The feeding level ([0,1]) is determined by the fraction of time spent foraging $\tau$, foraging rate $\gamma w^p \Theta$ (search rate $\gamma w^p$ times prey availability $\Theta$) and maximum consumption $h c(T) w^q$.  The supply is discounted by the loss due to specific dynamic action  $\beta$ (SDA, or heat increment; the energy spent absorbing food), and $\phi$ is the fraction of food excreted and egested. 
+where $h c(T) w^q$ is the maximum consumption rate. The feeding level ([0,1]) is determined by the fraction of time spent foraging $\tau$, foraging rate $\gamma w^p \Theta$ (search rate $\gamma w^p$ times prey availability $\Theta$) and maximum consumption $h c(T) w^q$.  The supply is discounted by the loss due to specific dynamic action  $\beta$ (SDA, or heat increment; the energy spent absorbing food), and $\phi$ is the fraction of food excreted and egested. 
 
-Metabolic demands ($D(w,T)$) are standard metabolism ($\propto k w^n$), which scales with exponent $n<1$, and active metabolism $\propto \tau k_a w$, which scales proportional to mass owing to muscular demands scaling approximately isometrically with weight (\cite{glazier_activity_2009,brett1965relation}, and the activity fraction \emph{(Important note: you cannot interpret $\delta$ as the factorial aerobic scope (FAS) when the two metabolisms scale with different exponents!. I therefore propose to rename the constant to $k_a$)}. 
+Metabolic demands ($D(w,T)$) are standard metabolism ($\propto k w^n$), which scales with exponent $n<1$, and active metabolism $\propto \tau k_a w$, which scales proportional to mass owing to muscular demands scaling approximately isometrically with weight (\cite{glazier_activity_2009,brett1965relation}, and the activity fraction. Temperature scaling of metabolic rates (standard and active metabolism, and maximum consumption rate) is determined by enzymatic processes (e.g., digestion, glycolysis \cite{jeschke_predator_2002, sentis_parsing_2013}) as $c(T) = e^{E_a(T-T_0)/(kTT_0)}$. 
 
-Temperature scaling of all metabolic rates (standard and active metabolism and maximum consumption rate) is determined by digestive (enzymatic) processes (\cite{jeschke_predator_2002, sentis_parsing_2013}) as $c(T) = e^{E_a(T-T_0)/(kTT_0)}$. 
-
-The oxygen budget $P_{0_2}(w,T)$ (oxygen per time) follows a similar form to the mass budget:
+The oxygen budget $P_{0_2}(w,T)$ (or aerobic scope) follows a similar form to the mass budget:
 \begin{align}
   P_{0_2}(w,T) &= S_{O_2}(w,T) - D_{O_2}(w,T) \\
         &= s_(T) w^n - \omega c(T) \left( \beta f(w,T) h w^q + k w^n + k_a w \right).
 \end{align}
-Demand ($D_{O_2}(w,T)$) is the sum of oxygen used for all metabolic processes in Eq.~\ref{eq:P} (except assimilation losses), with $\omega$ being amount of oxygen required per mass.  The oxygen supply scales with body weight as $w^n$ multiplied by a flexible dome-shaped function ($s(t)$) \emph{I've changed this away from $f$, because $f$ was used above for a function that is in the range 0:1, while this one has a unit} that can emulate both a dome-shaped MOS as well as MOS that increas continously up to a lethal temeprature (Figure \ref{fig:O2_fig}, Appendix A). 
+Demand ($D_{O_2}(w,T)$) is the sum of oxygen used for all metabolic processes in Eq.~\ref{eq:P} (except assimilation losses), with $\omega$ being amount of oxygen required per mass.  The oxygen supply scales with body weight as $w^n$ multiplied by a flexible dome-shaped function that can emulate both a dome-shaped maximum oxygen supply (MOS) as well as MOS that increase continuously up to a lethal temperature (fig. \ref{fig:O2_fig}, Appendix A). 
 
 Fish will adjust their activity fraction $\tau$ to maximise fitness. We use Gilliam's rule as a fitness proxy \cite{gilliam_habitat_1987}:
 \begin{equation}
@@ -99,32 +97,43 @@ This optimisation represents a "short-sighted" fitness optimisation that does no
   \label{eq:M}
   M(w) = (\rho+\eta\tau) w^{q-1},
 \end{equation}
-$\rho$ is mortality at mass $w=1$ and $\tau=0$, that is, with no activity beyond that covered by standard metabolism.  Activity is limited by available oxygen, such that $P_{O_2}$ is not allowed to be negative \emph{Is that a correct interpretation?}.
+$\rho$ is mortality at mass $w=1$ and $\tau=0$, that is, with no activity beyond that covered by standard metabolism.  Activity is limited by available oxygen, such that the aerobic scope $P_{O_2}$ is not allowed to be negative over the time scales considered. In other words, we consider time scales that are long enough to ignore the ability of many ectotherms to go into oxygen debt, or to switch to anaerobic metabolism for limited periods of time. This means we assume that animals will adapt their effort to optimise fitness given temperature and oxygen constraints.
 
-%We assumed that the metabolic scope dictates the upper limit of this activity, such that at $\tau_{\text{max}}$, oxygen demand $D_{0_2}$ equals total supply $S_{0_2}$. Both temperature and oxygen will influence $\tau$, such that at a given temperature and oxygen concentration, $\tau_{w,T,O_2} = \text{min}\left( \tau_{\text{opt}},\tau_{\text{max}} \right)$, meaning we assumed that animals will adapt their effort to optimise fitness $F$ given temperature and oxygen constraints.
+\subsection{Defining performance metrics}
 
+Performance itself is a vague concept that is often used without definition in the relevant literature, but it is only defined in the context of a particular physiological or demographic parameter, with potentially different thermal response curves (\cite{jutfelt_oxygen-and_2018}). For instance, even though growth in ectotherms is often impacted by temperature (\cite{angilletta_temperature_2004}), measured performance may depend strongly on what aspect of growth is measured --- whether it is the growth increment at a particular size, growth efficiency per unit intake, the attained asymptotic size, or parameters of a fitted growth curve. We use and compare four performance measures with broad ecological and practical implications:
+
+\begin{itemize}
+
+\item Growth curves predicted through ontogeny, which allow us to compare growth performance early and late in life (i.e., juvenile growth vs asymptotic size).
+\item Growth efficiency, here defined as available energy relative to the feeding level (i.e., $\frac{P(w,T)}{f(w,T)}$.
+\item The ratio of $P/M$ (Gilliam's rule) used above as a short-sighted fitness aproximation.
+\item Fitness integrated over an individual's lifetime, defined as $R0$ (see below).
+
+\end{itemize}
 
 \subsection{Growth response}
 
-Temperature affects growth via its effects on the energy budget and the investment of available (surplus) energy into reproduction and growth. The change in allocation to reproduction with size and age in variable environmental conditions is described by the maturation reaction norm, which is generally defined as the probability of maturing at a certain age under different growth conditions (\cite[e.g., ][]{dieckmann_probabilistic_2007}). We defined the reaction norm as the mid-point of a logistic allocation function that determines investment in reproduction as a function of age and size. The allocation was parametrised as 
-$$\phi(z) = 1/(1+\exp(-(c z))) \text{, where }$$
-$$z(t, w_t) = (w_t-w^*)\times \text{cos}(\text{atan}(b))-t\times \text{sin}(\text{atan}(b))$$  
-rotates the coordinate system about the slope $b$ of the reaction norm, $t$ is the age, $w$ is the mass, $w^*$ is the intercept of the reaction norm, and $c$ determines how rapidly energy allocation shifts from somatic growth to reproduction. 
+Temperature affects growth via its effects on the energy budget and the investment of available (surplus) energy into reproduction and growth. The change in allocation to reproduction with size and age in variable environmental conditions is described by the maturation reaction norm, which is generally defined as the probability of maturing at a certain age under different growth conditions (\cite[e.g., ][]{dieckmann_probabilistic_2007}). We defined the reaction norm as the mid-point of a logistic allocation function that determines investment in reproduction as a function of age and size. 
 
-The slope of maturation reaction norms is evolutionarily determined by the strength of the co-variation between growth and mortality for a given population in a given environment. Strongly positive co-variation leads to the relatively flat reaction norms observed for most fish populations (\cite{marty_impact_2011}). This covariation is probably the consequence of good growth conditions (e.g., from increased prey density) altering the baseline mortality $\rho$ and the risk of foraging $\eta$ (e.g., by attracting predators). We did not explicitly model these interactions here (aside from the dependence of mortality on $\tau$), but rather assumed that reaction norms evolved over regimes of relatively stable temperature and growth variation in the past. Consequently, we assumed that the evolved slope of the reaction norm is a fixed trait over the time-scales considered here for a particular species or population, and for simplicity and generality we assume a slightly negative slope in the reaction norm \ref{fig:MRN}). The intercept of this reaction norm was found numerically by maximising fitness ($R0$, see below) at the reference temperature for our simulations (15\degree C), and this intercept was asumed fixed as temperatures change.
+The slope of maturation reaction norms is evolutionarily determined by the strength of the co-variation between growth and mortality for a given population in a given environment. Strongly positive co-variation leads to the relatively flat reaction norms observed for most fish populations (\cite{marty_impact_2011}). This covariation is probably the consequence of good growth conditions (e.g., from increased prey density) altering the baseline mortality $\rho$ and the risk of foraging $\eta$ (e.g., by attracting predators). We did not explicitly model these interactions here (aside from the dependence of mortality on $\tau$), but rather assumed that reaction norms evolved over regimes of relatively stable temperature and growth variation in the past. Consequently, we assumed that the evolved slope of the reaction norm is a fixed trait over the time-scales considered here for a particular species or population, and for simplicity and generality we assume a flat reaction norm (i.e., allocation to reproduction is a function of size only; fig. \ref{fig:MRN}), although sloping reaction norms can be formulated and used in our framework (see appendix \ref{sec:MRN}). The intercept of this reaction norm was found numerically by maximising fitness ($R0$, see below) at the reference temperature for our simulations (15\degree C), and this intercept was assumed fixed as temperatures change.
 
-As growth is also fundamentally driven by resource availibility, we contrast the growth reponse to temperature at the baseline level (Table \ref{tab:parameters}), with a 30\% reduction and increase in available resources.
+The allocation was parametrised as 
+$$\phi(w^*) = 1/(1+\exp(-cw^*))$$,
+where $w^*$ is the intercept of the reaction norm, and $c$ determines how rapidly energy allocation shifts from somatic growth to reproduction. 
+
+As growth is also fundamentally driven by resource availability, we contrast the growth response to temperature at the baseline level (Table \ref{tab:parameters}), with a 1/3 reduction and increase in available resources.
 
 \subsection{Fitness consequences}
 
-Fitness consequences for particular life-history strategies (trait combinations, see below) at different temperatures can be investigated if one considers the time-scales in the model to be short relative to evolutionary time-scales (i.e., if the model represents ecological time-scales). On these time-scales, we asume that adaptative responses are negligeable. We investigate over-all fitness with respect to temperature by calculating R0 for a given maturation-reaction norm and trait parameters - we thus do not consider evolutionary consequences of changes in fitness here. R0 was calculated as 
+Fitness consequences for particular life-history strategies (trait combinations, see below) at different temperatures can be investigated if one considers the time-scales in the model to be short relative to evolutionary time-scales (i.e., if the model represents ecological time-scales). On these time-scales, we assume that adaptive responses are negligible. We investigate over-all fitness with respect to temperature by calculating R0 for a given maturation-reaction norm and trait parameters - we thus do not consider evolutionary consequences of changes in fitness here. R0 was calculated as 
 
 $$R0 = \int_0^\infty \phi(z(t,w_t,w^*))P(w_t,T)S_{0 \rightarrow t} dt, \text{, where}$$
-$$S_{0 \rightarrow t} = \int_0^t \exp(-M(w_t))dt$$
+$$S_{0 \rightarrow t} = \int_0^t \exp(-M(w_t))\text{dt}$$
 
 \subsection{Trait based scenarios}
 
-To ensure a level of generality, we explored ecological impacts of optimised behaviour at different temperatures in a trait-based context. Specifically, we aimed to contrast species along a gradient of life-history that, at the one end, maximises production (energy acquisition; henceforth called the P-strategy) at the cost of increased metabolism and mortality, and at the opposing end minimises mortality and metabolic costs at the expense of production (henceforth M-strategy). This axis leads to an approximately constant ratio of production to mortality, and corresponds to a line of equal size in the life-history space proposed by \citeauthor{charnov_evolutionary_2013} (\citeyear{charnov_evolutionary_2013}). In other words, this axis contrasts species of similar size (here $L_{\infty}\sim 30$cm) with defensive/sluggish versus active life-histories.
+To ensure a level of generality, we explored ecological impacts of optimised behaviour at different temperatures in a trait-based context. Specifically, we aimed to contrast species along a gradient of life-history that, at the one end, maximises production (energy acquisition; henceforth called the production strategy, indicated by a supercript $p$) at the cost of increased metabolism and mortality, and at the opposing end minimises mortality and metabolic costs at the expense of production (henceforth safe strategy, indicated by a supercript $s$). This axis leads to an approximately constant ratio of production to mortality, and corresponds to a line of equal size in the life-history space proposed by \citeauthor{charnov_evolutionary_2013} (\citeyear{charnov_evolutionary_2013}). In other words, this axis contrasts species of similar size (here $L_{\infty}\sim 30$cm) with defensive/sluggish versus active life-histories.
 
 To implement this axis, we used the result that species with a more
 active, production oriented life-history (e.g., predatory pelagic
@@ -137,43 +146,43 @@ larger heart will also contribute to higher standard metabolism in
 active species (\cite{priede_metabolic_1985}). In practice, we assumed
 that approximately 50\% of the standard metabolic cost is due to gut
 maintenance, such that a doubling of the maximum ingestion leads to a
-50\% increase in standard metabolic cost. We further assumed that such active species have a less effective refuge from predators and therefore have a higher constant mortality, but lower mortality related to activity (i.e., $M^{M-strat}(w) = (0.1+6\tau) w^{q-1}$ and $M^{M-strat}(w) = (1+\tau) w^{q-1}$). Exact parameter values for these trait scenarios are given in Table \ref{tab:parameters}. Together, these assumed trait differences lead to very different recological and bio-energetic responses of M- and P-strategists (Figure \ref{fig:scenarios}), with $\tau_{\text{opt}}$ found at lower activity levels for M-strategists, as high activity induces exceedingly high mortality and decreasing energy efficiency (i.e., available energy relative to feeding level) at high activity levels. A slower increase in available energy and M with $tau$ for P-strategists leads to a higher $\tau_{\text{opt}}$.
+50\% increase in standard metabolic cost. We further assumed that such active species have a less effective refuge from predators and therefore have a higher constant mortality, but lower mortality related to activity (i.e., $M^{s}(w) = (0.1+6\tau) w^{q-1}$ and $M^{p}(w) = (1+\tau) w^{q-1}$). Exact parameter values for these trait scenarios are given in Table \ref{tab:parameters}. Together, these assumed trait differences lead to very different ecological and bio-energetic responses of safe- and production strategists (fig. \ref{fig:scenarios}), with $\tau_{\text{opt}}$ found at lower activity levels for safe-strategists, as high activity induces exceedingly high mortality and decreasing energy efficiency (i.e., available energy relative to feeding level) at high activity levels. A slower increase in available energy and M with $\tau$ for production strategists leads to a higher $\tau_{\text{opt}}$.
 
-We further contrasted species with oxygen limitation at high temperatures (i.e., species with a uni-modal metabolic scope) with species that do not experience oxygen limitation at high temperatures (at least not up to a lethal temeprature, where death may be induced by sudden failure to deliver oxgyen to vital organs). In practice, this was achieved as described above by setting the maximum oxygen deliver close to the lethal temperature (Figure \ref{fig:O2_fig}).
+We further contrasted species with oxygen limitation at high temperatures (i.e., species with a uni-modal metabolic scope) with species that do not experience oxygen limitation at high temperatures (at least not up to a lethal temperature, where death may be induced by sudden failure to deliver oxygen to vital organs, or failure of bio-chemical pathways at high temperature \cite{salin_inadequate_2016,iftikar_mitochondria_2013}). In practice, this was achieved as described above by setting the maximum oxygen delivery close to the lethal temperature (fig. \ref{fig:O2_fig}). Note that, although we assume here that limitations over the temperature range are due to oxygen availibility, other limiting mechanisms, such as the respiratory control ratio (\cite{salin_inadequate_2016,iftikar_mitochondria_2013}) may determine upper limits to activity over some or all of a species temperature range. However the over-all mechanism would be the same to the one assumed here, with different untis (e.g., ATP instead of $O_2$).
 
 \begin{table}
-\caption{Parameters of the constrained activity model for two scenarios: M-strategy and P-strategy species. For parameters with dual values (i.e., x/y), the former reflects species with a domed maximum oxygen supply (MOS) with respect to temperature, whereas the latter corresponds to species with a continuously increasing MOS. Values in brackets for $\\gamma$ are alternative resource availibility scenarios.}
+\caption{Parameters of the constrained activity model for two scenarios: safe strategy and production strategy species. For parameters with dual values (i.e., x/y), the former reflects species with a domed maximum oxygen supply (MOS) with respect to temperature, whereas the latter corresponds to species with a continuously increasing MOS. Values in brackets for $\gamma$ are alternative resource availability scenarios.}
 \label{tab:parameters}
 \begin{tabular}{llcc}
  \multirow{2}{*}{Description} &  \multirow{2}{*}{Symbol (unit)} & \multicolumn{2}{r}{Value} \\
  \cmidrule{3-4}
- & & M-strategy  & P-strategy \\
+ & & safe strategy  & production strategy \\
 
 \hline
 \addlinespace
 \multicolumn{4}{c}{\textbf{Biomass Metabolism}} \\
-Activity coefficient & $\delta$ ($g^{n}$) & \multicolumn{2}{c}{4}    \\
 Specific dynamic action & $\beta$ & \multicolumn{2}{c}{0.15} \\
 Egestion and excretion & $\phi$ & \multicolumn{2}{c}{0.25}  \\
-Coeff. for std.~metabolism  & $k$ ($g^{1-n}\cdot y^{-1}$)  & 1 &  1.5 \\
+Coeff. for std.~metabolism  & $k$ (g$^{1-n}\cdot$y$^{-1}$)  & 1 &  1.5 \\
+Coeff. for act.~metabolism  & $k$ (g$ \cdot$y$^{-1}$)  & 4 &  2 \\
 Exponent for std.~metabolism & $n$ & 0.88 & 0.75  \\
 
 \addlinespace
 \multicolumn{4}{c}{\textbf{Feeding ecology}}\\
-Coeff. for Encountered food & $\gamma\Theta$ ($g^{1-p} \cdot y^{-1}$)& \multicolumn{2}{c}{60 (40/80)} \\
+Coeff. for Encountered food & $\gamma\Theta$ (g$^{1-p} \cdot$y$^{-1}$)& \multicolumn{2}{c}{60 (40/80)} \\
 Exponent for clearance rate $\gamma$ & $p$ & \multicolumn{2}{c}{0.8}  \\
-Coeff. for Maximum consumption rate & $h$ ($g^{1-q}\cdot y^{-1}$) & 30 & 60  \\
+Coeff. for Maximum consumption rate & $h$ (g$^{1-q}\cdot$y$^{-1}$) & 30 & 60  \\
 Exponent for max.~consumption $h$ & $q$ & \multicolumn{2}{c}{0.8} \\
-Coeff. for constant mortality & $M$ ($g\cdot y^{-1}$) & 0.1  & 1  \\
-Coeff. for activity related mortality & $\rho$ ($y^{-1}$) & 6 & 1\\
+Coeff. for constant mortality & $M$ (g$\cdot$y$^{-1}$) & 0.1  & 1  \\
+Coeff. for activity related mortality & $\rho$(y$^{-1}$) & 6 & 1\\
 Exponent for mortality & $\nu$ & \multicolumn{2}{c}{0.2} \\
 
 \addlinespace
 \multicolumn{4}{c}{\textbf{Temperature}}\\
-Reference temperature (°C) & $T_{ref}$ & \multicolumn{2}{c}{15} \\
+Reference temperature  & $T_{\text{ref}}$ (°C)& \multicolumn{2}{c}{15} \\
 Activation energy & $E_a$ & \multicolumn{2}{c}{0.52} \\
-Temperature at maximum MOS & $T_{max}$ & \multicolumn{2}{c}{20/25}\\
-Temperature range & $T^-_{lethal}$--$T^+_{lethal}$ & \multicolumn{2}{c}{5--26} \\
+Temperature at maximum MOS & $T_{\text{max}}$ & \multicolumn{2}{c}{20/25}\\
+Temperature range & $T^-_{\text{lethal}}$--$T^+_{\text{lethal}}$ & \multicolumn{2}{c}{5--26} \\
 
 \addlinespace
 \multicolumn{4}{c}{\textbf{Reaction norm}}\\
@@ -183,10 +192,10 @@ Reaction & $c$ & \multicolumn{2}{c}{0.5} \\
 
 \addlinespace
 \multicolumn{4}{c}{\textbf{Oxygen budget}} \\
-Critical $O_2$ & $P_{crit}$ ($mg\cdot L^{-1}$) & \multicolumn{2}{c}{2}\\
-Dissolved $O_2$ at $0.5\times f_{max}(O_2)$  & $P50$ ($mg\cdot L^{-1}$) & \multicolumn{2}{c}{4} \\
+Critical $O_2$ & $P_{\text{crit}}$ (mg$\cdot$L$^{-1}$) & \multicolumn{2}{c}{2}\\
+Dissolved $O_2$ at $0.5\times f_{\text{max}}(O_2)$  & $P50$ (mg$\cdot$L$^{-1}$) & \multicolumn{2}{c}{4} \\
 Doming for $O_2$ supply & $\eta$ & \multicolumn{2}{c}{3/0.1}\\
-Level of $O_2$ supply  & $\zeta$ ($g\cdot y^{-1}$) &  0.5 & 1\\
+Level of $O_2$ supply  & $\zeta$ (g$\cdot$y$^{-1}$) &  0.5 & 1\\
 
 
 \hline
@@ -203,6 +212,7 @@ require(tidyr)
 require(rlang)
 require(cowplot)
 
+
 source('model.R')
 cols <- c('#4477AA','#44AA77','#AA7744','#AA4488','#DDDD77')
 
@@ -210,14 +220,13 @@ cols <- c('#4477AA','#44AA77','#AA7744','#AA4488','#DDDD77')
 
 <<Scenarios>>=
 
-
-int_m <- 100
-int_t <- 100
+int_m <- 500
+int_t <- 500
 int_temp <- 30
 
 # Sluggish small
 ss <- list(c=0.3,
-           beta=0.15,
+           beta=0.1,
            delta=4,
            Ea=0.52, 
            gamma=60, 
@@ -237,7 +246,7 @@ ss <- list(c=0.3,
            temp=seq(5,26,l=int_temp),
            Topt=20, 
            temp_ref=15,
-           slope=-0.5,
+           slope=0,
            tmax=20,
            tr=0.5,
            M=0.1,
@@ -258,6 +267,7 @@ fs$v <- 1
 fs$M <- 1
 fs$nu<- 0.8-1
 fs$n <- 0.75
+fs$delta <- 4
 fs$o <- 1
 fs$p <- 0.8
 fs$q <- 0.8
@@ -271,11 +281,24 @@ sl <- ss
 sl$shape <- 0.1
 sl$Topt <- 25
 
+ffl <- fs
+ffl$gamma <- 20
+
+fsl <- ss
+fsl$gamma <- 20
+
+ffh <- fs
+ffl$gamma <- 80
+
+fsh <- ss
+fsl$gamma <- 80
+
 scs <- list(ss,fs,sl,fl)
+fscs <- list(fsh,ffh,fsl,ffl)
 
 baseline <- bind_cols(data_frame(Scenario = as.factor(rep(c('M strategy','P strategy','M strategy','P strategy'),each=int_temp)),
-                                  O2lim = as.factor(rep(c('Domed','Rising'),each=int_temp*2))),
-                       bind_rows(lapply(scs, get_model_out,seq(0.05,1,l=int_temp))))
+                                  Food = as.factor(rep(c('High','Low'),each=int_temp*2))),
+                       bind_rows(lapply(fscs, get_model_out,seq(0.05,1,l=int_temp))))
 
 
 scenarios <- bind_cols(data_frame(Scenario = as.factor(rep(c('M strategy','P strategy','M strategy','P strategy'),each=int_temp)),
@@ -289,33 +312,42 @@ scz <- rep(unique(scenarios$O2lim),each=2)
 
 \section{Results}
 
-Increasing metabolic demands with temperature lead species to adjust activity levels in order to optimise energy gains relative to mortality risk (Figure \ref{fig:activity}). This adjustment is especially pronounced in M-strategy species, for which the over-all activity level is markedly lower and which show a consistent increase in activity over-all sizes for the simulated life-history (Figure \ref{fig:size-act}). A similar increase in activity is observed for small P-strategy individuals (e.g., post-larval) for which even initial activity levels are very high (Figure \ref{fig:size-act}). For these individuals, the increasing activity and metabolic demands lead to an active metabolic rate that is close to their MMR. For all other sizes across the two trait scenarios, oxygen is only limiting to activity at the extremes of the simulated temperature range (Figure \ref{fig:activity}), and only for species with a dome-shaped MOS with respect to temperature. For species with a rising MOS with temperature, oxygen is not limiting (Figure \ref{fig:activity-rising}). However, larger P-strategy individuals are predicted to show a dome-shaped adjustment in activity levels at intermediate sizes, and a decreasing activity level in response to temperature at large sizes, despite available aerobic scope for activity.
+Increasing metabolic demands with temperature lead species to adjust activity levels in order to optimise energy gains relative to mortality risk (fig. \ref{fig:activity}). This adjustment is especially pronounced in safe strategy species, for which the over-all activity level is markedly lower and which show a consistent increase in activity over-all sizes for the simulated life-history (fig. \ref{fig:size-act}). A similar increase in activity is observed for small production strategy individuals (e.g., post-larval) for which even initial activity levels are very high (fig. \ref{fig:size-act}). For these individuals, the increasing activity and metabolic demands lead to an active metabolic rate that is close to their MMR. For all other sizes across the two trait scenarios, oxygen is only limiting to activity at the extremes of the simulated temperature range (fig. \ref{fig:activity}), and only for species with a dome-shaped MOS with respect to temperature. For species with a rising MOS with temperature, oxygen is not limiting (fig. \ref{fig:activity-rising}). However, larger production strategy individuals are predicted to show a slightly dome-shaped adjustment in activity levels at intermediate sizes, and a slightly decreasing activity level in response to temperature at large sizes, despite available aerobic scope for activity. This adjsutment is a function of metabolic activity costs assumed here - at smaller metabolic costs per activity, activity adjustment are strictly increasing (fig. \ref{fig:size-act_low}).
 
+<<scenarios,fig.cap='Available energy $P$ (Blue solid line), efficiency (green dashed line), and the ratio of $P$ to $M$ (orange dotted line) are impacted as a function of changing activity at constant temperature ($T=15$\\degree C) for a growing fish ($L_{\\infty}\\sim 30$cm) at 10cm length (10g). Responses are shown for safe- (a and b, respectively) and production strategy (c and d), for species in high (left column) and low (right column) food environments. All rates are plotted relative to their maximum for each trait scenario (i.e., by row), the optimal activity level $\\tau^*$ is indicated by the dotted vertical line.',fig.align='center',fig.height=5,fig.width=6>>=
 
-<<scenarios,fig.cap='Feeding level (blue solid line), available energy $P$ (green long-dashed), efficiency (orange dotted), mortality (red dotted-dashed) and the ratio of $P$ to $M$ (yellow solid) are impacted as a function of changing activity at constant temperature ($T=15$\\degree C) for a growing fish ($L_{\\infty}\\sim 30$cm) at 10cm length (10g). Responses are shown for M- and P-strategy (a and b, respectively), for species with and without oxygen limitation (left and right columns, respectively). Energy and fitness are plotted relative to maximum over all temperatures.',fig.align='center',fig.height=3,fig.width=6>>=
+lab <- as_labeller(c(`M strategy High`  ='a',
+                   `P strategy High` = 'c',
+                   `M strategy Low`  ='b',
+                   `P strategy Low` = 'd'))
 
-lab <- as_labeller(c(`M strategy Domed`  ='a',
-                   `P strategy Domed` = 'b'))
-
-sc_bl <- baseline %>% filter(O2lim=='Domed') %>%
+sc_bl <- baseline  %>%
   #filter(!grepl('large',Scenario)) %>% 
-  group_by(Scenario,O2lim) %>%
+  group_by(Scenario) %>%
   mutate(Consumption=sc(Consumption),
          Efficiency=sc(Efficiency),
-         Feeding=`Feeding level`,
-         `Available Energy` = sc(`C for growth`),
-         `Energy` = ifelse(`Available Energy`<0,0,`Available Energy`),
-         Fitness = sc(Energy/M)) %>% 
-  tidyr::gather(Rate,value,Feeding,Energy,Efficiency,M,Fitness) %>%
-  mutate(Rate = factor(Rate,levels = c('Feeding','Energy','Efficiency','M','Fitness')),
-         Dispatch = paste(Scenario,O2lim))
+         Feeding=sc(`Feeding level`),
+         `Available Energy` = ifelse(`C for growth`<0,0,`C for growth`),
+         `Relative M` = sc(M),
+         `Energy` = sc(`Available Energy`),
+         Fitness = sc(`Available Energy`/M)) %>% 
+  tidyr::gather(Rate,value,Energy,Efficiency,`Relative M`,Fitness) %>%
+  mutate(Rate = factor(Rate,levels = c('Energy','Efficiency','Fitness')),
+         Dispatch = paste(Scenario,Food))
 
+tstar <- baseline  %>%
+  group_by(Scenario, Food) %>%
+  mutate(`Available Energy` = ifelse(`C for growth`<0,0,`C for growth`),
+         Fitness = sc(`Available Energy`/M)) %>% 
+  summarise(tstar = tau[which.max(Fitness)]) %>%
+  mutate(Dispatch = paste(Scenario,Food))
 
-ggplot(sc_bl) + 
-  geom_line(aes(x=tau, y=value, linetype=Rate,col=Rate,group=Rate)) +
+ggplot() + 
+  geom_line(aes(x=tau, y=value, linetype=Rate,col=Rate,group=Rate),data=sc_bl) +
+  geom_vline(aes(xintercept=tstar),linetype=3,data=tstar) +
   theme_cowplot()+
   facet_wrap(~Dispatch,labeller = lab,ncol=2)+
-  theme(strip.text = element_text(hjust = 0),
+  theme(strip.text = element_text(hjust = 0.05),
         strip.background = element_blank(),
         panel.background = element_blank(),
         plot.background = element_blank())+
@@ -374,13 +406,13 @@ ggso <- sco %>% filter(O2lim=='Domed') %>%
 cowplot::plot_grid(ggsc,ggso,ncol=2)
 
 @
-\caption{Optimum (red long-dashed), maximum (green short-dashed) and realised (blue solid lines) activity levels (left column [a,c]) at increasing temperatures for a 10g fish with a dome-shaped MOS with increasing temperature (maximum at 20\degree C), with corresponding oxygen demand (right column [b,d]); maximum oxygen supply (MOS; green short-dashed), standard metabolism (red long-dashed) and realised (active; blue solid lines) metabolic demand, as well as metabolic scope (orange long-dashed) at activity level $\tau$, for M-strategy (slow life history; aandb) and P-strategy (fast life-history; candd).}
+\caption{Optimum (red long-dashed), maximum (green short-dashed) and realised (blue solid lines) activity levels (left column [a,c]) at increasing temperatures for a 10g fish with a dome-shaped MOS with increasing temperature (maximum at 20\degree C), with corresponding oxygen demand (right column [b,d]); maximum oxygen supply (MOS; green short-dashed), standard metabolism (red long-dashed) and realised (active; blue solid lines) metabolic demand, as well as metabolic scope (orange long-dashed) at activity level $\tau$, for safe strategy (slow life history; a \& b) and production strategy (fast life-history; c \& d).}
 \label{fig:activity}
 \end{figure}
 
 
 
-<<size-act,fig.cap='Optimum (red long-dashed), maximum (green short-dashed) and realised (blue solid lines) activity levels (left column) at increasing temperatures through ontogeny for a for fish with a $L_{\\infty}\\sim 30$cm at 1.25g (5cm; a--b); 10g (10cm; c--d) and 80g (20cm; e--f), for M-strategy (slow life history; left column [a,c,e]) and P-strategy (fast life-history; right column [b,d,f]) species with a dome-shaped maximum metabolic rate with respect to temperature.',fig.align='center'>>=
+<<size-act,fig.cap='Optimum (red long-dashed), maximum (green short-dashed) and realised (blue solid lines) activity levels (left column) at increasing temperatures through ontogeny for a for fish with a $L_{\\infty}\\sim 30$cm at 1.25g (5cm; a--b); 10g (10cm; c--d) and 80g (20cm; e--f), for safe strategy (slow life history; left column [a,c,e]) and production strategy (fast life-history; right column [b,d,f]) species with a dome-shaped maximum metabolic rate with respect to temperature.',fig.align='center'>>=
 
 ssm <- ss
 ssm$m <- 1.25
@@ -432,11 +464,11 @@ ggplot(sc_acts) +
 
 @
 
-Temeprature and metabolic demand-driven adjustments to the activity level lead to substantial changes in performance related metrics in both trait scenarios (Figure \ref{fig:feeding}). For M-strategy species, the increases in activity levels lead to relatively stable feeding levels, but a substantial increase in mortality coupled with a slow increase in available energy leads to an over-all decline in the ratio of $P$ to $M$. Available energy shows a dome-shaped response to temperature in M-strategists, and is maximised at relatively high temperatures. However, it is limited by oxygen availability only at high temperatures in species with a dome-shaped MOS. Growth efficiency ($P/f$) follows a near identical trend due to the relatively flat response in $f$.
+Temperature and metabolic demand-driven adjustments to the activity level lead to substantial changes in performance related metrics in both trait scenarios (fig. \ref{fig:feeding}). For safe strategy species, the increases in activity levels lead to relatively stable feeding levels, but a substantial increase in mortality coupled with a slow increase in available energy leads to an over-all decline in the ratio of $P$ to $M$. Available energy shows a dome-shaped response to temperature in safe strategists, and is maximised at relatively high temperatures. However, it is limited by oxygen availability only at high temperatures in species with a dome-shaped MOS. Growth efficiency  follows a near identical trend due to the relatively flat response in the feeding level $f$.
 
-For P-strategists, the relatively modest response in activity levels at all but the smallest sizes leads to a decline in feeding levels, which causes a largely dome-shaped response of available energy and growth efficiency to warmer temperatures (Figure \ref{fig:feeding}). Again, growth efficiency peaks at relatively high temperatures, but in this scenario available energy $P$ peaks at much lower temperatures. Given the relatively flat mortality levels, the ratio of $P/M$ largely follows the trend in $P$. 
+For production strategists, the relatively modest response in activity levels at all but the smallest sizes leads to a decline in feeding levels, which causes a largely dome-shaped response of available energy and growth efficiency to warmer temperatures (fig. \ref{fig:feeding}). Again, growth efficiency peaks at relatively high temperatures, but in this scenario available energy $P$ peaks at much lower temperatures. Given the relatively flat mortality levels, the ratio of $P/M$ largely follows the trend in $P$. 
 
-<<feeding,fig.cap='Feeding level (blue solid line), available energy $P$ (green long-dashed), efficiency (orange dotted), mortality (red dotted-dashed) and the ratio of $P$ to $M$ (yellow solid) are impacted by changing activity and the metabolic response to temperature for a growing fish ($L_{\\infty}\\sim 30$cm) at 10cm length (10g). Responses are shown for M- and P-strategy (a and b, respectively), for species with and without oxygen limitation (left and right columns, respectively). Energy and fitness are plotted relative to maximum over all temperatures.',fig.align='center',fig.height=3,fig.width=6>>=
+<<feeding,fig.cap='Feeding level (blue solid line), available energy $P$ (green long-dashed), efficiency (orange dotted), mortality (red dotted-dashed) and the ratio of $P$ to $M$ (yellow solid) are impacted by changing activity and the metabolic response to temperature for a growing fish ($L_{\\infty}\\sim 30$cm) at 10cm length (10g). Responses are shown for safe  and production strategy (a and b, respectively), for species with and without oxygen limitation (left and right columns, respectively). Energy, mortality and fitness are plotted relative to their maximum over all temperatures.',fig.align='center',fig.height=5,fig.width=6>>=
 
 lab <- as_labeller(c(`M strategy Domed`  ='a',
                    `P strategy Domed` = 'b'))
@@ -447,30 +479,33 @@ sc_feed <- scenarios %>% filter(O2lim=='Domed') %>%
   mutate(Consumption=sc(Consumption),
          Efficiency=sc(Efficiency),
          Feeding=`Feeding level`,
-         `Available Energy` = sc(`C for growth`),
-         `Energy` = ifelse(`Available Energy`<0,0,`Available Energy`),
-         Fitness = sc(Energy/M)) %>% 
+         M=sc(M),
+         `Available Energy` = ifelse(`C for growth`<0,0,`C for growth`),
+         `Relative M` = sc(M),
+         `Energy` = sc(`Available Energy`),
+         Fitness = sc(`Available Energy`/M)) %>% 
   tidyr::gather(Rate,value,Feeding,Energy,Efficiency,M,Fitness) %>%
   mutate(Rate = factor(Rate,levels = c('Feeding','Energy','Efficiency','M','Fitness')),
          Dispatch = paste(Scenario,O2lim))
 
-
 ggplot(sc_feed) + 
   geom_line(aes(x=Temperature, y=value, linetype=Rate,col=Rate,group=Rate)) +
   theme_cowplot()+
-  facet_wrap(~Dispatch,labeller = lab,ncol=2)+
-  theme(strip.text = element_text(hjust = 0),
+  facet_wrap(~Dispatch,labeller = lab,ncol=1)+
+  theme(strip.text = element_text(hjust = 0.05),
         strip.background = element_blank(),
         panel.background = element_blank(),
         plot.background = element_blank())+
-  scale_linetype_manual(values=c(1:4,1),guide='none')+
-  scale_color_manual(values = cols,guide='none')+
+  scale_linetype_manual(values=c(1:4,1))+
+  scale_color_manual(values = cols)+
   labs(x = expression("Mean temperature " ( degree*C)),
        y='Relative rate') 
 
 @
 
-Simulated growth curves illustrate the ontogenetic consequences of increasing temperatures (Figure \ref{fig:norms}). For both trait scenarios, fastest growth occurred at temperatures close to the lethal temperature, with declining growth for oxygen limited species at high temperatures \ref{fig:norms02}). This can be explained by ontogenetic shifts in temperature optima for growth (Figure \ref{fig:size-rates}): for small individuals, available energy and growth efficiency consistently peak at high temperatures, but this peak rapidly moves to lower temperatures as individuals for either trait-scenario grow. For large individuals, growth is optimised at relatively low temperatures, leading to larger asymptotic size at lower temperatures. Resource availibility storngly modulates this growth response to temeprature: low resource availibility leads to strong differences in asymptotic size, whereas high food availibility leads to high growth and larger asymptitic length at high temperatures.
+Simulated growth curves illustrate the ontogenetic consequences of increasing temperatures (fig. \ref{fig:norms}). For both trait scenarios, fastest growth occurred at relatively high temperatures, with declining growth for oxygen limited species at the highest temperatures (fig. \ref{fig:norms_O2}). This can be explained by ontogenetic shifts in temperature optima for growth (fig. \ref{fig:size-rates}): for small individuals, available energy and growth efficiency consistently peak at high temperatures, but this peak rapidly moves to lower temperatures as individuals in either trait-scenario grow. For large individuals, growth is optimised at relatively low temperatures, leading to larger asymptotic size at lower temperatures. 
+
+Resource availability strongly modulates this growth response to temperature: low resource availability leads to strong differences in asymptotic size, whereas high food availability leads to fast growth and larger asymptotic length at high temperatures (fig. \ref{fig:norms}). In addition, in very resource poor conditions, individuals may not grow to reproductive size in our scenario of a flat MRN. Over-all growth responses to temperature are not strongly affected by the assumed slope of the MRN (figs. \ref{fig:norms_neg},\ref{fig:norms_pos}), although a negatively sloped MRN does ensure maturation in low resource environments.
 
 <<calc-gouts>>=
 
@@ -493,8 +528,8 @@ scsg <- list(ssgl,ss,ssgh,fsgl,fs,fsgh)
 mstar_ss <- plot_data_growth_tO2(ss)$mstar
 mstar_fs <- plot_data_growth_tO2(fs)$mstar
 
-#mstar_ss <- 50
-#mstar_fs <- 50
+#mstar_ss <- 18
+#mstar_fs <- 18
 
 goutss <- parallel::mclapply(list(ssgl,ss,ssgh),
                              plot_data_growth_tO2,
@@ -511,7 +546,7 @@ gouts <- c(goutss,goutsf)
 @
 
 
-<<norms, fig.cap='On ecological time-scales, temperature affects size via evolved maturation-reaction norms (\\cite{marty_impact_2011}). Increasing temparture (purple to yellow growth curves) modifies growth, and maturation age changes according to the reaction norm (black dots at 50\\% allocation to reproduction), whereas asymptotic size is affected by changes in absolute energy available for growth. Growth curves are shown for M- (left column [a,c,e]) and P-strategists (right column [b,d,f]), at increasing food availibility from top (a/b) to bottom (e/f). Baseline resource availibility assumed in all other simulations is that shown in panels c and d.',fig.align='center',fig.width=6>>=
+<<norms, fig.cap='On ecological time-scales, increasing temperature (purple to yellow growth curves) modifies growth, and maturation age changes according to the reaction norm (black dots at 50\\% allocation to reproduction), whereas asymptotic size is affected by changes in absolute energy available for growth. Growth curves are shown for safe- (left column [a,c,e]) and production strategists (right column [b,d,f]), at increasing food availibility from top (a/b) to bottom (e/f). Baseline resource availibility assumed in all other simulations is that shown in panels c and d.',fig.align='center',fig.width=6>>=
 
 
 labla <- as_labeller(c(`M strategy Low` ='a',
@@ -565,7 +600,7 @@ ggplot() +
 
 
 
-Over-all fitness consequences mirror trends in the ratio of $P/M$ (Figure \ref{fig:fit}a), which can be seen as a short sighted approximation to over-all fitness optimisation (\cite{sainmont_effective_2015}). With increasing temperatures, fitness declines at our basic parameter settings, in opposition to growth and aerobic scope. At low temperatures, fitness is limited by aerobic scope, with the magnitude determined by the extend of doming in aerobic scope. Note that this limitation through the aerobic scope appears at higher temperatures than apparent from Figure \ref{fig:activity}, reflecting stronger limitation of oxygen on growth during early life (Figure \ref{fig:size-rates}). Fitness trends with temperature are strongly dependant on metabolic costs of activity (Figure \ref{fig:fit}b), and changing the activity cost to lower values attenuates the decline in fitness with temperature for M-strategy species, and moves the fitness optimum to higher temperatures for P-strategy species. Similarly, changes in the growth reponse to temperature lead to changes in fitness optima, with higher optimum temperatures, especially for P-strategists, and a slower decline of fitness with temperature.
+Over-all fitness consequences mirror trends in the ratio of $P/M$ (fig. \ref{fig:fit}a), which can be seen as a short sighted approximation to over-all fitness optimisation (\cite{sainmont_effective_2015}). With increasing temperatures, fitness declines at our basic parameter settings, in opposition to growth and aerobic scope. At low temperatures, fitness is limited by aerobic scope, with the magnitude determined by the extend of doming in aerobic scope. Note that this limitation through the aerobic scope appears at higher temperatures than apparent from fig. \ref{fig:activity}, reflecting stronger limitation of oxygen on growth during early life (fig. \ref{fig:size-rates}). Fitness trends with temperature are strongly dependent on metabolic costs of activity (fig. \ref{fig:fit}b), and changing the activity cost to lower values attenuates the decline in fitness with temperature for safe strategy species, and moves the fitness optimum to higher temperatures for production strategy species. Similarly, increased food availibility leads to changes in fitness optima, with higher optimum temperatures, especially for production strategists, and a slower decline of fitness with temperature.
 
 <<>>=
 ssm <- ss
@@ -585,14 +620,14 @@ scna <- rep(unique(scenarios$Scenario),each=3)
 scza <- rep(c('High','Medium','Low'),3)
 
 gouta <- parallel::mclapply(scsa,plot_data_growth_tO2,mc.cores = 3)
-goutr <- parallel::mclapply(scs,plot_data_growth_tO2,mc.cores = 2)
+goutr <- parallel::mclapply(scs,plot_data_growth_tO2,mc.cores = 3)
 @
 
-<<fit, fig.cap='Fitness (R0), relative to maximum fitness within oxygen limited (blue) and non-oxygen limited (teal) P- (dashed lines) and M-strategy (solid lines) species at the assumed maturation-raction norm and base parameters (panel a), and changes in relative fitness with respect to temperature resulting from different levels of activity cost (panel b; blue: $\\delta=4$; orange: $\\delta=2$ and green: $\\delta=1$).',fig.align='center',fig.height=6>>=
+<<fit, fig.cap='Fitness (R0), relative to maximum fitness within (a and b) oxygen limited (blue) and non-oxygen limited (teal) for safe- (a) and production strategy (b) species at the assumed maturation-raction norm and base parameters, and (c and d) changes in relative fitness with respect to temperature resulting from decreasing levels of activity cost symbolised by decreasing linewidth, and (e and f) changes in relative fitness with respect to temperature as a function of increasing food availability (increasing linewidth)',fig.align='center',fig.height=8>>=
 
 R0s <- bind_rows(lapply(1:length(goutr), function(x) {
-  y <- data.frame(gouts[[x]]['R0'])
-  y$Temperature <-gouts[[x]][['winfs']]$Temperature
+  y <- data.frame(goutr[[x]]['R0'])
+  y$Temperature <-goutr[[x]][['winfs']]$Temperature
   y$Scenario <- scn[x]
   y$O2lim <- scz[x]
   y$Dispatch <- paste(scn[x],scz[x])
@@ -601,19 +636,32 @@ R0s <- bind_rows(lapply(1:length(goutr), function(x) {
 R0s <- R0s %>% group_by(Dispatch) %>%
   mutate(R0 = R0/max(R0, na.rm=T))
 
- f1 <- ggplot(R0s) + 
-  geom_line(aes(x=Temperature, y=R0, linetype=Scenario,col=O2lim,group=Dispatch)) +
+sizes = c(0.5,1,1.5)
+
+f1.1 <- ggplot(R0s%>% filter(Scenario=='M strategy')) + 
+  geom_line(aes(x=Temperature, y=R0, col=O2lim)) +
   theme_cowplot()+
-  theme(
+  theme(axis.text.x = element_text(colour = 'white'),
         panel.background = element_blank(),
         plot.background = element_blank())+
-  scale_linetype_manual(values=c(1:4),guide='none')+
-  scale_color_manual(values = cols,guide='none')+
-  labs(x = expression("Mean temperature " ( degree*C)),
-       y=expression('R0/R0'[max])) 
+    scale_colour_manual(values=cols,guide='none')+
+  labs(x = ' ',
+       y='Relative fitness') 
+ 
+ 
+ f1.2 <- ggplot(R0s%>% filter(Scenario=='P strategy')) + 
+  geom_line(aes(x=Temperature, y=R0, col=O2lim)) +
+  theme_cowplot()+
+  theme(axis.text = element_text(colour = 'white'),
+        panel.background = element_blank(),
+        plot.background = element_blank())+
+  scale_colour_manual(values=cols,guide='none')+
+  labs(x = ' ',
+       y=' ') 
 
 
-R0s <- bind_rows(lapply(1:length(gouta), function(x) {
+
+R0ss <- bind_rows(lapply(1:length(gouta), function(x) {
   y <- data.frame(gouta[[x]]['R0'])
   y$Temperature <-gouta[[x]][['winfs']]$Temperature
   y$Scenario <- scna[x]
@@ -621,22 +669,33 @@ R0s <- bind_rows(lapply(1:length(gouta), function(x) {
   y$Dispatch <- paste(scna[x],scza[x])
   y}))
 
-R0s <- R0s %>% group_by(Dispatch) %>%
-  mutate(R0 = R0/max(R0, na.rm=T))
+R0ss <- R0ss %>% group_by(Dispatch) %>%
+  mutate(R0 = R0/max(R0, na.rm=T),
+         ActivityCost = factor(ActivityCost,levels=c('Low','Medium','High')))
 
-f2 <- ggplot(R0s) + 
-  geom_line(aes(x=Temperature, y=R0, linetype=Scenario,col=ActivityCost,group=Dispatch)) +
+f2.1 <- ggplot(R0ss%>% filter(Scenario=='M strategy')) + 
+  geom_line(aes(x=Temperature, y=R0,group=ActivityCost,size=as.numeric(ActivityCost)/3)) +
   theme_cowplot()+
-  theme(
+  theme(axis.text.x = element_text(colour = 'white'),
         panel.background = element_blank(),
         plot.background = element_blank())+
-  scale_linetype_manual(values=c(1:4),guide='none')+
-  scale_color_manual(values = cols,guide='none')+
-  labs(x = expression("Mean temperature " ( degree*C)),
-       y=expression('R0/R0'[max]))
+  scale_size(guide='none',range = c(0.8,1.2))+
+  labs(x = ' ',
+       y='Relative fitness')
 
 
-R0s <- bind_rows(lapply(1:length(gouts), function(x) {
+f2.2 <- ggplot(R0ss%>% filter(Scenario=='P strategy')) + 
+  geom_line(aes(x=Temperature, y=R0,group=ActivityCost,size=as.numeric(ActivityCost)/3)) +
+  theme_cowplot()+
+  theme(axis.text = element_text(colour = 'white'),
+        panel.background = element_blank(),
+        plot.background = element_blank())+
+  scale_size(guide='none',range = c(0.8,1.2))+
+  labs(x =' ',
+       y=' ')
+
+
+R0sss <- bind_rows(lapply(1:length(gouts), function(x) {
   y <- data.frame(gouts[[x]]['R0'])
    y$Temperature <-gouts[[x]][['winfs']]$Temperature
   y$Scenario <- rep(c('M strategy','P strategy'),each=3)[x]
@@ -645,38 +704,48 @@ R0s <- bind_rows(lapply(1:length(gouts), function(x) {
   y})) 
 
 
-R0s <- R0s %>% group_by(Dispatch) %>%
-  mutate(R0 = R0/max(R0, na.rm=T))
+R0sss <- R0sss %>% group_by(Dispatch) %>%
+  mutate(R0 = R0/max(R0, na.rm=T),
+         Food = factor(Food,levels=c('High','Medium','Low')))
 
-f3 <- ggplot(R0s) + 
-  geom_line(aes(x=Temperature, y=R0, linetype=Scenario,col=Food,group=Dispatch)) +
+f3.1 <- ggplot(R0sss %>% filter(Scenario=='M strategy')) + 
+  geom_line(aes(x=Temperature, y=R0,group=Food,size=as.numeric(Food)/3)) +
   theme_cowplot()+
   theme(
         panel.background = element_blank(),
         plot.background = element_blank())+
-  scale_linetype_manual(values=c(1:4),guide='none')+
-  scale_color_manual(values = cols,guide='none')+
+  scale_size(guide='none',range = c(0.8,1.2))+
   labs(x = expression("Mean temperature " ( degree*C)),
-       y=expression('R0/R0'[max]))
+       y='Relative fitness')
 
-cowplot::plot_grid(f1,f2,f3,ncol=1,labels = 'auto')
+f3.2 <- ggplot(R0sss %>% filter(Scenario=='P strategy')) + 
+  geom_line(aes(x=Temperature, y=R0,group=Food,size=as.numeric(Food)/3)) +
+  theme_cowplot()+
+  theme(axis.text.y = element_text(colour = 'white'),
+        panel.background = element_blank(),
+        plot.background = element_blank())+
+  scale_size(guide='none',range = c(0.8,1.2))+
+  labs(x = expression("Mean temperature " ( degree*C)),
+       y=' ')
+
+cowplot::plot_grid(f1.1,f1.2,f2.1,f2.2,f3.1,f3.2,ncol=2,labels = 'auto')
 
 @
 
 
 \section{Discussion}
 
-In this study, we attempt to provide a general mechanistic basis for exploring thermal sensitivities of ectotherm organisms. Much of the recent debate about the validity of projected climate change impact on ectotherms, and fish in particular, has resolved about the validity of particular concepts, such as the OCLTT and projections based on the gill-oxygen limitation theory (\cite{pauly_sound_2017,lefevre_modelling_2017}). We attempted to go beyond this debate by developing a model that allows for general insights about the temperature response in ectotherms, while being specific enough to mechanistically articulate aspects of physiology and ecology that are fundamental to organismal response to temperature. The general model and its parameter values are also easily adjusted to reflect particular organisms or theories. 
+In this study, we attempt to provide a general mechanistic basis for exploring thermal sensitivities of ectotherm organisms. Much of the recent debate about the validity of projected climate change impact on ectotherms, and fish in particular, has resolved about the validity of particular concepts, such as the OCLTT and projections based on the gill-oxygen limitation theory (\cite{pauly_sound_2017,lefevre_modelling_2017}). We attempted to go beyond this debate by developing a model that allows for general insights about the temperature response in ectotherms, while being specific enough to mechanistically articulate aspects of physiology and ecology that are fundamental to organism response to temperature. The general model and its parameter values are also easily adjusted to reflect particular organisms or theories. 
 
 It has been argued that the OCLTT as a concept provides a basis to explain observed responses to climate change on the basis of oxygen limitation via the aerobic scope (\cite{portner_physiology_2008,portner_oxygen-and_2010}), and simple oxygen budgets have been used to predict metabolic constraints on organismal activity due to warming ocean temperatures (\cite{deutsch_climate_2015}). As a conceptual framework, however, the OCLTT is subject not only to semantic dispute but also criticism of its core concept of oxygen limitation (\cite{jutfelt_oxygen-and_2018,lefevre_are_2016}).
 
-Our quantitative thermal impact model generalises existing eco-physiological models for particular species and stocks (\cite{hufnagl_physiological_2011, holt_climate_2014,holt_climate_2015}), and allows to develop a more nuanced understanding of interactions between temperature, oxygen limitation and ecology for species with varying traits. In line with the conceptual framework of Fry's aerobic scope and the OCLTT, our model suggests that oxygen limitation can be a potentially important ecological driver, especially at extreme temperatures for species with declining MOSs in such temperature regimes. At the onset of this limitation, ecological parameters change drastically, and growth, mortality are strongly impacted. This limitation closely mimics limitations seen in wild fish (\cite{myrick_temperature_2000}), and is in line with observations that fish often seek specific water temperatures to optimise metabolic function (\cite{armstrong_diel_2013,claireaux_physiology_1995}). Fitness, however, appears to be limited through the metabolic scope primarily via limitations at temperature extremes and impact on particular life-history stages. For instance, oxygen limitation is a more severe constraint for small individuals (Figure \ref{fig:size-rates}), and thereby can limit growth performance early in life, impacting over-all fitness. Also, changes in environmental oxygen supply, if beyond an oganisms ability to compensate via passive or active compensation mechanisms, will induce an over-all lower aerobic scope and lead to an earlier onset of oxygen limitation, but such scenarios do not change the qualitative predictions from our model.
+Our quantitative thermal impact model generalises existing eco-physiological models for particular species and stocks (\cite{hufnagl_physiological_2011, holt_climate_2014,holt_climate_2015}), and allows to develop a more nuanced understanding of interactions between temperature, oxygen limitation and ecology for species with varying traits. In line with the conceptual framework of Fry's aerobic scope and the OCLTT, our model suggests that oxygen limitation can be a potentially important ecological driver, especially at extreme temperatures for species with declining MOSs in such temperature regimes. At the onset of this limitation, ecological parameters change drastically, and growth, mortality are strongly impacted. This limitation closely mimics limitations seen in wild fish (\cite{myrick_temperature_2000}), and is in line with observations that fish often seek specific water temperatures to optimise metabolic function (\cite[e.g., ][]{armstrong_diel_2013,claireaux_physiology_1995}). Fitness, however, appears to be limited through the metabolic scope primarily via limitations at temperature extremes and impact on particular life-history stages. For instance, oxygen limitation is a more severe constraint for small individuals (fig. \ref{fig:size-rates}), and thereby can limit growth performance early in life, impacting over-all fitness. Furthermore, changes in environmental oxygen supply, if beyond an organisms ability to compensate via passive or active compensation mechanisms, will induce an over-all lower aerobic scope and lead to an earlier onset of oxygen limitation, but such scenarios do not change the qualitative predictions from our model.
 
-Variation in performance metrics away from temperature extremes, even if potentially correlated with aerobic scope (e.g., growth efficiency), are primarily affected by the interaction of temperature driven metabolic demands with optimal feeding behaviour. Predictions from our model, in line with metabolic experiments and other physiological predictions (\cite[e.g., ][]{holt_climate_2014}), suggest that routine activity, including normal swimming behaviour, feeding, and digestion usually lead to routine metabolic rates that are well below the MOS, even in fish with high metabolism (\cite{lucas_utilization_1992,priede_metabolic_1985}). Strenuous swimming activity, for example, usually only makes up a small proportion of the standard energy budget in fish (\cite{priede_natural_1977,priede_metabolic_1985}). Furthermore, as a limit for long-term performance, the MOS does not usually impose a limitation on short term energy demands, as fish can incur oxygen debt during swimming bursts during which the MOS is exceeded (\cite{brett_metabolic_1972,priede_metabolic_1985}). A logical conclusion is that the metabolic scope is only limiting to performance at extreme temperatures where MOS is low due to impaired oxygen delivery.
+Variation in performance metrics away from temperature extremes, even if potentially correlated with aerobic scope (e.g., growth efficiency), are primarily affected by the interaction of temperature driven metabolic demands with optimal feeding behaviour. Predictions from our model, in line with metabolic experiments and species specific physiological predictions (\cite[e.g., ][]{holt_climate_2014}), suggest that routine activity, including normal swimming behaviour, feeding, and digestion usually lead to routine metabolic rates that are well below the MOS, even in fish with high metabolism (\cite{lucas_utilization_1992,priede_metabolic_1985}). Strenuous swimming activity, for example, usually only makes up a small proportion of the standard energy budget in fish (\cite{priede_natural_1977,priede_metabolic_1985}). Furthermore, as a limit for long-term performance, the MOS does not usually impose a limitation on short term energy demands, as fish can incur oxygen debt during swimming bursts during which the MOS is exceeded (\cite{brett_metabolic_1972,priede_metabolic_1985}). A logical conclusion is that the metabolic scope is only limiting to performance at extreme temperatures where MOS is low due to impaired oxygen delivery.
 
-Importantly, fitness is predicted to decline with increasing temeprature in nearly all scenarios. This decline with temperature leads to a parsimonious explanation for the relationship between growth performance and fitness at varying temperatures. In many species, both the aerobic scope and growth efficiency peak at relatively high temperatures within the potential thermal range, yet species are generally found at temperatures lower than these optima (\cite{magnuson_thermal_1997, claireaux_influence_2000}). This apparent paradox can be explained by an opposing trend in fitness: fitness is predicted to decline with increasing temeprature in nearly all scenarios, and leads to a parsimonious explanation for the relationship between growth performance and fitness at varying temperatures. The decline in fitness is caused by a decline in available energy with temperature, and a constant or increasing mortality rate. Previous explanations of this niche-occupation paradox involved environmental factors that narrow the thermal niche or behaviour that optimises thermal performance across available habitats (\cite{claireaux_influence_2000, magnuson_thermal_1997}). However, in relatively homogeneous habitats such as marine ecosystems, for example, the simple negative relationship between growth and fitness across the temperature range provides a parsimonious explanation for this apparent paradox. 
+Importantly, fitness is predicted to decline with increasing temperature in nearly all our simulation scenarios. This decline with temperature leads to a parsimonious explanation for the relationship between growth performance and fitness at varying temperatures. In many species, both the aerobic scope and growth efficiency peak at relatively high temperatures within the potential thermal range, yet species are generally found at temperatures lower than these optima (\cite{magnuson_thermal_1997, claireaux_influence_2000}). This apparent paradox can be explained by an opposing trend in fitness: fitness is predicted to decline with increasing temperature in nearly all scenarios, and leads to a parsimonious explanation for the relationship between growth performance and fitness at varying temperatures. The decline in fitness is caused by a decline in available energy with temperature, and a constant or increasing mortality rate. Previous explanations of this niche-occupation paradox involved environmental factors that narrow the thermal niche or behaviour that optimises thermal performance across available habitats (\cite{claireaux_influence_2000, magnuson_thermal_1997}). However, in relatively homogeneous habitats such as marine ecosystems, for example, the simple negative relationship between growth and fitness across the temperature range provides a parsimonious explanation for this apparent paradox. 
 
-Resource availibility imposes a strong environmental constraint on organisms, with all aspects from optimal activity levels, mortality and available energy for growth ultimately influenced by available prey. Changes in prey availibility thus influence individual temperature response directly via available energy, and indirectly, through altered energetic requirements to procure food and changes in mortality due to changes in the optimal acitivity level. In low-food environments, changing energetic demands with temperature are not easily adjusted for, and any adjustment demands higher energic costs and mortality risk. This environment-driven change in costs of temperature adjustments leads to the strong modulation of the growth repsonse, as well as changing gradients in fitness with temperature in these environments. In particular, in low-food environments, asymptotic size is strongly reduced at high temperatures, whereas this is not necessarily the case in high-food environments. Increased growth and mortality changes in such environments then combine to produce a more strongly domed fitness curve than in environemts where food supply is not limiting. 
+Resource availability imposes a strong environmental constraint on organisms, with all aspects from optimal activity levels, mortality and available energy for growth ultimately influenced by available prey. Changes in prey availability thus influence individual temperature response directly via available energy, and indirectly, through altered energetic requirements to procure food and changes in mortality due to changes in the optimal activity level. In low-food environments, changing energetic demands with temperature are not easily adjusted for, and any adjustment demands higher energetic costs and mortality risk. This environment-driven change in costs of temperature adjustments leads to the strong modulation of the growth response, as well as changing gradients in fitness with temperature in these environments. In particular, in low-food environments, asymptotic size is strongly reduced at high temperatures, whereas this is not necessarily the case in high-food environments. Increased growth and mortality changes in such environments then combine to produce a more strongly domed fitness curve than in environments where food supply is not limiting.
 
 Our model prediction of declining fitness with temperature is
 particularly sensitive to activity costs, with low activity costs
@@ -690,14 +759,14 @@ reflect actual activity cost as swimming at MMR in fast predatory fish
 is far more efficient than swimming of sluggish fish, such as flatfish
 (\cite{priede_metabolic_1985}). Such an efficiency gain may occur as a result of more efficient form or physiology, or simply by reduced drag at large size (e.g., whale-sharks), and may be a key requirement to the viability of active pelagic predatory fish in tropical waters.
 
-Our prediction of constantly decreasing fitness with temperature, especially for relatively inactive species (M-strategists), contrasts with a previous species-specific eco-physiological model for cod that includes similar constraints to our model (\cite{holt_climate_2014,holt_climate_2015}), and which predicted relatively high fitness at high temperatures. Although this difference is potentially due to the different activity cost coefficients and foraging assumptions in our model, the product of $\delta*\tau$ is on the same order of magnitude in both models. Differences may also be due to key assumptions about time-scales in the model --- we assume an evolutionarily fixed maturation reaction norm that drives relative growth and reproductive output across temperatures. In other words, we explicitly model species responses on ecological time-scales. Models of Holt \& Joergensen have assumed that adaption of reproductive investment is instantaneous with changing temperatures --- species display an evolutionarily optimal maturation-reaction at any temperature (\cite{holt_climate_2014,holt_climate_2015}). This, however, would require foresight about future environmental conditions and related reproductive output. In practice this optimisation occurs through selection, and we suggest that our "short-sighted" optimisation of activity coupled with a evolutionarily stable maturation-reaction norm provides a more explicit separation of evolutionary and ecological time-scales. 
+Our prediction of constantly decreasing fitness with temperature, especially for relatively inactive species (safe strategists), contrasts with a previous species-specific eco-physiological model for cod that includes similar constraints to our model (\cite{holt_climate_2014,holt_climate_2015}), and which predicted relatively high fitness at high temperatures. Although this difference is potentially due to the different activity cost coefficients and foraging assumptions in our model, the product of $\delta*\tau$ is on the same order of magnitude in both models. Differences may also be due to key assumptions about time-scales in the model --- we assume an evolutionarily fixed maturation reaction norm that drives relative growth and reproductive output across temperatures. In other words, we explicitly model species responses on ecological time-scales. Models of Holt \& Joergensen have assumed that adaption of reproductive investment is instantaneous with changing temperatures --- species display an evolutionarily optimal maturation-reaction at any temperature (\cite{holt_climate_2014,holt_climate_2015}). This, however, would require foresight about future environmental conditions and related reproductive output. In practice this optimisation occurs through selection, and we suggest that our "short-sighted" optimisation of activity coupled with a evolutionarily stable maturation-reaction norm provides a more explicit separation of evolutionary and ecological time-scales. 
 
-That fish behave optimally to maximise food acquisition relative to mortality risk and energetic requirements is a standard hypothesis and assumption in ecological models (\cite{gilliam_habitat_1987,sainmont_effective_2015,priede_natural_1977, claireaux_influence_2000,hufnagl_physiological_2011}). Indeed, heightened mortality risk may be a key driver of fish spending very little time \emph{in vivo} at metabolic regimes that approach the MOS (\cite{priede_natural_1977}), an observation that is in line with predictions from our model, especially for the slow (M-strategy) life-history. Our scenarios were parametrised to allow for excess metabolic scope beyond maximum foraging activity (i.e., $\tau=1$). This assumption is in line with observations that the aerobic scope often exceeds energetic requirements from swimming alone, and is adapted to provide oxygen for digestion (SDA), the oxygen demand of which can be as high or higher than that of locomotion alone (\cite{priede_metabolic_1985}).
+That fish behave optimally to maximise food acquisition relative to mortality risk and energetic requirements is a standard hypothesis and assumption in ecological models (\cite{gilliam_habitat_1987,sainmont_effective_2015,priede_natural_1977, claireaux_influence_2000,hufnagl_physiological_2011}). Indeed, heightened mortality risk may be a key driver of fish spending very little time \emph{in vivo} at metabolic regimes that approach the MOS (\cite{priede_natural_1977}), an observation that is in line with predictions from our model, especially for the slow (safe strategy) life-history. Our scenarios were parametrised to allow for excess metabolic scope beyond maximum foraging activity (i.e., $\tau=1$). This assumption is in line with observations that the aerobic scope often exceeds energetic requirements from swimming alone, and is adapted to provide oxygen for digestion (SDA), the oxygen demand of which can be as high or higher than that of locomotion alone (\cite{priede_metabolic_1985}).
 
-Optimal activity is predicted to increase with temperature in all but one of our simulations. This prediction is confirmed by many observations in experimental and field conditions for both larval and adult fish (\cite{sswat_growth_2018,brown_feeding_1989,claireaux_physiology_1995, biro_mechanisms_2007}). This increase of activity often occurs despite increased mortality (\cite[e.g., ][]{sswat_growth_2018, biro_mechanisms_2007}), and serves the necessity to offset increased metabolic expenses. Only large individuals of the simulated P-strategy species will optimally decrease activity as a result of increased temperature. In this case, additional activity will lead to comparatively small gains from feeding relative to the cost of activity and SDA, owing to the non-linearity of the functional response.
+Optimal activity is predicted to increase with temperature in nearly all cases, but it is sensitive to the cost of activity - at higher cost relative to the potential pay-off, activity may even decline at high temeprature. Predictions of increased activity are supported by many observations in experimental and field conditions for both larval and adult fish (\cite{sswat_growth_2018,brown_feeding_1989,claireaux_physiology_1995, biro_mechanisms_2007}). This increase of activity often occurs despite increased mortality (\cite[e.g., ][]{sswat_growth_2018, biro_mechanisms_2007}), and serves the necessity to offset increased metabolic expenses. Only large individuals of the simulated production strategy species will optimally decrease activity as a result of increased temperature. In this case, additional activity will lead to comparatively small gains from feeding relative to the cost of activity and SDA, owing to the non-linearity of the functional response.
 
 
-Taken together, the physiological processes and optimisation described in our model provides a mechanistic underpinning for observations about changes of ecological rates, such as
+Taken together, the physiological processes and optimisation described in our model provide a mechanistic underpinning for observations about changes of ecological rates, such as
 increasing or dome-shaped consumption or attack-rates with temperature
 (\cite{biro_mechanisms_2007,englund_temperature_2011,rall_universal_2012}). Depending on the
 strength of oxygen limitation and the development of the optimal
@@ -706,7 +775,9 @@ and feeding rates may appear to be steadily increasing via increased
 optimal activity, or dome-shaped from oxygen limitation or dome-shaped
 optimal activity. Thus, rather than assuming \emph{ad hoc} changes in ecological rates in response to temperature that may not be transferable between species and traits, the change in these rates may be mechanistically described in terms of optimal ecological adjustments to physiological constraints.
 
-The importance of the interaction between ecology, bio-energetics and oxygen limitations in deriving realistic predictions about temperature impacts on ecological rates and fitness calls into question predictions for climate change impacts based on simple models of growth alone (\cite{cheung_shrinking_2013, pauly_sound_2017}). We suggest that the general trait-based approach presented here provides a parsimonious compromise between overly-simplistic approximations that may provide misleading predictions about future ecosystems (\cite{brander_overconfidence_2013, lefevre_models_2017}), and more complex eco-physiological models such as dynamic energy budget models (\cite[e.g., ][]{guiet_effects_2016}) and species specific eco-physiology models (\cite{hufnagl_physiological_2011, holt_climate_2014,holt_climate_2015}). In addition, our model provides a more explicit, physiology-based mechanistic model to derive general predictions about temperature effects on ectotherms than previous general frameworks such as the OCLTT. Predictions from the OCLTT are both contributing to patterns in fitness and ecological rates shown here, but are also only part of the picture, and we suggest that future improvements of predictive frameworks should center on model critisism and improvements, and leave behind semantic discussions about conceptual constructs that are difficult to explicitly link to data.
+Similarly, our model provides a mechanistic basis for the temperature-size rule in ectotherms (\cite{atkinson_temperature_1994}), without needing to evoke direct changes in ecological rates with temperature. This leads to heterogeneous predictions about growth trajectories over ranges of temperature, with various degrees of nesting (i.e., non-crossing) and crossing of growth trajectories possible depending on ecological conditions (e.g., food availability) and physiological traits (fig.s \ref{fig:norms}, \ref{fig:norms_O2}). Due to its reliance on physiological traits and their interaction with ecological variables, our model provides a multi-variate framework to predict heterogeneous temperature impacts on size and growth (\cite{angilletta_temperature_2004}).
+
+The importance of the interaction between ecology, bio-energetics and oxygen limitations in deriving realistic predictions about temperature impacts on ecological rates and fitness calls into question predictions for climate change impacts based on simple models of growth alone (\cite{cheung_shrinking_2013, pauly_sound_2017}). We suggest that the general trait-based approach presented here provides a parsimonious compromise between simplistic approximations that may provide misleading predictions about future ecosystems (\cite{brander_overconfidence_2013, lefevre_models_2017}), and more complex eco-physiological models such as dynamic energy budget models (\cite[e.g., ][]{guiet_effects_2016}) and species specific eco-physiology models (\cite{hufnagl_physiological_2011, holt_climate_2014,holt_climate_2015}). In addition, our model provides a more explicit, physiology-based mechanistic model to derive general predictions about temperature effects on ectotherms than previous general frameworks such as the OCLTT. Predictions from the OCLTT are both contributing to patterns in fitness and ecological rates shown here, but are also only part of the picture, and we suggest that future improvements of predictive frameworks should center on model critisism and improvements, and leave behind semantic discussions about conceptual constructs that are difficult to explicitly link to data.
 
 \end{spacing}
 
@@ -714,7 +785,7 @@ The importance of the interaction between ecology, bio-energetics and oxygen lim
 
 \appendix
 
-\section{Specification of temperature dependent oxygen availibility}
+\section{Specification of temperature dependent oxygen availability}
 
 The maximum oxygen consumption is the oxygen consumption during maximal activity level that can be sustained over some time, and is usually termed the maximum metabolic rate (MMR). Although the MMR is often used synonymously with both maximum oxygen supply and demand, in some species the maximal oxygen consumption ($D^{max}_{O_2}(T)$) is not reached at maximum activity levels, but rather during digestion (\cite{priede_metabolic_1985}). We use MMR and oxygen supply interchangeably, although maximum oxygen demand (i.e., at full activity) may be lower than the MMR. We assume that oxygen supply is temperature dependent and follows a flexible dome-shaped function (\cite{gnauck2013freshwater, lefrancois_influence_2003}):
 
@@ -723,15 +794,18 @@ f_{O_2}(T)&=\lambda(T)\left(1-e^{(O_2(T)-P_{crit})\log(0.5)/(P50-P_{crit})}\righ
 \lambda(T)&=\zeta\left(\frac{T_{\text{max}}-T}{T_{\text{max}}-T_{\text{opt}}}\right)^\eta \times \exp\left(-\eta\frac{T_{\text{max}}-T}{T_{\text{max}}-T_{\text{opt}}}\right),
 \end{align}
 
-Here $\lambda(T)$ specifies the temperature dependency of $O_2$ supply, whereas the second term describes the saturation dependence on ambient $O_2$ at temeprature $T$ ($O_2(T)$). At constant temperature $T$, oxygen supply is a function of ambient oxygen and is assumed to follow a saturating function (\cite[e.g.,][]{lefrancois_influence_2003}). We specify $P_{50}$ as the point where oxygen supply has dropped by 50\% relative to the saturation level $\lambda(T)$, and $P_{crit}$ is the ambient concentaration at which oxgygen supply ceases. Ambient oxygen levels are assumed to decline with temperature as $l*\exp(-0.01851*(T-5)$, with $l$ the ambient oxygen concentaration at 5\degree C. To specify $\lambda(T)$, we use $T_{\text{max}}$ the lethal temperature for the species, $T_{\text{opt}}$ the temperature at which oxygen supply is maximised; $\eta$ determines the width of the dome-shape, and $\zeta$ its height (Figure \ref{fig:O2_fig}). Note that we can emulate an oxygen supply (and hence maximum metabolic rate; MMR) that increases up to the lethal temperature by setting the temperature for maximum oxygen delivery close to the lethal temperature.
+Here $\lambda(T)$ specifies the temperature dependency of $O_2$ supply, whereas the second term describes the saturation dependence on ambient $O_2$ at temperature $T$ ($O_2(T)$). At constant temperature $T$, oxygen supply is a function of ambient oxygen and is assumed to follow a saturating function (\cite[e.g.,][]{lefrancois_influence_2003}). We specify $P_{50}$ as the point where oxygen supply has dropped by 50\% relative to the saturation level $\lambda(T)$, and $P_{crit}$ is the ambient concentration at which oxygen supply ceases. Ambient oxygen levels are assumed to decline with temperature as $l*\exp(-0.01851*(T-5)$, with $l$ the ambient oxygen concentration at 5\degree C. To specify $\lambda(T)$, we use $T_{\text{max}}$ the lethal temperature for the species, $T_{\text{opt}}$ the temperature at which oxygen supply is maximised; $\eta$ determines the width of the dome-shape, and $\zeta$ its height (fig. \ref{fig:O2_fig}). Note that we can emulate an oxygen supply (and hence maximum metabolic rate; MMR) that increases up to the lethal temperature by setting the temperature for maximum oxygen delivery close to the lethal temperature.
 
 \input{O2_fig}
 
 \section{Maturation-reaction norm}
+\label{sec:MRN}
+
+A flat maturation reaction norm (MRN) leads to a logistic allocation to reproduction that is only dependent on size and independent of age (fig. \ref{fig:MRN}).
 
 <<MRN, fig.cap='Proportion of energy allocated to reproduction, as a function of age (a) and size (b). With a flat maturation-reaction norm, maturation is independent of age, and only size-dependent.',fig.align='center',fig.height=6>>=
 
-lam <- gouts[[2]]$t_growth
+lam <- goutr[[3]]$t_growth
 
 mr1 <- ggplot(lam) + 
   geom_line(aes(x=t, y=allocs,col=Temperature,group=as.factor(Temperature))) +
@@ -773,6 +847,11 @@ mr2 <- ggplot(lam) +
 cowplot::plot_grid(mr1,mr2,ncol=1,labels = 'auto')
 
 @
+
+To express a MRN that varies as a function of age, we can reparametrise the MRN as:
+$$\phi(z) = 1/(1+\exp(-(c z))) \text{, where }$$
+$$z(t, w_t) = (w_t-w^*)\times \text{cos}(\text{atan}(b))-t\times \text{sin}(\text{atan}(b))$$  
+rotates the coordinate system about the slope $b$ of the reaction norm, $t$ is the age, $w$ is the mass, $w^*$ is the intercept of the reaction norm, and $c$ determines how rapidly energy allocation shifts from somatic growth to reproduction. 
 
 \section{Supplementary results}
 
@@ -825,11 +904,49 @@ ggso <- sco %>% filter(O2lim=='Rising') %>%
 cowplot::plot_grid(ggsc,ggso,ncol=2)
 
 @
-\caption{Optimum (red long-dashed), maximum (green short-dashed) and realised (blue solid lines) activity levels (left column [a,c]) at increasing temperatures for a 10g fish with a continously increasing MOS with increasing temperature, with corresponding oxygen demand (right column [b,d]); maximum oxygen supply (MOS; green short-dashed), standard metabolism (red long-dashed) and realised (active; blue solid lines) metabolic demand, as well as metabolic scope (orange long-dashed) at activity level $\tau$, for M-strategy (slow life history; aandb) and P-strategy (fast life-history; c, d).}
+\caption{Optimum (red long-dashed), maximum (green short-dashed) and realised (blue solid lines) activity levels (left column [a,c]) at increasing temperatures for a 10g fish with a continuously increasing MOS with increasing temperature, with corresponding oxygen demand (right column [b,d]); maximum oxygen supply (MOS; green short-dashed), standard metabolism (red long-dashed) and realised (active; blue solid lines) metabolic demand, as well as metabolic scope (orange long-dashed) at activity level $\tau$, for safe strategy (slow life history; aandb) and production strategy (fast life-history; c, d).}
 \label{fig:activity-rising}
 \end{figure}
 
-<<size-rates,fig.cap='Feeding level (blue solid line), available energy $P$ (green long-dashed), efficiency (orange dotted), mortality (red dotted-dashed) and the ratio of $P$ to $M$ (yellow solid) are impacted by changing activity and the metabolic response to temperature for growing fish ($L_{\\infty}\\sim 30$cm) of 1.25g (5cm; a--b); 10g (10cm; c--d) and 80g (20cm; e--f ), for M-strategy (slow life history; left column [a,c,e]) and P-strategy (fast life-history; right column [b,d,f]) species with a dome-shaped maximum metabolic rate with respect to temperature.',fig.align='center'>>=
+<<size-act_low,fig.cap='Optimum (red long-dashed), maximum (green short-dashed) and realised (blue solid lines) activity levels at increasing temperatures through ontogeny for a for fish nearly grown fish of 80g (20cm; e--f), for a production strategy (fast life-history) species with a dome-shaped maximum metabolic rate with respect to temperature. ',fig.align='center'>>=
+
+scsa[[4]]$m <- 80
+scsa[[5]]$m <- 80
+scsa[[6]]$m <- 80
+
+scenarios_d <- bind_cols(data_frame(Scenario = as.factor(rep(rep(c('P strategy'),each=3),each=int_temp)),
+                                   AC= as.factor(rep(rep(c('High','Medium','Low'),1),each=int_temp))),
+                       bind_rows(lapply(scsa[4:6], plot_data_temp)))
+
+
+sc_actd <- gather(scenarios_d,Activity,value,Optimum, Limit,Realised) %>%
+  mutate(Activity = relevel(as.factor(Activity), "Realised"),
+         Dispatch = paste(Scenario,AC))
+
+
+laba <- as_labeller(c(`P strategy Low` ='a',
+                   `P strategy Medium`  ='b',
+                   `P strategy High` ='c'))
+
+sc_actd$Dispatch <- factor(sc_actd$Dispatch,levels=unique(sc_actd$Dispatch)[order(unlist(laba(unique(sc_actd$Dispatch))))])
+
+ggplot(sc_actd) + 
+  geom_line(aes(x=Temperature, y=value, linetype=Activity,col=Activity)) +
+  theme_cowplot()+
+  scale_color_manual(values = cols,guide='none')+
+  scale_linetype(guide='none')+
+  facet_wrap(~Dispatch,ncol = 1,labeller = laba)+
+  theme(strip.text = element_text(hjust = 0),
+        strip.background = element_blank(),
+        panel.background = element_blank(),
+        plot.background = element_blank()) + 
+  labs(x = expression("Mean temperature " ( degree*C)),
+       y=expression('Activity ' (tau)))
+
+
+@
+
+<<size-rates,fig.cap='Feeding level (blue solid line), available energy $P$ (green long-dashed), efficiency (orange dotted), mortality (red dotted-dashed) and the ratio of $P$ to $M$ (yellow solid) are impacted by changing activity and the metabolic response to temperature for growing fish ($L_{\\infty}\\sim 30$cm) of 1.25g (5cm; a--b); 10g (10cm; c--d) and 80g (20cm; e--f ), for safe strategy (slow life history; left column [a,c,e]) and production strategy (fast life-history; right column [b,d,f]) species with a dome-shaped maximum metabolic rate with respect to temperature. Energy, mortality and fitness are plotted relative to their maximum over all temperatures.',fig.align='center'>>=
 
 sc_feed <- scenarios_s %>%
   #filter(!grepl('large',Scenario)) %>% 
@@ -837,9 +954,11 @@ sc_feed <- scenarios_s %>%
   mutate(Consumption=sc(Consumption),
          Efficiency=sc(Efficiency),
          Feeding=`Feeding level`,
-         `Available Energy` = sc(`C for growth`),
-         `Energy` = ifelse(`Available Energy`<0,0,`Available Energy`),
-         Fitness = sc(Energy/M)) %>% 
+         M = sc(M),
+         `Available Energy` = ifelse(`C for growth`<0,0,`C for growth`),
+         `Relative M` = sc(M),
+         `Energy` = sc(`Available Energy`),
+         Fitness = sc(`Available Energy`/M)) %>%  
   tidyr::gather(Rate,value,Feeding,Energy,Efficiency,M,Fitness) %>%
   mutate(Rate = factor(Rate,levels = c('Feeding','Energy','Efficiency','M','Fitness')),
          Dispatch = paste(Scenario,Size))
@@ -864,7 +983,7 @@ ggplot(sc_feed) +
 
 \begin{figure}
 \centering
-<<norms02, fig.align='center',fig.height=6>>=
+<<norms_O2, fig.align='center',fig.height=6>>=
 
 lab <- as_labeller(c(`M strategy Domed`  ='a',
                    `P strategy Domed` = 'b',
@@ -873,7 +992,7 @@ lab <- as_labeller(c(`M strategy Domed`  ='a',
 
 
 t_growth <- bind_rows(lapply(1:length(goutr), function(x) {
-  y <- gouts[[x]][['t_growth']] 
+  y <- goutr[[x]][['t_growth']] 
   y$Scenario <- scn[x]
   y$O2lim <- scz[x]
   y$Dispatch <- paste(scn[x],scz[x])
@@ -911,8 +1030,152 @@ ggplot() +
 
 
 @
-\caption{Contrasting growth reponses at baseline resource availibility for species with dome-shaped MOS (top row [a,b]) and increasing MOS with temperature (bottom row [c,d]). Growth curves are shown for M- (left column [a,c]) and P-strategists (right column [b,d]). Increasing temparture (purple to yellow growth curves) modifies growth, and maturation age changes according to the reaction norm (black dots at 50\% allocation to reproduction), whereas asymptotic size is affected by changes in absolute energy available for growth.}
-\label{fig:activity-rising}
+\caption{Contrasting growth responses at baseline resource availability for species with dome-shaped MOS (top row [a,b]) and increasing MOS with temperature (bottom row [c,d]). Growth curves are shown for safe- (left column [a,c]) and production strategists (right column [b,d]). Increasing temperature (purple to yellow growth curves) modifies growth, and maturation age changes according to the reaction norm (black dots at 50\% allocation to reproduction), whereas asymptotic size is affected by changes in absolute energy available for growth.}
+\label{fig:norms_O2}
 \end{figure}
+
+
+<<>>=
+
+scsg <- lapply(scsg,function(x) {x$slope=-1;x})
+
+goutss <- parallel::mclapply(scsg[1:3],
+                             plot_data_growth_tO2,
+                             mstar=mstar_ss,
+                             mc.cores = 3)
+
+goutsf <- parallel::mclapply(scsg[4:6],
+                             plot_data_growth_tO2,
+                             mstar=mstar_fs,
+                             mc.cores = 3)
+
+gouts <- c(goutss,goutsf)
+
+@
+
+
+<<norms_neg, fig.cap='On ecological time-scales, increasing temperature (purple to yellow growth curves) modifies growth, and maturation age changes according to the negative reaction norm (black dots at 50\\% allocation to reproduction), whereas asymptotic size is affected by changes in absolute energy available for growth. Growth curves are shown for safe- (left column [a,c,e]) and production strategists (right column [b,d,f]), at increasing food availibility from top (a/b) to bottom (e/f). Baseline resource availibility assumed in all other simulations is that shown in panels c and d.',fig.align='center',fig.width=6>>=
+
+
+labla <- as_labeller(c(`M strategy Low` ='a',
+                   `P strategy Low`  ='b',
+                   `M strategy Medium` ='c',
+                   `P strategy Medium` = 'd',
+                   `M strategy High` = 'e',
+                   `P strategy High` = 'f'
+))
+
+t_growth <- bind_rows(lapply(1:length(gouts), function(x) {
+  y <- gouts[[x]][['t_growth']] 
+  y$Scenario <- rep(c('M strategy','P strategy'),each=3)[x]
+  y$Food<- rep(c('Low','Medium','High'),2)[x]
+  y$Dispatch <- paste(rep(c('M strategy','P strategy'),each=3)[x],rep(c('Low','Medium','High'),2)[x])
+  y})) 
+
+t_growth$Dispatch <- factor(t_growth$Dispatch, levels = levels(as.factor(t_growth$Dispatch))[c(2,5,3,6,1,4)])
+
+#browser()
+norm <- t_growth %>% 
+  group_by(Dispatch,Temperature) %>%
+  summarise(ts=t[ifelse(any(abs(allocs-0.5)<0.1),which.min(abs(allocs-0.5)),NA)-1],
+            m=t_length[ifelse(any(abs(allocs-0.5)<0.1),which.min(abs(allocs-0.5)),NA)-1],
+            tsq1=t[ifelse(any(abs(allocs-0.75)<0.1),which.min(abs(allocs-0.75)),NA)-1],
+            mq1=t_length[ifelse(any(abs(allocs-0.75)<0.1),which.min(abs(allocs-0.75)),NA)-1],
+            tsq3=t[ifelse(any(abs(allocs-0.25)<0.1),which.min(abs(allocs-0.25)),NA)-1],
+            mq3=t_length[ifelse(any(abs(allocs-0.25)<0.1),which.min(abs(allocs-0.25)),NA)-1]) 
+
+ggplot() +
+  geom_line(aes(x=t, y=t_length,col=Temperature,group=as.factor(Temperature)),data=t_growth) +
+  geom_point(aes(x=ts, y=m),data=norm) +
+  # geom_point(aes(x=tsq1, y=mq1),data=norm,col=cols[3]) +
+  # geom_point(aes(x=tsq3, y=mq3),data=norm,col=cols[3]) +
+  #geom_point(data=growth_scenarios[seq.int(1,nrow(growth_scenarios),by = 5),],aes(x=Temperature, y=Temp, col=Scenario,shape=Scenario),alpha=0.5,size=2) +
+  theme_cowplot()+
+  facet_wrap(~Dispatch,scales='free',ncol=2,labeller = labla)+
+  viridis::scale_colour_viridis(expression(Temp~(degree*C)))+
+  theme(legend.text = element_text(size=8),
+        legend.title = element_text(size=9),
+        strip.text = element_text(hjust = 0),
+        strip.background = element_blank(),
+        panel.background = element_blank(),
+        plot.background = element_blank())+
+  coord_cartesian()+
+  labs(y = 'Length (cm)',
+       x='Age  (years)')
+
+
+@
+
+<<>>=
+
+scsg <- lapply(scsg,function(x) {x$slope=1;x})
+
+goutss <- parallel::mclapply(scsg[1:3],
+                             plot_data_growth_tO2,
+                             mstar=mstar_ss,
+                             mc.cores = 3)
+
+goutsf <- parallel::mclapply(scsg[4:6],
+                             plot_data_growth_tO2,
+                             mstar=mstar_fs,
+                             mc.cores = 3)
+
+gouts <- c(goutss,goutsf)
+
+@
+
+
+<<norms_pos, fig.cap='On ecological time-scales, increasing temperature (purple to yellow growth curves) modifies growth, and maturation age changes according to the positive reaction norm (black dots at 50\\% allocation to reproduction), whereas asymptotic size is affected by changes in absolute energy available for growth. Growth curves are shown for safe- (left column [a,c,e]) and production strategists (right column [b,d,f]), at increasing food availibility from top (a/b) to bottom (e/f). Baseline resource availibility assumed in all other simulations is that shown in panels c and d.',fig.align='center',fig.width=6>>=
+
+
+labla <- as_labeller(c(`M strategy Low` ='a',
+                   `P strategy Low`  ='b',
+                   `M strategy Medium` ='c',
+                   `P strategy Medium` = 'd',
+                   `M strategy High` = 'e',
+                   `P strategy High` = 'f'
+))
+
+t_growth <- bind_rows(lapply(1:length(gouts), function(x) {
+  y <- gouts[[x]][['t_growth']] 
+  y$Scenario <- rep(c('M strategy','P strategy'),each=3)[x]
+  y$Food<- rep(c('Low','Medium','High'),2)[x]
+  y$Dispatch <- paste(rep(c('M strategy','P strategy'),each=3)[x],rep(c('Low','Medium','High'),2)[x])
+  y})) 
+
+t_growth$Dispatch <- factor(t_growth$Dispatch, levels = levels(as.factor(t_growth$Dispatch))[c(2,5,3,6,1,4)])
+
+#browser()
+norm <- t_growth %>% 
+  group_by(Dispatch,Temperature) %>%
+  summarise(ts=t[ifelse(any(abs(allocs-0.5)<0.1),which.min(abs(allocs-0.5)),NA)-1],
+            m=t_length[ifelse(any(abs(allocs-0.5)<0.1),which.min(abs(allocs-0.5)),NA)-1],
+            tsq1=t[ifelse(any(abs(allocs-0.75)<0.1),which.min(abs(allocs-0.75)),NA)-1],
+            mq1=t_length[ifelse(any(abs(allocs-0.75)<0.1),which.min(abs(allocs-0.75)),NA)-1],
+            tsq3=t[ifelse(any(abs(allocs-0.25)<0.1),which.min(abs(allocs-0.25)),NA)-1],
+            mq3=t_length[ifelse(any(abs(allocs-0.25)<0.1),which.min(abs(allocs-0.25)),NA)-1]) 
+
+ggplot() +
+  geom_line(aes(x=t, y=t_length,col=Temperature,group=as.factor(Temperature)),data=t_growth) +
+  geom_point(aes(x=ts, y=m),data=norm) +
+  # geom_point(aes(x=tsq1, y=mq1),data=norm,col=cols[3]) +
+  # geom_point(aes(x=tsq3, y=mq3),data=norm,col=cols[3]) +
+  #geom_point(data=growth_scenarios[seq.int(1,nrow(growth_scenarios),by = 5),],aes(x=Temperature, y=Temp, col=Scenario,shape=Scenario),alpha=0.5,size=2) +
+  theme_cowplot()+
+  facet_wrap(~Dispatch,scales='free',ncol=2,labeller = labla)+
+  viridis::scale_colour_viridis(expression(Temp~(degree*C)))+
+  theme(legend.text = element_text(size=8),
+        legend.title = element_text(size=9),
+        strip.text = element_text(hjust = 0),
+        strip.background = element_blank(),
+        panel.background = element_blank(),
+        plot.background = element_blank())+
+  coord_cartesian()+
+  labs(y = 'Length (cm)',
+       x='Age  (years)')
+
+
+@
+
 
 \end{document}

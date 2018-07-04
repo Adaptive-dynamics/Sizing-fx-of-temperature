@@ -307,7 +307,7 @@ model_out <- function(tau_max,
   inp <- (1-phi-beta)*f*tc*h*m^q
   out <- k*tc*m^n + tau_max*delta*k*tc*m^o
   e <-  inp -out
-  efficiency <- e/f
+  efficiency <- e/(f)
   efficiency[efficiency<0] <- 0
   predation_rate <- f/phi
   
