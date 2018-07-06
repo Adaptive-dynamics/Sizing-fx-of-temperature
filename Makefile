@@ -23,7 +23,7 @@ KNIT_COMMAND = library(knitr);opts_chunk\$$set(warning=F, message = FALSE,echo=T
 
 all: $(TARGET)
 
-$(TARGET): $(OUTPUT_DIR)/$(TARGET) $(OUTPUT_DIR)
+$(TARGET): $(OUTPUT_DIR)/$(TARGET) $(OUTPUT_DIR) $(KNITR)
 	cp $(OUTPUT_DIR)/$(TARGET) $(TARGET)
 
 $(PRESENTATION): $(OUTPUT_DIR)/$(PRESENTATION)

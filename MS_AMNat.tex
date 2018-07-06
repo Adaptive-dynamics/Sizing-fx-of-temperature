@@ -1,45 +1,112 @@
-\documentclass[a4paper, toc=index,abstract=true]{scrartcl}
+\documentclass[11pt]{article}\usepackage[]{graphicx}\usepackage[]{color}
+%% maxwidth is the original width if it is less than linewidth
+%% otherwise use linewidth (to make sure the graphics do not exceed the margin)
+\makeatletter
+\def\maxwidth{ %
+  \ifdim\Gin@nat@width>\linewidth
+    \linewidth
+  \else
+    \Gin@nat@width
+  \fi
+}
+\makeatother
+
+\definecolor{fgcolor}{rgb}{0.345, 0.345, 0.345}
+\newcommand{\hlnum}[1]{\textcolor[rgb]{0.686,0.059,0.569}{#1}}%
+\newcommand{\hlstr}[1]{\textcolor[rgb]{0.192,0.494,0.8}{#1}}%
+\newcommand{\hlcom}[1]{\textcolor[rgb]{0.678,0.584,0.686}{\textit{#1}}}%
+\newcommand{\hlopt}[1]{\textcolor[rgb]{0,0,0}{#1}}%
+\newcommand{\hlstd}[1]{\textcolor[rgb]{0.345,0.345,0.345}{#1}}%
+\newcommand{\hlkwa}[1]{\textcolor[rgb]{0.161,0.373,0.58}{\textbf{#1}}}%
+\newcommand{\hlkwb}[1]{\textcolor[rgb]{0.69,0.353,0.396}{#1}}%
+\newcommand{\hlkwc}[1]{\textcolor[rgb]{0.333,0.667,0.333}{#1}}%
+\newcommand{\hlkwd}[1]{\textcolor[rgb]{0.737,0.353,0.396}{\textbf{#1}}}%
+\let\hlipl\hlkwb
+
+\usepackage{framed}
+\makeatletter
+\newenvironment{kframe}{%
+ \def\at@end@of@kframe{}%
+ \ifinner\ifhmode%
+  \def\at@end@of@kframe{\end{minipage}}%
+  \begin{minipage}{\columnwidth}%
+ \fi\fi%
+ \def\FrameCommand##1{\hskip\@totalleftmargin \hskip-\fboxsep
+ \colorbox{shadecolor}{##1}\hskip-\fboxsep
+     % There is no \\@totalrightmargin, so:
+     \hskip-\linewidth \hskip-\@totalleftmargin \hskip\columnwidth}%
+ \MakeFramed {\advance\hsize-\width
+   \@totalleftmargin\z@ \linewidth\hsize
+   \@setminipage}}%
+ {\par\unskip\endMakeFramed%
+ \at@end@of@kframe}
+\makeatother
+
+\definecolor{shadecolor}{rgb}{.97, .97, .97}
+\definecolor{messagecolor}{rgb}{0, 0, 0}
+\definecolor{warningcolor}{rgb}{1, 0, 1}
+\definecolor{errorcolor}{rgb}{1, 0, 0}
+\newenvironment{knitrout}{}{} % an empty environment to be redefined in TeX
+
+\usepackage{alltt}
+\usepackage[sc]{mathpazo} %Like Palatino with extensive math support
+\usepackage{fullpage}
 \usepackage{gensymb}
-\usepackage{geometry}
-\usepackage{enumitem}
-\usepackage{setspace}
-\usepackage{booktabs}
-\usepackage{subfig}
-\usepackage{placeins}
-\usepackage{amsmath}
-\usepackage{pdflscape}
 \usepackage{multirow}
-\usepackage{longtable}
-\usepackage[toc,page]{appendix}
-\usepackage{array,booktabs}
-\usepackage[american]{babel}
-\usepackage[backend=biber,
-mincitenames = 1,
-maxcitenames = 1,
-uniquename = false,
-uniquelist = false,
-citestyle = authoryear-comp]{biblatex}%
-\usepackage{lineno, blindtext}
-\captionsetup[table]{singlelinecheck=false}
+\usepackage{booktabs}
+\usepackage{amsmath}
+\usepackage[authoryear,sectionbib,sort]{natbib}
+\linespread{1.7}
+\usepackage[utf8]{inputenc}
+\usepackage{lineno}
+\usepackage{titlesec}
+\titleformat{\section}[block]{\Large\bfseries\filcenter}{\thesection}{1em}{}
+\titleformat{\subsection}[block]{\Large\itshape\filcenter}{\thesubsection}{1em}{}
+\titleformat{\subsubsection}[block]{\large\itshape}{\thesubsubsection}{1em}{}
+\titleformat{\paragraph}[runin]{\itshape}{\theparagraph}{1em}{}[. ]\renewcommand{\refname}{Literature Cited}
+
 
 \title{Thermal performance of fish is explained by an interplay between physiology, behaviour, and ecology}
-\author{Philipp Neubauer\\Dragonfly Data Science, Wellington, NZ  \and 
-        Ken H. Andersen\\Centre for Ocean Life
-        Danish Technical University, Lyngby, Denmark}
 
+
+% \author{Philipp Neubauer^{1,\ast}$ \\ 
+%         Ken H. Andersen$^{2,\dag}$}
+
+
+\date{}
+\IfFileExists{upquote.sty}{\usepackage{upquote}}{}
 \begin{document}
 
 \maketitle
 
-\begin{spacing}{1.9}
+% \noindent{} 1. Dragonfly Data Science, PO Box 27535, Wellington 6141, New Zealand;
+% 
+% \noindent{} 2. Centre for Ocean Life, National Institute of Aquatic Resources, Technical University of Denmark, 7 Kemitorvet B-202, 2800 Kongens Lyngby, Denmark;
 
-\pagenumbering{gobble}
-\begin{abstract}
+\bigskip
+
+\textit{Manuscript elements}: Figure~1, figure~2, table~1, online appendices~A and B (including figure~A1 and figure~A2). Figure~2 is to print in color.
+
+\bigskip
+
+\textit{Keywords}: thermal performance, OCLTT, metabolic rate, climate change
+
+\bigskip
+
+\textit{Manuscript type}: Article.
+
+\bigskip
+
+\noindent{\footnotesize Prepared using the suggested \LaTeX{} template for \textit{Am.\ Nat.}}
+
+\linenumbers{}
+\modulolinenumbers[3]
+
+\newpage{}
+
+\section*{Abstract}
 
 Increasing temperatures under climate change are thought to affect individual physiology of fish and other ectotherms through increases in metabolic demands, leading to changes in species performance with concomitant effects on species ecology. Although intuitively appealing, the driving mechanism behind thermal performance is contested: thermal performance (e.g., growth) appears correlated with metabolic scope (i.e., oxygen availability for activity) for a number of species, but a substantial number of datasets do not support oxygen limitation of long-term performance. Whether or not oxygen limitations via the metabolic scope, or a lack thereof, have major ecological consequences remains a highly contested question. Here, we propose a general size and trait-based model of energy and oxygen budgets to determine the relative influence of metabolic rates, oxygen limitation, and environmental conditions on ecotherm performance. We show that oxygen limitation is not necessary to explain performance variation with temperature. Oxygen can drastically limit performance and fitness, especially at temperature extremes, but changes in thermal performance are primarily driven by the interplay between changing metabolic rates and species ecology. Furthermore, our model reveals that fitness trends with temperature can oppose trends in growth, suggesting a potential explanation for the paradox that species often occur at lower temperatures than their growth-optimum. Our model provides a mechanistic underpinning that can provide general and realistic predictions about temperature impacts on the performance of fish and other ectotherms, and act as a null model for contrasting temperature impacts on species with different metabolic and ecological traits.
-
-\end{abstract}
-{\large Keywords:} thermal performance curves, OCLTT, metabolic rates, climate change
 
 \newpage
 
@@ -141,155 +208,21 @@ $$S_{0 \rightarrow t}(T) = \int_0^t \exp(-M(w(t),T))\text{d}t$$
 
 
 
-<< setup,echo=FALSE,include=F>>=
-knitr::opts_chunk$set(echo = F, message = F,cache=T,autodep = T)
-
-require(dplyr)
-require(tidyr)
-require(rlang)
-require(cowplot)
-
-source('model.R')
-cols <- c('#4477AA','#44AA77','#AA7744','#AA4488','#DDDD77')
-
-@
-
-<<Scenarios>>=
-
-int_m <- 500
-int_t <- 500
-int_temp <- 30
-
-# Sluggish small
-ss <- list(c=0.3,
-           beta=0.1,
-           delta=4,
-           Ea=0.52, 
-           gamma=60, 
-           h=30, 
-           k=1,
-           lO=0.5, 
-           m=10, 
-           n=0.88, 
-           o=1,
-           O2crit=2, 
-           omega=0.25, 
-           p=0.8,
-           P50=4.2, 
-           phi=0.25, 
-           q=0.8,
-           shape=3,
-           temp=seq(5,26,l=int_temp),
-           Topt=20, 
-           temp_ref=15,
-           slope=0,
-           tmax=20,
-           tr=0.5,
-           M=0.1,
-           v=6,
-           lm=int_m,
-           nu=0.8-1,
-           dt=int_t,
-           min_m=-2,
-           max_m= 3
-)
-
-# fast small0.8-1
-fs <- ss
-fs$lO <- 1
-fs$k <- 1.5
-fs$h <- 60
-fs$v <- 1
-fs$M <- 1
-fs$nu<- 0.8-1
-fs$n <- 0.75
-fs$delta <- 4
-fs$o <- 1
-fs$p <- 0.8
-fs$q <- 0.8
-fs$tmax <- 10
-
-fl <- fs
-fl$shape <- 0.1
-fl$Topt <- 25
-
-sl <- ss
-sl$shape <- 0.1
-sl$Topt <- 25
-
-ffl <- fs
-ffl$gamma <- 20
-
-fsl <- ss
-fsl$gamma <- 20
-
-ffh <- fs
-ffl$gamma <- 80
-
-fsh <- ss
-fsl$gamma <- 80
-
-scs <- list(ss,fs,sl,fl)
-fscs <- list(fsh,ffh,fsl,ffl)
-
-baseline <- bind_cols(data_frame(Scenario = as.factor(rep(c('M strategy','P strategy','M strategy','P strategy'),each=int_temp)),
-                                  Food = as.factor(rep(c('High','Low'),each=int_temp*2))),
-                       bind_rows(lapply(fscs, get_model_out,seq(0.05,1,l=int_temp))))
 
 
-scenarios <- bind_cols(data_frame(Scenario = as.factor(rep(c('M strategy','P strategy','M strategy','P strategy'),each=int_temp)),
-                                  O2lim = as.factor(rep(c('Domed','Rising'),each=int_temp*2))),
-                       bind_rows(lapply(scs, plot_data_temp)))
-
-scn <- rep(unique(scenarios$Scenario),2)
-scz <- rep(unique(scenarios$O2lim),each=2)
-
-@
 
 
-<<scenarios,fig.cap='Available energy $P$ (Blue solid line), efficiency (green dashed line), and the ratio of $P$ to $M$ (orange dotted line) are impacted as a function of changing activity at constant temperature ($T=15$\\degree C) for a growing fish ($L_{\\infty}\\sim 30$cm) at 10cm length (10g). Responses are shown for slow- (a) and fast strategy (b). All rates are plotted relative to their maximum for each trait scenario, the optimal activity level $\\tau^*$ is indicated by the dotted vertical line.',fig.align='center',fig.height=3,fig.width=6>>=
 
-lab <- as_labeller(c(
-                   `M strategy Low`  ='a',
-                   `P strategy Low` = 'b'))
+\begin{figure}
 
-sc_bl <- baseline  %>%
-  filter(Food == 'Low') %>% 
-  group_by(Scenario) %>%
-  mutate(Consumption=sc(Consumption),
-         Efficiency=sc(Efficiency),
-         Feeding=sc(`Feeding level`),
-         `Available Energy` = ifelse(`C for growth`<0,0,`C for growth`),
-         `Relative M` = sc(M),
-         `Energy` = sc(`Available Energy`),
-         Fitness = sc(`Available Energy`/M)) %>% 
-  tidyr::gather(Rate,value,Energy,Efficiency,`Relative M`,Fitness) %>%
-  mutate(Rate = factor(Rate,levels = c('Energy','Efficiency','Fitness')),
-         Dispatch = paste(Scenario,Food))
+{\centering \includegraphics[width=\maxwidth]{images/scenarios-1} 
 
-tstar <- baseline  %>%
-  filter(Food == 'Low') %>%
-  group_by(Scenario, Food) %>%
-  mutate(`Available Energy` = ifelse(`C for growth`<0,0,`C for growth`),
-         Fitness = sc(`Available Energy`/M)) %>% 
-  summarise(tstar = tau[which.max(Fitness)]) %>%
-  mutate(Dispatch = paste(Scenario,Food))
+}
 
-ggplot() + 
-  geom_line(aes(x=tau, y=value, linetype=Rate,col=Rate,group=Rate),data=sc_bl) +
-  geom_vline(aes(xintercept=tstar),linetype=3,data=tstar) +
-  theme_cowplot()+
-  facet_wrap(~Dispatch,labeller = lab,ncol=2)+
-  theme(strip.text = element_text(hjust = 0.05),
-        strip.background = element_blank(),
-        panel.background = element_blank(),
-        plot.background = element_blank())+
-  scale_linetype_manual(values=c(1:4,1),guide='none')+
-  scale_color_manual(values = cols,guide='none')+
-   labs(x = expression('Activity ' (tau)),
-       y='Relative rate') 
+\caption[Available energy $P$ (Blue solid line), efficiency (green dashed line), and the ratio of $P$ to $M$ (orange dotted line) are impacted as a function of changing activity at constant temperature ($T=15$\degree C) for a growing fish ($L_{\infty}\sim 30$cm) at 10cm length (10g)]{Available energy $P$ (Blue solid line), efficiency (green dashed line), and the ratio of $P$ to $M$ (orange dotted line) are impacted as a function of changing activity at constant temperature ($T=15$\degree C) for a growing fish ($L_{\infty}\sim 30$cm) at 10cm length (10g). Responses are shown for slow- (a) and fast strategy (b). All rates are plotted relative to their maximum for each trait scenario, the optimal activity level $\tau^*$ is indicated by the dotted vertical line.}\label{fig:scenarios}
+\end{figure}
 
-@
+
 
 \subsection*{Trait based scenarios}
 
@@ -374,407 +307,84 @@ Increasing metabolic demands with temperature lead species to adjust activity le
 
 \begin{figure}
 \centering
-<<activity, fig.height=4,fig.width=6>>=
 
-sc_act <- gather(scenarios,Activity,value,Optimum, Limit,Realised) %>%
-  mutate(Activity = relevel(as.factor(Activity), "Realised"),
-         Dispatch = paste(Scenario,O2lim))
+\includegraphics[width=\maxwidth]{images/activity-1} 
 
-
-lab1 <- as_labeller(c(`M strategy Domed`  ='a',
-                   `P strategy Domed` = 'c'))
-
-lab2 <- as_labeller(c(`M strategy Domed`  ='b',
-                   `P strategy Domed` = 'd'))
-
-ggsc <- ggplot(sc_act %>% filter(O2lim=='Domed')) + 
-  geom_line(aes(x=Temperature, y=value, linetype=Activity,col=Activity)) +
-  theme_cowplot()+
-  scale_color_manual(values = cols,guide='none')+
-  scale_linetype(guide='none')+
-  facet_wrap(~Dispatch,ncol = 1,labeller = lab1)+
-  theme(strip.text = element_text(hjust = 0),
-        strip.background = element_blank(),
-        panel.background = element_blank(),
-        plot.background = element_blank()) + 
-  labs(x = expression("Mean temperature " ( degree*C)),
-       y=expression('Activity ' (tau)))
-
-sco <- tidyr::gather(scenarios,Metabolism,value,Max, Active, Std,Scope) %>%
-  mutate(Dispatch = paste(Scenario,O2lim))
-
-ggso <- sco %>% filter(O2lim=='Domed') %>%
-  ggplot() + 
-   geom_line(aes(x=Temperature, y=value, linetype=Metabolism,col=Metabolism)) +
-  theme_cowplot() +
-  scale_color_manual(values = cols,guide='none')+
-  scale_linetype(guide='none')+
-  facet_wrap(~Dispatch,ncol = 1,labeller = lab2)+
-  theme(strip.text = element_text(hjust = 0),
-        strip.background = element_blank(),
-        panel.background = element_blank(),
-        plot.background = element_blank()) + 
-  labs(x = expression("Mean temperature " ( degree*C)),
-       y=expression(Oxygen~(mg.yr^-1))) 
-
-cowplot::plot_grid(ggsc,ggso,ncol=2)
-
-@
 \caption{Optimum (red long-dashed), maximum (green short-dashed) and realised (blue solid lines) activity levels (left column [a,c]) at increasing temperatures for a 10g fish with a dome-shaped MOS with increasing temperature (maximum at 20\degree C), with corresponding oxygen demand (right column [b,d]); maximum oxygen supply (MOS; green short-dashed), standard metabolism (red long-dashed) and realised (active; blue solid lines) metabolic demand, as well as metabolic scope (orange long-dashed) at activity level $\tau$, for slow strategy (slow life history; a \& b) and fast strategy (fast life-history; c \& d).}
 \label{fig:activity}
 \end{figure}
 
 
 
-<<size-act,fig.cap='Optimum (red long-dashed), maximum (green short-dashed) and realised (blue solid lines) activity levels (left column) at increasing temperatures through ontogeny for a for fish with a $L_{\\infty}\\sim 30$cm at 1.25g (5cm; a--b); 10g (10cm; c--d) and 80g (20cm; e--f), for slow strategy (slow life history; left column [a,c,e]) and fast strategy (fast life-history; right column [b,d,f]) species with a dome-shaped maximum metabolic rate with respect to temperature.',fig.align='center'>>=
+\begin{figure}
 
-ssm <- ss
-ssm$m <- 1.25
+{\centering \includegraphics[width=\maxwidth]{images/size-act-1} 
 
-ssl <- ss
-ssl$m <- 80
+}
 
-fsm <- fs
-fsm$m <- 1.25
-
-fsl <- fs
-fsl$m <- 80
-
-scss <- list(ssm,ss,ssl,fsm,fs,fsl)
-
-scenarios_s <- bind_cols(data_frame(Scenario = as.factor(rep(rep(c('M strategy','P strategy'),each=3),each=int_temp)),
-                                  Size = as.factor(rep(rep(c('Small','Medium','Large'),2),each=int_temp))),
-                       bind_rows(lapply(scss, plot_data_temp)))
+\caption[Optimum (red long-dashed), maximum (green short-dashed) and realised (blue solid lines) activity levels (left column) at increasing temperatures through ontogeny for a for fish with a $L_{\infty}\sim 30$cm at 1.25g (5cm]{Optimum (red long-dashed), maximum (green short-dashed) and realised (blue solid lines) activity levels (left column) at increasing temperatures through ontogeny for a for fish with a $L_{\infty}\sim 30$cm at 1.25g (5cm; a--b); 10g (10cm; c--d) and 80g (20cm; e--f), for slow strategy (slow life history; left column [a,c,e]) and fast strategy (fast life-history; right column [b,d,f]) species with a dome-shaped maximum metabolic rate with respect to temperature.}\label{fig:size-act}
+\end{figure}
 
 
-sc_acts <- gather(scenarios_s,Activity,value,Optimum, Limit,Realised) %>%
-  mutate(Activity = relevel(as.factor(Activity), "Realised"),
-         Dispatch = paste(Scenario,Size))
-
-
-laba <- as_labeller(c(`M strategy Small` ='a',
-                   `P strategy Small`  ='b',
-                   `M strategy Medium` ='c',
-                   `P strategy Medium` = 'd',
-                   `M strategy Large` = 'e',
-                   `P strategy Large` = 'f'
-))
-
-sc_acts$Dispatch <- factor(sc_acts$Dispatch,levels=unique(sc_acts$Dispatch)[order(unlist(laba(unique(sc_acts$Dispatch))))])
-
-ggplot(sc_acts) + 
-  geom_line(aes(x=Temperature, y=value, linetype=Activity,col=Activity)) +
-  theme_cowplot()+
-  scale_color_manual(values = cols,guide='none')+
-  scale_linetype(guide='none')+
-  facet_wrap(~Dispatch,ncol = 2,labeller = laba)+
-  theme(strip.text = element_text(hjust = 0),
-        strip.background = element_blank(),
-        panel.background = element_blank(),
-        plot.background = element_blank()) + 
-  labs(x = expression("Mean temperature " ( degree*C)),
-       y=expression('Activity ' (tau)))
-
-
-@
 
 Temperature and metabolic demand-driven adjustments to the activity level lead to substantial changes in performance related metrics in both trait scenarios (fig./~\ref{fig:feeding}). For slow strategy species, the increases in activity levels lead to relatively stable feeding levels, but a substantial increase in mortality coupled with a slow increase in available energy leads to an over-all decline in the ratio of $P$ to $M$. Available energy shows a dome-shaped response to temperature in slow strategists, and is maximised at relatively high temperatures. However, it is limited by oxygen availability only at high temperatures in species with a dome-shaped MOS. Production efficiency follows a near opposite trend due to the relatively flat response in the feeding level $f$, but temperature driven increases in maximum consumption.
 
 For fast strategists, the relatively modest response in activity levels at all but the smallest sizes leads to a decline in feeding levels, which causes a largely dome-shaped response of available energy and growth efficiency to warmer temperatures (fig./~\ref{fig:feeding}). Again, production efficiency peaks at relatively low temperatures, but in this scenario available energy $P$ peaks at much lower temperatures. Given the relatively flat mortality levels, the ratio of $P/M$ largely follows the trend in $P$. 
 
-<<feeding,fig.cap='Feeding level (blue solid line), available energy $P$ (green long-dashed), efficiency (orange dotted), mortality (red dotted-dashed) and the ratio of $P$ to $M$ (yellow solid) are impacted by changing activity and the metabolic response to temperature for a growing fish ($L_{\\infty}\\sim 30$cm) at 10cm length (10g). Responses are shown for slow  and fast strategy (a and b, respectively), for species with and without oxygen limitation (left and right columns, respectively). Energy, mortality and fitness are plotted relative to their maximum over all temperatures.',fig.align='center',fig.height=5,fig.width=6>>=
+\begin{figure}
 
-lab <- as_labeller(c(`M strategy Domed`  ='a',
-                   `P strategy Domed` = 'b'))
+{\centering \includegraphics[width=\maxwidth]{images/feeding-1} 
 
-sc_feed <- scenarios %>% filter(O2lim=='Domed') %>%
-  #filter(!grepl('large',Scenario)) %>% 
-  group_by(Scenario,O2lim) %>%
-  mutate(Consumption=sc(Consumption),
-         Efficiency=sc(Efficiency),
-         Feeding=`Feeding level`,
-         M=sc(M),
-         `Available Energy` = ifelse(`C for growth`<0,0,`C for growth`),
-         `Relative M` = sc(M),
-         `Energy` = sc(`Available Energy`),
-         Fitness = sc(`Available Energy`/M)) %>% 
-  tidyr::gather(Rate,value,Feeding,Energy,Efficiency,M,Fitness) %>%
-  mutate(Rate = factor(Rate,levels = c('Feeding','Energy','Efficiency','M','Fitness')),
-         Dispatch = paste(Scenario,O2lim))
+}
 
-ggplot(sc_feed) + 
-  geom_line(aes(x=Temperature, y=value, linetype=Rate,col=Rate,group=Rate)) +
-  theme_cowplot()+
-  facet_wrap(~Dispatch,labeller = lab,ncol=1)+
-  theme(strip.text = element_text(hjust = 0.05),
-        strip.background = element_blank(),
-        panel.background = element_blank(),
-        plot.background = element_blank())+
-  scale_linetype_manual(values=c(1:4,1))+
-  scale_color_manual(values = cols)+
-  labs(x = expression("Mean temperature " ( degree*C)),
-       y='Relative rate') 
+\caption[Feeding level (blue solid line), available energy $P$ (green long-dashed), efficiency (orange dotted), mortality (red dotted-dashed) and the ratio of $P$ to $M$ (yellow solid) are impacted by changing activity and the metabolic response to temperature for a growing fish ($L_{\infty}\sim 30$cm) at 10cm length (10g)]{Feeding level (blue solid line), available energy $P$ (green long-dashed), efficiency (orange dotted), mortality (red dotted-dashed) and the ratio of $P$ to $M$ (yellow solid) are impacted by changing activity and the metabolic response to temperature for a growing fish ($L_{\infty}\sim 30$cm) at 10cm length (10g). Responses are shown for slow  and fast strategy (a and b, respectively), for species with and without oxygen limitation (left and right columns, respectively). Energy, mortality and fitness are plotted relative to their maximum over all temperatures.}\label{fig:feeding}
+\end{figure}
 
-@
+
 
 Simulated growth curves illustrate the ontogenetic consequences of increasing temperatures (fig./~\ref{fig:norms}). For both trait scenarios, fastest growth occurred at relatively high temperatures, with declining growth for oxygen limited species at the highest temperatures (fig./~\ref{fig:norms_O2}). This can be explained by ontogenetic shifts in temperature optima for growth (fig./~\ref{fig:size-rates}): for small individuals, available energy and growth consistently peak at high temperatures, but this peak rapidly moves to lower temperatures as individuals in either trait-scenario grow. For large individuals, growth is optimised at relatively low temperatures, leading to larger asymptotic size at lower temperatures. 
 
 Resource availability strongly modulates this growth response to temperature: low resource availability leads to strong differences in asymptotic size, whereas high food availability leads to fast growth and larger asymptotic length at high temperatures (figs./~\ref{fig:norms},\ref{fig:infs}). In addition, in very resource poor conditions, individuals may not grow to reproductive size in our scenario of a flat MRN. Over-all growth responses to temperature are not strongly affected by the assumed slope of the MRN (figs. \ref{fig:norms_neg},\ref{fig:norms_pos}), although a negatively sloped MRN does ensure maturation in low resource environments.
 
-<<calc-gouts>>=
-
-ssgl <- ss
-ssgl$gamma <- 40
-
-ssgh <- ss
-ssgh$gamma <- 80
 
 
-fsgl <- fs
-fsgl$gamma <- 40
 
-fsgh <- fs
-fsgh$gamma <- 80
+\begin{figure}
 
-scsg <- list(ssgl,ss,ssgh,fsgl,fs,fsgh)
+{\centering \includegraphics[width=\maxwidth]{images/norms-1} 
 
-mstar_ss <- plot_data_growth_tO2(ss)$mstar
-mstar_fs <- plot_data_growth_tO2(fs)$mstar
+}
 
-#mstar_ss <- 18
-#mstar_fs <- 18
-
-goutss <- parallel::mclapply(list(ssgl,ss,ssgh),
-                             plot_data_growth_tO2,
-                             mstar=mstar_ss,
-                             mc.cores = 3)
-
-goutsf <- parallel::mclapply(list(fsgl,fs,fsgh),
-                             plot_data_growth_tO2,
-                             mstar=mstar_fs,
-                             mc.cores = 3)
-
-gouts <- c(goutss,goutsf)
-
-@
+\caption[On ecological time-scales, increasing temperature (purple to yellow growth curves) modifies growth, and maturation age changes according to the reaction norm (black dots at 50\% allocation to reproduction), whereas asymptotic size is affected by changes in absolute energy available for growth]{On ecological time-scales, increasing temperature (purple to yellow growth curves) modifies growth, and maturation age changes according to the reaction norm (black dots at 50\% allocation to reproduction), whereas asymptotic size is affected by changes in absolute energy available for growth. Growth curves are shown for slow- (left column [a,c,e]) and fast strategists (right column [b,d,f]), at increasing food availibility from top (a/b) to bottom (e/f). Baseline resource availibility assumed in all other simulations is that shown in panels c and d.}\label{fig:norms}
+\end{figure}
 
 
-<<norms, fig.cap='On ecological time-scales, increasing temperature (purple to yellow growth curves) modifies growth, and maturation age changes according to the reaction norm (black dots at 50\\% allocation to reproduction), whereas asymptotic size is affected by changes in absolute energy available for growth. Growth curves are shown for slow- (left column [a,c,e]) and fast strategists (right column [b,d,f]), at increasing food availibility from top (a/b) to bottom (e/f). Baseline resource availibility assumed in all other simulations is that shown in panels c and d.',fig.align='center',fig.width=6>>=
+
+\begin{figure}
+
+{\centering \includegraphics[width=\maxwidth]{images/infs-1} 
+
+}
+
+\caption[Interactive effects of food availibility and temperature of the asymptotic size ($L_{\infty}$), with increasing linewidth showing increasing prey availibility for a) slow and b) fast life-history species]{Interactive effects of food availibility and temperature of the asymptotic size ($L_{\infty}$), with increasing linewidth showing increasing prey availibility for a) slow and b) fast life-history species.}\label{fig:infs}
+\end{figure}
 
 
-labla <- as_labeller(c(`M strategy Low` ='a',
-                   `P strategy Low`  ='b',
-                   `M strategy Medium` ='c',
-                   `P strategy Medium` = 'd',
-                   `M strategy High` = 'e',
-                   `P strategy High` = 'f'
-))
-
-t_growth <- bind_rows(lapply(1:length(gouts), function(x) {
-  y <- gouts[[x]][['t_growth']] 
-  y$Scenario <- rep(c('M strategy','P strategy'),each=3)[x]
-  y$Food<- rep(c('Low','Medium','High'),2)[x]
-  y$Dispatch <- paste(rep(c('M strategy','P strategy'),each=3)[x],rep(c('Low','Medium','High'),2)[x])
-  y})) 
-
-t_growth$Dispatch <- factor(t_growth$Dispatch, levels = levels(as.factor(t_growth$Dispatch))[c(2,5,3,6,1,4)])
-
-#browser()
-norm <- t_growth %>% 
-  group_by(Dispatch,Temperature) %>%
-  summarise(ts=t[ifelse(any(abs(allocs-0.5)<0.1),which.min(abs(allocs-0.5)),NA)-1],
-            m=t_length[ifelse(any(abs(allocs-0.5)<0.1),which.min(abs(allocs-0.5)),NA)-1],
-            tsq1=t[ifelse(any(abs(allocs-0.75)<0.1),which.min(abs(allocs-0.75)),NA)-1],
-            mq1=t_length[ifelse(any(abs(allocs-0.75)<0.1),which.min(abs(allocs-0.75)),NA)-1],
-            tsq3=t[ifelse(any(abs(allocs-0.25)<0.1),which.min(abs(allocs-0.25)),NA)-1],
-            mq3=t_length[ifelse(any(abs(allocs-0.25)<0.1),which.min(abs(allocs-0.25)),NA)-1]) 
-
-
-ggplot() +
-  geom_line(aes(x=t, y=t_length,col=Temperature,group=as.factor(Temperature)),data=t_growth) +
-  geom_point(aes(x=ts, y=m),data=norm) +
-  # geom_point(aes(x=tsq1, y=mq1),data=norm,col=cols[3]) +
-  # geom_point(aes(x=tsq3, y=mq3),data=norm,col=cols[3]) +
-  #geom_point(data=growth_scenarios[seq.int(1,nrow(growth_scenarios),by = 5),],aes(x=Temperature, y=Temp, col=Scenario,shape=Scenario),alpha=0.5,size=2) +
-  theme_cowplot()+
-  facet_wrap(~Dispatch,scales='free',ncol=2,labeller = labla)+
-  viridis::scale_colour_viridis(expression(Temp~(degree*C)))+
-  theme(legend.text = element_text(size=8),
-        legend.title = element_text(size=9),
-        strip.text = element_text(hjust = 0),
-        strip.background = element_blank(),
-        panel.background = element_blank(),
-        plot.background = element_blank())+
-  coord_cartesian()+
-  labs(y = 'Length (cm)',
-       x='Age  (years)')
-
-
-@
-
-<<infs, fig.cap='Interactive effects of food availibility and temperature of the asymptotic size ($L_{\\infty}$), with increasing linewidth showing increasing prey availibility for a) slow and b) fast life-history species.',fig.align='center',fig.width=6,fig.height=3>>=
-
-
-infs <- t_growth %>% 
-  mutate(Food = factor(Food, levels=c('Low','Medium','High'))) %>%
-  group_by(Scenario, Food,Temperature) %>%
-  summarise(lmax = max(t_length)) %>%
-  mutate(wmax = wl(lmax))
-
-size <- tidyr::gather(infs,size,value,-Scenario, -Food,-Temperature)
-
-labls <- as_labeller(c(`M strategy` ='a',
-                   `P strategy`  ='b'))
-
-ggplot() +
-  geom_line(aes(x=Temperature, y=value,size=as.numeric(Food),group=Food),data=size%>% filter(size=='lmax')) +
-  theme_cowplot()+
-  scale_linetype_discrete(guide='none') +
-  facet_wrap(~Scenario,labeller = labls) + 
-  scale_size(guide='none',range = c(0.6,1.4))+
-  theme(legend.text = element_text(size=8),
-        legend.title = element_text(size=9),
-        strip.text = element_text(hjust = 0.05),
-        strip.background = element_blank(),
-        panel.background = element_blank(),
-        plot.background = element_blank())+
-  coord_cartesian()+
-  labs(y = expression(L[infinity]~(cm)),
-       x=expression("Mean temperature " ( degree*C)))
-
-@
 
 Over-all fitness consequences mirror trends in the ratio of $P/M$ (fig./~\ref{fig:fit}a), which can be seen as a short sighted approximation to over-all fitness optimisation (\cite{sainmont_effective_2015}). With increasing temperatures, fitness declines at our basic parameter settings, in opposition to growth and aerobic scope. At low temperatures, fitness is limited by aerobic scope, with the magnitude determined by the extend of doming in aerobic scope. Note that this limitation through the aerobic scope appears at higher temperatures than apparent from fig./~\ref{fig:activity}, reflecting stronger limitation of oxygen on growth during early life (fig./~\ref{fig:size-rates}). Fitness trends with temperature are strongly dependent on metabolic costs of activity (fig./~\ref{fig:fit}b), and changing the activity cost to lower values attenuates the decline in fitness with temperature for slow strategy species, and moves the fitness optimum to higher temperatures for fast strategy species. Similarly, increased food availibility leads to changes in fitness optima, with higher optimum temperatures, especially for fast strategists, and a slower decline of fitness with temperature.
 
-<<>>=
-ssm <- ss
-ssm$delta <- 2
-
-ssl <- ss
-ssl$delta <- 1
-
-fsm <- fs
-fsm$delta <- 2
-
-fsl <- fs
-fsl$delta <- 1
-
-scsa <- list(ss,ssm,ssl,fs,fsm,fsl)
-scna <- rep(unique(scenarios$Scenario),each=3)
-scza <- rep(c('High','Medium','Low'),3)
-
-gouta <- parallel::mclapply(scsa,plot_data_growth_tO2,mc.cores = 3)
-goutr <- parallel::mclapply(scs,plot_data_growth_tO2,mc.cores = 3)
-@
-
-<<fit, fig.cap='Fitness ($R_0$), relative to maximum fitness within (a and b) oxygen limited (blue) and non-oxygen limited (teal) for slow- (a) and fast strategy (b) species at the assumed maturation-raction norm and base parameters, and (c and d) changes in relative fitness with respect to temperature resulting from decreasing levels of activity cost symbolised by decreasing linewidth, and (e and f) changes in relative fitness with respect to temperature as a function of increasing food availability (increasing linewidth)',fig.align='center',fig.height=8>>=
-
-R0s <- bind_rows(lapply(1:length(goutr), function(x) {
-  y <- data.frame(goutr[[x]]['R0'])
-  y$Temperature <-goutr[[x]][['winfs']]$Temperature
-  y$Scenario <- scn[x]
-  y$O2lim <- scz[x]
-  y$Dispatch <- paste(scn[x],scz[x])
-  y}))
-
-R0s <- R0s %>% group_by(Dispatch) %>%
-  mutate(R0 = R0/max(R0, na.rm=T))
-
-sizes = c(0.5,1,1.5)
-
-f1.1 <- ggplot(R0s%>% filter(Scenario=='M strategy')) + 
-  geom_line(aes(x=Temperature, y=R0, col=O2lim)) +
-  theme_cowplot()+
-  theme(axis.text.x = element_text(colour = 'white'),
-        panel.background = element_blank(),
-        plot.background = element_blank())+
-    scale_colour_manual(values=cols,guide='none')+
-  labs(x = ' ',
-       y='Relative fitness') 
- 
- 
- f1.2 <- ggplot(R0s%>% filter(Scenario=='P strategy')) + 
-  geom_line(aes(x=Temperature, y=R0, col=O2lim)) +
-  theme_cowplot()+
-  theme(axis.text = element_text(colour = 'white'),
-        panel.background = element_blank(),
-        plot.background = element_blank())+
-  scale_colour_manual(values=cols,guide='none')+
-  labs(x = ' ',
-       y=' ') 
 
 
+\begin{figure}
 
-R0ss <- bind_rows(lapply(1:length(gouta), function(x) {
-  y <- data.frame(gouta[[x]]['R0'])
-  y$Temperature <-gouta[[x]][['winfs']]$Temperature
-  y$Scenario <- scna[x]
-  y$ActivityCost <- scza[x]
-  y$Dispatch <- paste(scna[x],scza[x])
-  y}))
+{\centering \includegraphics[width=\maxwidth]{images/fit-1} 
 
-R0ss <- R0ss %>% group_by(Dispatch) %>%
-  mutate(R0 = R0/max(R0, na.rm=T),
-         ActivityCost = factor(ActivityCost,levels=c('Low','Medium','High')))
+}
 
-f2.1 <- ggplot(R0ss%>% filter(Scenario=='M strategy')) + 
-  geom_line(aes(x=Temperature, y=R0,group=ActivityCost,size=as.numeric(ActivityCost)/3)) +
-  theme_cowplot()+
-  theme(axis.text.x = element_text(colour = 'white'),
-        panel.background = element_blank(),
-        plot.background = element_blank())+
-  scale_size(guide='none',range = c(0.6,1.4))+
-  labs(x = ' ',
-       y='Relative fitness')
+\caption[Fitness ($R_0$), relative to maximum fitness within (a and b) oxygen limited (blue) and non-oxygen limited (teal) for slow- (a) and fast strategy (b) species at the assumed maturation-raction norm and base parameters, and (c and d) changes in relative fitness with respect to temperature resulting from decreasing levels of activity cost symbolised by decreasing linewidth, and (e and f) changes in relative fitness with respect to temperature as a function of increasing food availability (increasing linewidth)]{Fitness ($R_0$), relative to maximum fitness within (a and b) oxygen limited (blue) and non-oxygen limited (teal) for slow- (a) and fast strategy (b) species at the assumed maturation-raction norm and base parameters, and (c and d) changes in relative fitness with respect to temperature resulting from decreasing levels of activity cost symbolised by decreasing linewidth, and (e and f) changes in relative fitness with respect to temperature as a function of increasing food availability (increasing linewidth)}\label{fig:fit}
+\end{figure}
 
 
-f2.2 <- ggplot(R0ss%>% filter(Scenario=='P strategy')) + 
-  geom_line(aes(x=Temperature, y=R0,group=ActivityCost,size=as.numeric(ActivityCost)/3)) +
-  theme_cowplot()+
-  theme(axis.text = element_text(colour = 'white'),
-        panel.background = element_blank(),
-        plot.background = element_blank())+
-  scale_size(guide='none',range = c(0.6,1.4))+
-  labs(x =' ',
-       y=' ')
-
-
-R0sss <- bind_rows(lapply(1:length(gouts), function(x) {
-  y <- data.frame(gouts[[x]]['R0'])
-   y$Temperature <-gouts[[x]][['winfs']]$Temperature
-  y$Scenario <- rep(c('M strategy','P strategy'),each=3)[x]
-  y$Food<- rep(c('Low','Medium','High'),2)[x]
-  y$Dispatch <- paste(rep(c('M strategy','P strategy'),each=3)[x],rep(c('Low','Medium','High'),2)[x])
-  y})) 
-
-
-R0sss <- R0sss %>% group_by(Dispatch) %>%
-  mutate(R0 = R0/max(R0, na.rm=T),
-         Food = factor(Food,levels=c('High','Medium','Low')))
-
-f3.1 <- ggplot(R0sss %>% filter(Scenario=='M strategy')) + 
-  geom_line(aes(x=Temperature, y=R0,group=Food,size=as.numeric(Food)/3)) +
-  theme_cowplot()+
-  theme(
-        panel.background = element_blank(),
-        plot.background = element_blank())+
-  scale_size(guide='none',range = c(0.6,1.4))+
-  labs(x = expression("Mean temperature " ( degree*C)),
-       y='Relative fitness')
-
-f3.2 <- ggplot(R0sss %>% filter(Scenario=='P strategy')) + 
-  geom_line(aes(x=Temperature, y=R0,group=Food,size=as.numeric(Food)/3)) +
-  theme_cowplot()+
-  theme(axis.text.y = element_text(colour = 'white'),
-        panel.background = element_blank(),
-        plot.background = element_blank())+
-  scale_size(guide='none',range = c(0.6,1.4))+
-  labs(x = expression("Mean temperature " ( degree*C)),
-       y=' ')
-
-cowplot::plot_grid(f1.1,f1.2,f2.1,f2.2,f3.1,f3.2,ncol=2,labels = 'auto')
-
-@
 
 
 \section*{Discussion}
@@ -821,61 +431,35 @@ In order to provide a general framework, our model setup is deliberatly minimali
 
 The importance of the interaction between ecology, bio-energetics and oxygen limitations in deriving realistic predictions about temperature impacts on ecological rates and fitness calls into question predictions for climate change impacts based on simple models of growth alone (\cite{cheung_shrinking_2013, pauly_sound_2017}). We suggest that the general trait-based approach presented here provides a parsimonious compromise between simplistic approximations that may provide misleading predictions about future ecosystems (\cite{brander_overconfidence_2013, lefevre_models_2017}), and more complex eco-physiological models such as dynamic energy budget models (\cite[e.g., ][]{guiet_effects_2016}) and species specific eco-physiology models (\cite{hufnagl_physiological_2011, holt_climate_2014,holt_climate_2015}). In addition, our model provides a more explicit, physiology-based mechanistic model to derive general predictions about temperature effects on ectotherms than previous general frameworks such as the OCLTT. Predictions from the OCLTT are both contributing to patterns in fitness and ecological rates shown here, but are also only part of the picture, and we suggest that future improvements of predictive frameworks should center on model critisism and improvements, and leave behind semantic discussions about conceptual constructs that are difficult to explicitly link to data.
 
-\end{spacing}
+% \section*{Acknowledgments}
+% 
+% The authors would like to thank members of the DTU Centre for Ocean Life modeling group for stimulating discussions over the course of the development of the ideas in this paper. PN was supported by a Marsden fast-start grant by the Royal Society Te Apārangi of New Zealand. KHA was supported by the Centre for Ocean Life, a VKR Centre of Excellence funded by the Villum Foundation.
 
-\printbibliography 
+\newpage{}
 
-\appendix
+\titleformat{\section}{\normalfont\bfseries\sffamily}{APPENDIX \thesection:}{1em}{}
+\renewcommand{\theequation}{\thesection-\arabic{equation}}
+\renewcommand{\thetable}{\thesection-\arabic{table}}
+\renewcommand{\thefigure}{\thesection-\arabic{figure}}
+\setcounter{figure}{0}  % reset counter 
+\setcounter{table}{0}  % reset counter 
+\setcounter{equation}{0}  % reset counter 
 
 \section*{Maturation-reaction norm}
 \label{sec:MRN}
 
 A flat maturation reaction norm (MRN) leads to a logistic allocation to reproduction that is only dependent on size and independent of age (fig./~\ref{fig:MRN}).
 
-<<MRN, fig.cap='Proportion of energy allocated to reproduction, as a function of age (a) and size (b). With a flat maturation-reaction norm, maturation is independent of age, and only size-dependent.',fig.align='center',fig.height=6>>=
+\begin{figure}
 
-lam <- goutr[[3]]$t_growth
+{\centering \includegraphics[width=\maxwidth]{images/MRN-1} 
 
-mr1 <- ggplot(lam) + 
-  geom_line(aes(x=t, y=allocs,col=Temperature,group=as.factor(Temperature))) +
-  #geom_point(aes(x=ts, y=m),data=norm) +
-  # geom_point(aes(x=tsq1, y=mq1),data=norm,col=cols[3]) +
-  # geom_point(aes(x=tsq3, y=mq3),data=norm,col=cols[3]) +
-  #geom_point(data=growth_scenarios[seq.int(1,nrow(growth_scenarios),by = 5),],aes(x=Temperature, y=Temp, col=Scenario,shape=Scenario),alpha=0.5,size=2) +
-  theme_cowplot()+
-  viridis::scale_colour_viridis(expression(Temp~(degree*C)))+
-  theme(legend.text = element_text(size=8),
-        legend.title = element_text(size=9),
-        strip.text = element_text(hjust = 0),
-        strip.background = element_blank(),
-        panel.background = element_blank(),
-        plot.background = element_blank())+
-  coord_cartesian()+
-  labs(y = 'Proportion',
-       x='Age  (years)')
+}
+
+\caption[Proportion of energy allocated to reproduction, as a function of age (a) and size (b)]{Proportion of energy allocated to reproduction, as a function of age (a) and size (b). With a flat maturation-reaction norm, maturation is independent of age, and only size-dependent.}\label{fig:MRN}
+\end{figure}
 
 
-mr2 <- ggplot(lam) + 
-  geom_line(aes(x=t_length, y=allocs,col=Temperature,group=as.factor(Temperature))) +
-  #geom_point(aes(x=ts, y=m),data=norm) +
-  # geom_point(aes(x=tsq1, y=mq1),data=norm,col=cols[3]) +
-  # geom_point(aes(x=tsq3, y=mq3),data=norm,col=cols[3]) +
-  #geom_point(data=growth_scenarios[seq.int(1,nrow(growth_scenarios),by = 5),],aes(x=Temperature, y=Temp, col=Scenario,shape=Scenario),alpha=0.5,size=2) +
-  theme_cowplot()+
-  viridis::scale_colour_viridis(expression(Temp~(degree*C)))+
-  theme(legend.text = element_text(size=8),
-        legend.title = element_text(size=9),
-        strip.text = element_text(hjust = 0),
-        strip.background = element_blank(),
-        panel.background = element_blank(),
-        plot.background = element_blank())+
-  coord_cartesian()+
-  labs(y = 'Proportion',
-       x='Size (cm)')
-
-cowplot::plot_grid(mr1,mr2,ncol=1,labels = 'auto')
-
-@
 
 To express a MRN that varies as a function of age, we can reparametrise the MRN as:
 $$\phi(z) = 1/(1+\exp(-(c z))) \text{, where }$$
@@ -886,325 +470,78 @@ rotates the coordinate system about the slope $b$ of the reaction norm, $t$ is t
 
 \begin{figure}
 \centering
-<<activitys, fig.height=4,fig.width=6>>=
 
-sc_act <- gather(scenarios,Activity,value,Optimum, Limit,Realised) %>%
-  mutate(Activity = relevel(as.factor(Activity), "Realised"),
-         Dispatch = paste(Scenario,O2lim))
+\includegraphics[width=\maxwidth]{images/activitys-1} 
 
-cols <- c('#4477AA','#44AA77','#AA7744','#AA4488','#DDDD77')
-
-lab1 <- as_labeller(c(`M strategy Rising`  ='a',
-                   `P strategy Rising` = 'c'))
-
-lab2 <- as_labeller(c(`M strategy Rising`  ='b',
-                   `P strategy Rising` = 'd'))
-
-ggsc <- ggplot(sc_act %>% filter(O2lim=='Rising')) + 
-  geom_line(aes(x=Temperature, y=value, linetype=Activity,col=Activity)) +
-  theme_cowplot()+
-  scale_color_manual(values = cols,guide='none')+
-  scale_linetype(guide='none')+
-  facet_wrap(~Dispatch,ncol = 1,labeller = lab1)+
-  theme(strip.text = element_text(hjust = 0),
-        strip.background = element_blank(),
-        panel.background = element_blank(),
-        plot.background = element_blank()) + 
-  labs(x = expression("Mean temperature " ( degree*C)),
-       y=expression('Activity ' (tau)))
-
-sco <- tidyr::gather(scenarios,Metabolism,value,Max, Active, Std,Scope) %>%
-  mutate(Dispatch = paste(Scenario,O2lim))
-
-ggso <- sco %>% filter(O2lim=='Rising') %>%
-  ggplot() + 
-   geom_line(aes(x=Temperature, y=value, linetype=Metabolism,col=Metabolism)) +
-  theme_cowplot() +
-  scale_color_manual(values = cols,guide='none')+
-  scale_linetype(guide='none')+
-  facet_wrap(~Dispatch,ncol = 1,labeller = lab2)+
-  theme(strip.text = element_text(hjust = 0),
-        strip.background = element_blank(),
-        panel.background = element_blank(),
-        plot.background = element_blank()) + 
-  labs(x = expression("Mean temperature " ( degree*C)),
-       y=expression(Oxygen~(mg.yr^-1))) 
-
-cowplot::plot_grid(ggsc,ggso,ncol=2)
-
-@
 \caption{Optimum (red long-dashed), maximum (green short-dashed) and realised (blue solid lines) activity levels (left column [a,c]) at increasing temperatures for a 10g fish with a continuously increasing MOS with increasing temperature, with corresponding oxygen demand (right column [b,d]); maximum oxygen supply (MOS; green short-dashed), standard metabolism (red long-dashed) and realised (active; blue solid lines) metabolic demand, as well as metabolic scope (orange long-dashed) at activity level $\tau$, for slow strategy (slow life history; aandb) and fast strategy (fast life-history; c, d).}
 \label{fig:activity-rising}
 \end{figure}
 
-<<size-act_low,fig.cap='Optimum (red long-dashed), maximum (green short-dashed) and realised (blue solid lines) activity levels at increasing temperatures through ontogeny for a for fish nearly grown fish of 80g (20cm; e--f), for a fast strategy (fast life-history) species with a dome-shaped maximum metabolic rate with respect to temperature. ',fig.align='center'>>=
+\begin{figure}
 
-scsa[[4]]$m <- 80
-scsa[[5]]$m <- 80
-scsa[[6]]$m <- 80
+{\centering \includegraphics[width=\maxwidth]{images/size-act_low-1} 
 
-scenarios_d <- bind_cols(data_frame(Scenario = as.factor(rep(rep(c('P strategy'),each=3),each=int_temp)),
-                                   AC= as.factor(rep(rep(c('High','Medium','Low'),1),each=int_temp))),
-                       bind_rows(lapply(scsa[4:6], plot_data_temp)))
+}
 
-
-sc_actd <- gather(scenarios_d,Activity,value,Optimum, Limit,Realised) %>%
-  mutate(Activity = relevel(as.factor(Activity), "Realised"),
-         Dispatch = paste(Scenario,AC))
+\caption[Optimum (red long-dashed), maximum (green short-dashed) and realised (blue solid lines) activity levels at increasing temperatures through ontogeny for a for fish nearly grown fish of 80g (20cm]{Optimum (red long-dashed), maximum (green short-dashed) and realised (blue solid lines) activity levels at increasing temperatures through ontogeny for a for fish nearly grown fish of 80g (20cm; e--f), for a fast strategy (fast life-history) species with a dome-shaped maximum metabolic rate with respect to temperature. }\label{fig:size-act_low}
+\end{figure}
 
 
-labal <- as_labeller(c(`P strategy Low` ='a',
-                   `P strategy Medium`  ='b',
-                   `P strategy High` ='c'))
 
-sc_actd$Dispatch <- factor(sc_actd$Dispatch,levels=unique(sc_actd$Dispatch)[order(unlist(labal(unique(sc_actd$Dispatch))))])
+\begin{figure}
 
-ggplot(sc_actd) + 
-  geom_line(aes(x=Temperature, y=value, linetype=Activity,col=Activity)) +
-  theme_cowplot()+
-  scale_color_manual(values = cols,guide='none')+
-  scale_linetype(guide='none')+
-  facet_wrap(~Dispatch,ncol = 1,labeller = labal)+
-  theme(strip.text = element_text(hjust = 0),
-        strip.background = element_blank(),
-        panel.background = element_blank(),
-        plot.background = element_blank()) + 
-  labs(x = expression("Mean temperature " ( degree*C)),
-       y=expression('Activity ' (tau)))
+{\centering \includegraphics[width=\maxwidth]{images/size-rates-1} 
+
+}
+
+\caption[Feeding level (blue solid line), available energy $P$ (green long-dashed), efficiency (orange dotted), mortality (red dotted-dashed) and the ratio of $P$ to $M$ (yellow solid) are impacted by changing activity and the metabolic response to temperature for growing fish ($L_{\infty}\sim 30$cm) of 1.25g (5cm]{Feeding level (blue solid line), available energy $P$ (green long-dashed), efficiency (orange dotted), mortality (red dotted-dashed) and the ratio of $P$ to $M$ (yellow solid) are impacted by changing activity and the metabolic response to temperature for growing fish ($L_{\infty}\sim 30$cm) of 1.25g (5cm; a--b); 10g (10cm; c--d) and 80g (20cm; e--f ), for slow strategy (slow life history; left column [a,c,e]) and fast strategy (fast life-history; right column [b,d,f]) species with a dome-shaped maximum metabolic rate with respect to temperature. Energy, mortality and fitness are plotted relative to their maximum over all temperatures.}\label{fig:size-rates}
+\end{figure}
 
 
-@
-
-<<size-rates,fig.cap='Feeding level (blue solid line), available energy $P$ (green long-dashed), efficiency (orange dotted), mortality (red dotted-dashed) and the ratio of $P$ to $M$ (yellow solid) are impacted by changing activity and the metabolic response to temperature for growing fish ($L_{\\infty}\\sim 30$cm) of 1.25g (5cm; a--b); 10g (10cm; c--d) and 80g (20cm; e--f ), for slow strategy (slow life history; left column [a,c,e]) and fast strategy (fast life-history; right column [b,d,f]) species with a dome-shaped maximum metabolic rate with respect to temperature. Energy, mortality and fitness are plotted relative to their maximum over all temperatures.',fig.align='center'>>=
-
-sc_feed <- scenarios_s %>%
-  #filter(!grepl('large',Scenario)) %>% 
-  group_by(Scenario,Size) %>%
-  mutate(Consumption=sc(Consumption),
-         Efficiency=sc(Efficiency),
-         Feeding=`Feeding level`,
-         M = sc(M),
-         `Available Energy` = ifelse(`C for growth`<0,0,`C for growth`),
-         `Relative M` = sc(M),
-         `Energy` = sc(`Available Energy`),
-         Fitness = sc(`Available Energy`/M)) %>%  
-  tidyr::gather(Rate,value,Feeding,Energy,Efficiency,M,Fitness) %>%
-  mutate(Rate = factor(Rate,levels = c('Feeding','Energy','Efficiency','M','Fitness')),
-         Dispatch = paste(Scenario,Size))
-
-sc_feed$Dispatch <- factor(sc_feed$Dispatch,levels=unique(sc_feed$Dispatch)[order(unlist(laba(unique(sc_feed$Dispatch))))])
-
-ggplot(sc_feed) + 
-  geom_line(aes(x=Temperature, y=value, linetype=Rate,col=Rate,group=Rate)) +
-  theme_cowplot()+
-  facet_wrap(~Dispatch,labeller = laba,ncol=2)+
-  theme(strip.text = element_text(hjust = 0),
-        strip.background = element_blank(),
-        panel.background = element_blank(),
-        plot.background = element_blank())+
-  scale_linetype_manual(values=c(1:4,1),guide='none')+
-  scale_color_manual(values = cols,guide='none')+
-  labs(x = expression("Mean temperature " ( degree*C)),
-       y='Relative rate') 
-
-@
 
 
 \begin{figure}
 \centering
-<<norms_O2, fig.align='center',fig.height=6>>=
-
-lab <- as_labeller(c(`M strategy Domed`  ='a',
-                   `P strategy Domed` = 'b',
-                   `M strategy Rising`  ='c',
-                   `P strategy Rising` = 'd'))
 
 
-t_growth <- bind_rows(lapply(1:length(goutr), function(x) {
-  y <- goutr[[x]][['t_growth']] 
-  y$Scenario <- scn[x]
-  y$O2lim <- scz[x]
-  y$Dispatch <- paste(scn[x],scz[x])
-  y}))
+{\centering \includegraphics[width=\maxwidth]{images/norms_O2-1} 
 
-#browser()
-norm <- t_growth %>% 
-  mutate(Dispatch = paste(Scenario,O2lim)) %>%
-  group_by(Dispatch,Temperature) %>%
-  summarise(ts=t[ifelse(any(abs(allocs-0.5)<0.1),which.min(abs(allocs-0.5)),NA)-1],
-            m=t_length[ifelse(any(abs(allocs-0.5)<0.1),which.min(abs(allocs-0.5)),NA)-1],
-            tsq1=t[ifelse(any(abs(allocs-0.75)<0.1),which.min(abs(allocs-0.75)),NA)-1],
-            mq1=t_length[ifelse(any(abs(allocs-0.75)<0.1),which.min(abs(allocs-0.75)),NA)-1],
-            tsq3=t[ifelse(any(abs(allocs-0.25)<0.1),which.min(abs(allocs-0.25)),NA)-1],
-            mq3=t_length[ifelse(any(abs(allocs-0.25)<0.1),which.min(abs(allocs-0.25)),NA)-1]) 
-
-ggplot() +
-  geom_line(aes(x=t, y=t_length,col=Temperature,group=as.factor(Temperature)),data=t_growth) +
-  geom_point(aes(x=ts, y=m),data=norm) +
-  #geom_point(aes(x=tsq1, y=mq1),data=norm,col=cols[3]) +
-  #geom_point(aes(x=tsq3, y=mq3),data=norm,col=cols[3]) +
-  #geom_point(data=growth_scenarios[seq.int(1,nrow(growth_scenarios),by = 5),],aes(x=Temperature, y=Temp, col=Scenario,shape=Scenario),alpha=0.5,size=2) +
-  theme_cowplot()+
-  facet_wrap(~Dispatch,scales='free',ncol=2,labeller = lab)+
-  viridis::scale_colour_viridis(expression(Temp~(degree*C)))+
-  theme(legend.text = element_text(size=8),
-        legend.title = element_text(size=9),
-        strip.text = element_text(hjust = 0),
-        strip.background = element_blank(),
-        panel.background = element_blank(),
-        plot.background = element_blank())+
-  coord_cartesian()+
-  labs(y = 'Length (cm)',
-       x='Age  (years)')
+}
 
 
-@
+
 \caption{Contrasting growth responses at baseline resource availability for species with dome-shaped MOS (top row [a,b]) and increasing MOS with temperature (bottom row [c,d]). Growth curves are shown for slow- (left column [a,c]) and fast strategists (right column [b,d]). Increasing temperature (purple to yellow growth curves) modifies growth, and maturation age changes according to the reaction norm (black dots at 50\% allocation to reproduction), whereas asymptotic size is affected by changes in absolute energy available for growth.}
 \label{fig:norms_O2}
 \end{figure}
 
 
-<<>>=
-
-scsg <- lapply(scsg,function(x) {x$slope=-1;x})
-
-goutss <- parallel::mclapply(scsg[1:3],
-                             plot_data_growth_tO2,
-                             mstar=mstar_ss,
-                             mc.cores = 3)
-
-goutsf <- parallel::mclapply(scsg[4:6],
-                             plot_data_growth_tO2,
-                             mstar=mstar_fs,
-                             mc.cores = 3)
-
-gouts <- c(goutss,goutsf)
-
-@
 
 
-<<norms_neg, fig.cap='On ecological time-scales, increasing temperature (purple to yellow growth curves) modifies growth, and maturation age changes according to the negative reaction norm (black dots at 50\\% allocation to reproduction), whereas asymptotic size is affected by changes in absolute energy available for growth. Growth curves are shown for slow- (left column [a,c,e]) and fast strategists (right column [b,d,f]), at increasing food availibility from top (a/b) to bottom (e/f). Baseline resource availibility assumed in all other simulations is that shown in panels c and d.',fig.align='center',fig.width=6>>=
+
+\begin{figure}
+
+{\centering \includegraphics[width=\maxwidth]{images/norms_neg-1} 
+
+}
+
+\caption[On ecological time-scales, increasing temperature (purple to yellow growth curves) modifies growth, and maturation age changes according to the negative reaction norm (black dots at 50\% allocation to reproduction), whereas asymptotic size is affected by changes in absolute energy available for growth]{On ecological time-scales, increasing temperature (purple to yellow growth curves) modifies growth, and maturation age changes according to the negative reaction norm (black dots at 50\% allocation to reproduction), whereas asymptotic size is affected by changes in absolute energy available for growth. Growth curves are shown for slow- (left column [a,c,e]) and fast strategists (right column [b,d,f]), at increasing food availibility from top (a/b) to bottom (e/f). Baseline resource availibility assumed in all other simulations is that shown in panels c and d.}\label{fig:norms_neg}
+\end{figure}
 
 
-labla <- as_labeller(c(`M strategy Low` ='a',
-                   `P strategy Low`  ='b',
-                   `M strategy Medium` ='c',
-                   `P strategy Medium` = 'd',
-                   `M strategy High` = 'e',
-                   `P strategy High` = 'f'
-))
-
-t_growth <- bind_rows(lapply(1:length(gouts), function(x) {
-  y <- gouts[[x]][['t_growth']] 
-  y$Scenario <- rep(c('M strategy','P strategy'),each=3)[x]
-  y$Food<- rep(c('Low','Medium','High'),2)[x]
-  y$Dispatch <- paste(rep(c('M strategy','P strategy'),each=3)[x],rep(c('Low','Medium','High'),2)[x])
-  y})) 
-
-t_growth$Dispatch <- factor(t_growth$Dispatch, levels = levels(as.factor(t_growth$Dispatch))[c(2,5,3,6,1,4)])
-
-#browser()
-norm <- t_growth %>% 
-  group_by(Dispatch,Temperature) %>%
-  summarise(ts=t[ifelse(any(abs(allocs-0.5)<0.1),which.min(abs(allocs-0.5)),NA)-1],
-            m=t_length[ifelse(any(abs(allocs-0.5)<0.1),which.min(abs(allocs-0.5)),NA)-1],
-            tsq1=t[ifelse(any(abs(allocs-0.75)<0.1),which.min(abs(allocs-0.75)),NA)-1],
-            mq1=t_length[ifelse(any(abs(allocs-0.75)<0.1),which.min(abs(allocs-0.75)),NA)-1],
-            tsq3=t[ifelse(any(abs(allocs-0.25)<0.1),which.min(abs(allocs-0.25)),NA)-1],
-            mq3=t_length[ifelse(any(abs(allocs-0.25)<0.1),which.min(abs(allocs-0.25)),NA)-1]) 
-
-ggplot() +
-  geom_line(aes(x=t, y=t_length,col=Temperature,group=as.factor(Temperature)),data=t_growth) +
-  geom_point(aes(x=ts, y=m),data=norm) +
-  # geom_point(aes(x=tsq1, y=mq1),data=norm,col=cols[3]) +
-  # geom_point(aes(x=tsq3, y=mq3),data=norm,col=cols[3]) +
-  #geom_point(data=growth_scenarios[seq.int(1,nrow(growth_scenarios),by = 5),],aes(x=Temperature, y=Temp, col=Scenario,shape=Scenario),alpha=0.5,size=2) +
-  theme_cowplot()+
-  facet_wrap(~Dispatch,scales='free',ncol=2,labeller = labla)+
-  viridis::scale_colour_viridis(expression(Temp~(degree*C)))+
-  theme(legend.text = element_text(size=8),
-        legend.title = element_text(size=9),
-        strip.text = element_text(hjust = 0),
-        strip.background = element_blank(),
-        panel.background = element_blank(),
-        plot.background = element_blank())+
-  coord_cartesian()+
-  labs(y = 'Length (cm)',
-       x='Age  (years)')
 
 
-@
-
-<<>>=
-
-scsg <- lapply(scsg,function(x) {x$slope=1;x})
-
-goutss <- parallel::mclapply(scsg[1:3],
-                             plot_data_growth_tO2,
-                             mstar=mstar_ss,
-                             mc.cores = 3)
-
-goutsf <- parallel::mclapply(scsg[4:6],
-                             plot_data_growth_tO2,
-                             mstar=mstar_fs,
-                             mc.cores = 3)
-
-gouts <- c(goutss,goutsf)
-
-@
 
 
-<<norms_pos, fig.cap='On ecological time-scales, increasing temperature (purple to yellow growth curves) modifies growth, and maturation age changes according to the positive reaction norm (black dots at 50\\% allocation to reproduction), whereas asymptotic size is affected by changes in absolute energy available for growth. Growth curves are shown for slow- (left column [a,c,e]) and fast strategists (right column [b,d,f]), at increasing food availibility from top (a/b) to bottom (e/f). Baseline resource availibility assumed in all other simulations is that shown in panels c and d.',fig.align='center',fig.width=6>>=
+\begin{figure}
+
+{\centering \includegraphics[width=\maxwidth]{images/norms_pos-1} 
+
+}
+
+\caption[On ecological time-scales, increasing temperature (purple to yellow growth curves) modifies growth, and maturation age changes according to the positive reaction norm (black dots at 50\% allocation to reproduction), whereas asymptotic size is affected by changes in absolute energy available for growth]{On ecological time-scales, increasing temperature (purple to yellow growth curves) modifies growth, and maturation age changes according to the positive reaction norm (black dots at 50\% allocation to reproduction), whereas asymptotic size is affected by changes in absolute energy available for growth. Growth curves are shown for slow- (left column [a,c,e]) and fast strategists (right column [b,d,f]), at increasing food availibility from top (a/b) to bottom (e/f). Baseline resource availibility assumed in all other simulations is that shown in panels c and d.}\label{fig:norms_pos}
+\end{figure}
 
 
-labla <- as_labeller(c(`M strategy Low` ='a',
-                   `P strategy Low`  ='b',
-                   `M strategy Medium` ='c',
-                   `P strategy Medium` = 'd',
-                   `M strategy High` = 'e',
-                   `P strategy High` = 'f'
-))
-
-t_growth <- bind_rows(lapply(1:length(gouts), function(x) {
-  y <- gouts[[x]][['t_growth']] 
-  y$Scenario <- rep(c('M strategy','P strategy'),each=3)[x]
-  y$Food<- rep(c('Low','Medium','High'),2)[x]
-  y$Dispatch <- paste(rep(c('M strategy','P strategy'),each=3)[x],rep(c('Low','Medium','High'),2)[x])
-  y})) 
-
-t_growth$Dispatch <- factor(t_growth$Dispatch, levels = levels(as.factor(t_growth$Dispatch))[c(2,5,3,6,1,4)])
-
-#browser()
-norm <- t_growth %>% 
-  group_by(Dispatch,Temperature) %>%
-  summarise(ts=t[ifelse(any(abs(allocs-0.5)<0.1),which.min(abs(allocs-0.5)),NA)-1],
-            m=t_length[ifelse(any(abs(allocs-0.5)<0.1),which.min(abs(allocs-0.5)),NA)-1],
-            tsq1=t[ifelse(any(abs(allocs-0.75)<0.1),which.min(abs(allocs-0.75)),NA)-1],
-            mq1=t_length[ifelse(any(abs(allocs-0.75)<0.1),which.min(abs(allocs-0.75)),NA)-1],
-            tsq3=t[ifelse(any(abs(allocs-0.25)<0.1),which.min(abs(allocs-0.25)),NA)-1],
-            mq3=t_length[ifelse(any(abs(allocs-0.25)<0.1),which.min(abs(allocs-0.25)),NA)-1]) 
-
-ggplot() +
-  geom_line(aes(x=t, y=t_length,col=Temperature,group=as.factor(Temperature)),data=t_growth) +
-  geom_point(aes(x=ts, y=m),data=norm) +
-  # geom_point(aes(x=tsq1, y=mq1),data=norm,col=cols[3]) +
-  # geom_point(aes(x=tsq3, y=mq3),data=norm,col=cols[3]) +
-  #geom_point(data=growth_scenarios[seq.int(1,nrow(growth_scenarios),by = 5),],aes(x=Temperature, y=Temp, col=Scenario,shape=Scenario),alpha=0.5,size=2) +
-  theme_cowplot()+
-  facet_wrap(~Dispatch,scales='free',ncol=2,labeller = labla)+
-  viridis::scale_colour_viridis(expression(Temp~(degree*C)))+
-  theme(legend.text = element_text(size=8),
-        legend.title = element_text(size=9),
-        strip.text = element_text(hjust = 0),
-        strip.background = element_blank(),
-        panel.background = element_blank(),
-        plot.background = element_blank())+
-  coord_cartesian()+
-  labs(y = 'Length (cm)',
-       x='Age  (years)')
-
-
-@
 
 
 \end{document}

@@ -1,17 +1,15 @@
 <<echo=FALSE>>=
 library(knitr)
 opts_chunk$set(warning=F, message = FALSE,echo=F,results='asis',error=FALSE,fig.lp='fig:',fig.path='images/')
-install.packages("purrrlyr",repo="http://cloud.r-project.org/")
-library("purrrlyr")
 @
 
 <<O2_fig,fig.cap='Maximum metabolic rate, determined by oxygen supply, as a function of temperature, for four different optimal temperatures (panels---see panel label for optimal temperature in degrees celsius), and increasing values of $\\eta$.', fig.width=8, fig.height=4, echo=FALSE, out.width='\\linewidth'>>=
 
-grid <- expand.grid(eta = c(0.1,0.5,2,5),
-                    Topt = c(10,15,20,29))
+grid <- expand.grid(eta = c(0.1,0.5,3,5),
+                    Topt = c(10,15,20,25))
 
 O2fun <- function(x) {
-  ts = with(x,((30-seq(1,30,l=1000))/(30-Topt))^eta*exp(-eta*(30-seq(1,30,l=1000))/(30-Topt)))
+  ts = with(x,((26-seq(1,26,l=1000))/(26-Topt))^eta*exp(-eta*(26-seq(1,26,l=1000))/(26-Topt)))
   ts = ts/max(ts)
 }
 
@@ -21,18 +19,40 @@ require(ggplot2)
 #require(cowplot)
 
 g <- grid %>% 
-  by_row(~O2fun(.x), .collate='rows') %>%
-  group_by(.row) %>%
-  mutate(Temperature=seq(1,30,l=1000)) 
+  mutate(n=1:n()) %>%
+  split(.$n) %>%
+  map(~data.frame(eta = .$eta,
+                  Topt = .$Topt,
+                  O2 = O2fun(.))) %>%
+  bind_rows(.id = 'n') %>%
+  group_by(eta,Topt) %>%
+  mutate(Temperature=seq(1,26,l=1000)) 
+# 
+# ggplot(g) + 
+#   geom_line(aes(x = Temperature, 
+#                 y = O2,
+#                 linetype=factor(eta))) + 
+#   theme_bw() + 
+#   facet_grid(Topt~.) +
+#   scale_linetype_discrete(bquote(eta)) + 
+#   scale_x_continuous(limits = c(3,29),breaks = seq(4,28,4)) +
+#   labs(y=expression(Relative~O[2]~supply),
+#        x=expression("Temperature " ( degree*C)))
 
-  ggplot(g) + 
+@
+
+
+<<O2_fig_used,fig.cap='Maximum oxygen supply relative to the maximum supply for species with a dome-shaped MOS (here $\\eta$ = 3) and a continually increasing MOS ($\\eta$ = 0.1) used in model scenarios discussed below.', fig.width=6, fig.height=3, echo=FALSE, out.width='\\linewidth'>>=
+
+ggplot(g %>% filter((eta==0.1 & Topt==25)|(eta==3 & Topt==20))) + 
   geom_line(aes(x = Temperature, 
-                y = .out,
+                y = O2,
                 linetype=factor(eta))) + 
   theme_bw() + 
-  facet_grid(Topt~.) +
   scale_linetype_discrete(bquote(eta)) + 
-  ylab(expression(Relative~O[2]~supply)) # + 
+  scale_x_continuous(limits = c(3,29),breaks = seq(4,28,4)) +
+  labs(y=expression(Relative~O[2]~supply),
+       x=expression("Temperature " ( degree*C)))
   #scale_color_discrete(bquote(T[opt]), h.start = 180)
 
 @
